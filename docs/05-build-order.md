@@ -56,7 +56,7 @@ with status chips, the mono spec-row record, `generateStaticParams`.
 No enquiry action on any piece. Render only fields that exist.
 *Read: `04-pages.md` § Collections + the dossier section, and `03-architecture.md` § Rendering.*
 
-## [ ] Phase 8 — Journal + newsletter
+## [x] Phase 8 — Journal + newsletter
 `/journal`, `/journal/[slug]`, portable-text renderer, category filter,
 pagination, `POST /api/newsletter` with double opt-in.
 *Read: `04-pages.md` § Journal.*
