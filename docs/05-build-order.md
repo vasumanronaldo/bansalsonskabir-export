@@ -61,7 +61,7 @@ No enquiry action on any piece. Render only fields that exist.
 pagination, `POST /api/newsletter` with double opt-in.
 *Read: `04-pages.md` § Journal.*
 
-## [ ] Phase 9 — Launch
+## [x] Phase 9 — Launch
 `/contact`, `/privacy`, `404`, sitemap, robots, JSON-LD, OG images,
 Vercel Analytics, Sanity revalidation webhook, Lighthouse pass against the
 budget in `03-architecture.md`.

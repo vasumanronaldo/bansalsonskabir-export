@@ -11,6 +11,8 @@ import { Display, Body, Label } from '@/components/type'
 import { Placeholder } from '@/components/ui/Placeholder'
 import { LinkArrow } from '@/components/ui/LinkArrow'
 import { DossierRecord, type DossierRow } from '@/components/blocks/DossierRecord'
+import { JsonLd } from '@/components/JsonLd'
+import { breadcrumbJsonLd } from '@/lib/seo'
 import { pieceDossier, allPieceParams, type NormalizedDossier } from '@/lib/collections'
 
 export async function generateStaticParams() {
@@ -95,6 +97,7 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
 
   return (
     <Container className="py-[clamp(2.5rem,6vw,5rem)]">
+      <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Collections', path: '/collections' }, { name: d.collectionSlug, path: `/collections/${d.collectionSlug}` }, { name: d.title, path: `/collections/${d.collectionSlug}/${d.slug}` }])} />
       <LinkArrow href={`/collections/${d.collectionSlug}`}>Back to the collection</LinkArrow>
 
       <div className="mt-8 grid gap-x-14 gap-y-10 lg:grid-cols-2">

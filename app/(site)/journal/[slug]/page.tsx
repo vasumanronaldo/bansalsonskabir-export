@@ -10,6 +10,9 @@ import { LinkArrow } from '@/components/ui/LinkArrow'
 import { Placeholder } from '@/components/ui/Placeholder'
 import { PortableTextBody } from '@/components/PortableTextBody'
 import { JournalCard } from '@/components/blocks/JournalCard'
+import { JsonLd } from '@/components/JsonLd'
+import { breadcrumbJsonLd } from '@/lib/seo'
+import { getSettings } from '@/lib/client-content'
 import { journalPost, relatedPosts, allJournalParams, JOURNAL_CATEGORIES } from '@/lib/journal'
 import { urlFor } from '@/sanity/lib/image'
 
@@ -39,9 +42,22 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const post = await journalPost(slug)
   if (!post) notFound()
   const related = await relatedPosts(post.category, post.slug, 3)
+  const { data: s } = getSettings()
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Journal', path: '/journal' }, { name: post.title, path: `/journal/${post.slug}` }])} />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: post.title,
+          description: post.excerpt ?? undefined,
+          datePublished: post.publishedAt ?? undefined,
+          author: post.author ? { '@type': 'Person', name: post.author } : undefined,
+          publisher: { '@type': 'Organization', name: s.legalName },
+        }}
+      />
       <Section field="pearl" className="pt-[clamp(2.5rem,6vw,5rem)]">
         <Container className="!max-w-[68ch] !px-[var(--spacing-gutter)]">
           <LinkArrow href="/journal">Back to the journal</LinkArrow>

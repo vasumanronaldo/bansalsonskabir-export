@@ -7,6 +7,8 @@ import { Section } from '@/components/layout/Section'
 import { Display, Lede, Label } from '@/components/type'
 import { PieceCard } from '@/components/blocks/PieceCard'
 import { CtaBand } from '@/components/blocks/CtaBand'
+import { JsonLd } from '@/components/JsonLd'
+import { breadcrumbJsonLd } from '@/lib/seo'
 import { collectionWithPieces, allCollectionParams } from '@/lib/collections'
 
 export async function generateStaticParams() {
@@ -31,6 +33,7 @@ export default async function CollectionDetailPage({ params }: { params: Promise
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Collections', path: '/collections' }, { name: collection.title, path: `/collections/${collection.slug}` }])} />
       <Section field="pearl" className="pt-[clamp(3rem,7vw,6rem)]">
         <Label className="block">Collection</Label>
         <Display size="xl" as="h1" className="mt-6">
