@@ -23,7 +23,7 @@ Prettier + ESLint. **No pages yet.**
 primitive at every size. **Screenshot it and critique your own work before moving on.**
 *Read: `02-design-system.md` only.*
 
-## [ ] Phase 3 — Sanity
+## [x] Phase 3 — Sanity
 Install Sanity v3, embed Studio at `/studio`. All schemas from
 `docs/03-architecture.md`. Desk structure, plain-language labels. GROQ queries in
 `sanity/queries.ts` with typed returns. Write `pnpm content:push` to import

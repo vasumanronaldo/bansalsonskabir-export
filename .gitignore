@@ -12,3 +12,6 @@ dist/
 # TS incremental build cache
 *.tsbuildinfo
 next-env.d.ts
+
+# Sanity generated import
+sanity/import/
