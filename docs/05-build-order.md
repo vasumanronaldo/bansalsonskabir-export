@@ -42,7 +42,7 @@ Resend templates (client confirmation + internal notification), Sanity write,
 rate limiting, honeypot, success state. **Test the full round trip before moving on.**
 *Read: `04-pages.md` § Appointment + `03-architecture.md` § Route handlers.*
 
-## [ ] Phase 6 — Story pages
+## [x] Phase 6 — Story pages
 `/legacy`, `/maison`, `/craftsmanship`, `/bespoke`.
 Includes the **people at the bench** block (`content/client/10-people.json`) and
 the **published commission terms** (`content/client/11-commission-terms.md`) —

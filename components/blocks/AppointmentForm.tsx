@@ -33,9 +33,19 @@ export function AppointmentForm({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<AppointmentInput>({ resolver: zodResolver(appointmentSchema), mode: 'onBlur' })
   const bounds = dateBounds()
+
+  // Prefill from a CTA like /appointment?interest=bespoke (read client-side so
+  // the page stays static). Only sets the field if the visitor hasn't typed.
+  useEffect(() => {
+    const interest = new URLSearchParams(window.location.search).get('interest')
+    if (interest === 'bespoke') {
+      setValue('requirement', 'I would like to discuss a bespoke commission.')
+    }
+  }, [setValue])
 
   async function onSubmit(values: AppointmentInput) {
     setSubmitError(null)
