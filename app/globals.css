@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+/* ── Bansal Sons — design tokens (docs/02-design-system.md) ──────────────
+   The showroom, translated: pearl field, obsidian feature walls, satin gold
+   at hairline weight. Zero radius. No shadows. No gradients. */
+@theme {
+  /* Field */
+  --color-pearl: #f7f5f1; /* default page background */
+  --color-pearl-deep: #efebe4; /* alternating section band */
+
+  /* Ink */
+  --color-charcoal: #22211f; /* primary text, dark sections */
+  --color-obsidian: #141311; /* black-marble feature sections */
+  --color-stone: #8c8a85; /* secondary text, captions */
+  --color-stone-light: #b5b2ab; /* tertiary, on-dark secondary */
+
+  /* Accent — used sparingly (≤3 per viewport) */
+  --color-gold: #b08d57; /* satin gold: rules, marks, hover */
+  --color-gold-soft: #c9ac7e; /* on-dark gold text only */
+
+  /* Structure */
+  --color-hairline: rgb(34 33 31 / 0.12);
+  --color-hairline-inv: rgb(247 245 241 / 0.14);
+
+  /* Fonts — bound in lib/fonts.ts via next/font, exposed as CSS vars */
+  --font-display: var(--font-bodoni), Georgia, 'Times New Roman', serif;
+  --font-body: var(--font-archivo), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, 'SF Mono', monospace;
+
+  /* Motion (docs/02 § Motion) — expo-out, never springy */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Layout */
+  --spacing-gutter: clamp(1.25rem, 5vw, 5rem);
+  --spacing-rhythm: clamp(5rem, 11vw, 9rem);
+
+  /* Zero radius everywhere — marble, glass and gold have hard edges */
+  --radius-none: 0px;
+
+  /* Fluid type scale (docs/02 § Type scale) */
+  --text-display-xl: clamp(2.75rem, 7vw, 5.5rem);
+  --text-display-lg: clamp(2.25rem, 5vw, 3.75rem);
+  --text-display-md: clamp(1.75rem, 3.5vw, 2.5rem);
+  --text-display-sm: clamp(1.25rem, 2.2vw, 1.5rem);
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-label: 0.6875rem;
+  --text-label-lg: 0.75rem;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+:root {
+  color-scheme: light;
+}
+
+* {
+  border-radius: 0 !important; /* hard rule: zero radius everywhere, no exception */
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-pearl);
+  color: var(--color-charcoal);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Visible focus ring — accessibility floor WCAG 2.1 AA (never removed) */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-gold) 24%, transparent);
+}
+
+/* Respect reduced motion globally; per-component Framer wrappers add to this */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

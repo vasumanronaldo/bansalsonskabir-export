@@ -7,7 +7,7 @@ Mark progress here by changing `[ ]` to `[x]` as you finish.
 
 ---
 
-## [ ] Phase 1 — Foundation
+## [x] Phase 1 — Foundation
 Scaffold Next.js 15 + TS strict + Tailwind v4. Wire `lib/client-content.ts`,
 the `DraftFlag` component and the `content:status` / `content:edit` scripts first —
 every later phase depends on them. Colour and type tokens from

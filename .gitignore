@@ -8,3 +8,7 @@ out/
 *.log
 .sanity/
 dist/
+
+# TS incremental build cache
+*.tsbuildinfo
+next-env.d.ts

@@ -1,0 +1,7 @@
+# pnpm 11 config. Prebuilt native binaries ship for darwin-arm64; postinstall
+# scripts are optional. Skip the pre-run deps check that blocks scripts here.
+verifyDepsBeforeRun: false
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - sharp
+  - unrs-resolver

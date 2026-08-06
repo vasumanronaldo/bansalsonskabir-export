@@ -1,0 +1,37 @@
+{
+  "name": "bansal-sons",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "content:status": "node scripts/content-status.mjs",
+    "content:edit": "bash scripts/content-edit.sh",
+    "content:push": "node scripts/content-push.mjs",
+    "prebuild": "node scripts/content-status.mjs",
+    "check:launch": "node scripts/content-status.mjs --strict && pnpm typecheck && pnpm build"
+  },
+  "dependencies": {
+    "next": "15.5.4",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "3.2.0",
+    "@tailwindcss/postcss": "4.1.14",
+    "@types/node": "22.10.10",
+    "@types/react": "19.2.0",
+    "@types/react-dom": "19.2.0",
+    "eslint": "9.18.0",
+    "eslint-config-next": "15.5.4",
+    "prettier": "3.4.2",
+    "prettier-plugin-tailwindcss": "0.6.11",
+    "tailwindcss": "4.1.14",
+    "typescript": "5.7.3"
+  }
+}
