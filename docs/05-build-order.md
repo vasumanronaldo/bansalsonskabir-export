@@ -30,7 +30,7 @@ Install Sanity v3, embed Studio at `/studio`. All schemas from
 `content/client/{02,03,04,05,09}` into Sanity as NDJSON, preserving `_approved`.
 *Read: `03-architecture.md` only.*
 
-## [ ] Phase 4 — Home
+## [x] Phase 4 — Home
 Build `/` completely, all six sections, copy verbatim from `docs/04-pages.md`.
 This includes the **Bansal Standard** signature section — get this right, it sets
 the tone for everything else.
