@@ -1,0 +1,1079 @@
+{
+  "_approved": false,
+  "_needs": [
+    "all descriptions",
+    "all photography",
+    "real reference numbers",
+    "real dossier weights, report numbers and HUIDs"
+  ],
+  "_note": "24 dummy pieces with full maker's dossiers so Phase 7 can be built and reviewed. No price field exists and none may be added.",
+  "pieces": [
+    {
+      "reference": "BSJ-0137",
+      "slug": "bridal-01",
+      "title": "Bridal set",
+      "collection": "bridal",
+      "metal": "22ct yellow gold",
+      "stones": "Polki, uncut",
+      "year": 1997,
+      "featured": true,
+      "isBespoke": true,
+      "consentOnFile": true,
+      "placeholderLabel": "Bridal set — 22ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "sold",
+      "dossier": {
+        "grossWeight": 18.0,
+        "netMetalWeight": 12.0,
+        "benchHours": 40,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing",
+          "Engraving"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Polki",
+            "count": 1,
+            "carat": 0.4,
+            "certifier": "GIA",
+            "reportNumber": "[TK]",
+            "treatment": "uncut"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 1997
+        },
+        "qcSignedOffBy": "Chetan Bansal",
+        "completedAt": "1997",
+        "serviceHistory": [
+          {
+            "date": "2000",
+            "work": "Polish and setting check",
+            "chargeable": false
+          }
+        ]
+      }
+    },
+    {
+      "reference": "BSJ-0274",
+      "slug": "bridal-02",
+      "title": "Bridal choker",
+      "collection": "bridal",
+      "metal": "22ct yellow gold",
+      "stones": "Polki, uncut",
+      "year": 2001,
+      "featured": false,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Bridal choker — 22ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "archive",
+      "dossier": {
+        "grossWeight": 21.17,
+        "netMetalWeight": 14.41,
+        "benchHours": 57,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Polki",
+            "count": 8,
+            "carat": 0.77,
+            "certifier": "IGI",
+            "reportNumber": "[TK]",
+            "treatment": "uncut"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2001
+        },
+        "qcSignedOffBy": "Shri Ashok Kumar Bansal",
+        "completedAt": "2001",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-0411",
+      "slug": "bridal-03",
+      "title": "Maang tikka",
+      "collection": "bridal",
+      "metal": "22ct yellow gold",
+      "stones": "Ruby, uncut diamond",
+      "year": 2004,
+      "featured": false,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Maang tikka — 22ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "sold",
+      "dossier": {
+        "grossWeight": 24.34,
+        "netMetalWeight": 16.82,
+        "benchHours": 74,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Ruby",
+            "count": 15,
+            "carat": 1.14,
+            "certifier": "GIA",
+            "reportNumber": "[TK]",
+            "treatment": "uncut diamond"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2004
+        },
+        "qcSignedOffBy": "Chetan Bansal",
+        "completedAt": "2004",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-0548",
+      "slug": "diamond-04",
+      "title": "Solitaire ring",
+      "collection": "diamond",
+      "metal": "18ct white gold",
+      "stones": "Diamond, GIA certified",
+      "year": 2008,
+      "featured": false,
+      "isBespoke": true,
+      "consentOnFile": true,
+      "placeholderLabel": "Solitaire ring — 18ct white gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "inWorkshop",
+      "dossier": {
+        "grossWeight": 27.51,
+        "netMetalWeight": 19.23,
+        "benchHours": 91,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing",
+          "Engraving"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Diamond",
+            "count": 22,
+            "carat": 1.51,
+            "certifier": "IGI",
+            "reportNumber": "[TK]",
+            "treatment": "GIA certified"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2008
+        },
+        "qcSignedOffBy": "Shri Ashok Kumar Bansal",
+        "completedAt": "2008",
+        "serviceHistory": [
+          {
+            "date": "2011",
+            "work": "Polish and setting check",
+            "chargeable": false
+          }
+        ]
+      }
+    },
+    {
+      "reference": "BSJ-0685",
+      "slug": "diamond-05",
+      "title": "Line bracelet",
+      "collection": "diamond",
+      "metal": "18ct white gold",
+      "stones": "Diamond, IGI certified",
+      "year": 2011,
+      "featured": true,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Line bracelet — 18ct white gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "sold",
+      "dossier": {
+        "grossWeight": 30.68,
+        "netMetalWeight": 21.64,
+        "benchHours": 108,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Diamond",
+            "count": 29,
+            "carat": 1.88,
+            "certifier": "GIA",
+            "reportNumber": "[TK]",
+            "treatment": "IGI certified"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2011
+        },
+        "qcSignedOffBy": "Chetan Bansal",
+        "completedAt": "2011",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-0822",
+      "slug": "diamond-06",
+      "title": "Drop earrings",
+      "collection": "diamond",
+      "metal": "18ct white gold",
+      "stones": "Diamond, GIA certified",
+      "year": 2014,
+      "featured": false,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Drop earrings — 18ct white gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "archive",
+      "dossier": {
+        "grossWeight": 33.85,
+        "netMetalWeight": 24.05,
+        "benchHours": 125,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Diamond",
+            "count": 36,
+            "carat": 2.25,
+            "certifier": "IGI",
+            "reportNumber": "[TK]",
+            "treatment": "GIA certified"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2014
+        },
+        "qcSignedOffBy": "Shri Ashok Kumar Bansal",
+        "completedAt": "2014",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-0959",
+      "slug": "diamond-07",
+      "title": "Pendant",
+      "collection": "diamond",
+      "metal": "18ct rose gold",
+      "stones": "Diamond, IGI certified",
+      "year": 2016,
+      "featured": false,
+      "isBespoke": true,
+      "consentOnFile": true,
+      "placeholderLabel": "Pendant — 18ct rose gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "sold",
+      "dossier": {
+        "grossWeight": 37.02,
+        "netMetalWeight": 26.46,
+        "benchHours": 142,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing",
+          "Engraving"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Diamond",
+            "count": 43,
+            "carat": 2.62,
+            "certifier": "GIA",
+            "reportNumber": "[TK]",
+            "treatment": "IGI certified"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2016
+        },
+        "qcSignedOffBy": "Chetan Bansal",
+        "completedAt": "2016",
+        "serviceHistory": [
+          {
+            "date": "2019",
+            "work": "Polish and setting check",
+            "chargeable": false
+          }
+        ]
+      }
+    },
+    {
+      "reference": "BSJ-1096",
+      "slug": "polki-08",
+      "title": "Polki choker",
+      "collection": "polki",
+      "metal": "22ct yellow gold",
+      "stones": "Polki, uncut",
+      "year": 2018,
+      "featured": false,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Polki choker — 22ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "inWorkshop",
+      "dossier": {
+        "grossWeight": 40.19,
+        "netMetalWeight": 28.87,
+        "benchHours": 159,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Polki",
+            "count": 50,
+            "carat": 2.99,
+            "certifier": "IGI",
+            "reportNumber": "[TK]",
+            "treatment": "uncut"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2018
+        },
+        "qcSignedOffBy": "Shri Ashok Kumar Bansal",
+        "completedAt": "2018",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-1233",
+      "slug": "polki-09",
+      "title": "Polki earrings",
+      "collection": "polki",
+      "metal": "22ct yellow gold",
+      "stones": "Polki, uncut",
+      "year": 2019,
+      "featured": true,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Polki earrings — 22ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "sold",
+      "dossier": {
+        "grossWeight": 43.36,
+        "netMetalWeight": 31.28,
+        "benchHours": 176,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Polki",
+            "count": 57,
+            "carat": 3.36,
+            "certifier": "GIA",
+            "reportNumber": "[TK]",
+            "treatment": "uncut"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2019
+        },
+        "qcSignedOffBy": "Chetan Bansal",
+        "completedAt": "2019",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-1370",
+      "slug": "kundan-10",
+      "title": "Kundan necklace",
+      "collection": "kundan",
+      "metal": "22ct yellow gold",
+      "stones": "Kundan, emerald",
+      "year": 2020,
+      "featured": false,
+      "isBespoke": true,
+      "consentOnFile": true,
+      "placeholderLabel": "Kundan necklace — 22ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "archive",
+      "dossier": {
+        "grossWeight": 46.53,
+        "netMetalWeight": 33.69,
+        "benchHours": 193,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing",
+          "Engraving"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Kundan",
+            "count": 64,
+            "carat": 3.73,
+            "certifier": "IGI",
+            "reportNumber": "[TK]",
+            "treatment": "emerald"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2020
+        },
+        "qcSignedOffBy": "Shri Ashok Kumar Bansal",
+        "completedAt": "2020",
+        "serviceHistory": [
+          {
+            "date": "2023",
+            "work": "Polish and setting check",
+            "chargeable": false
+          }
+        ]
+      }
+    },
+    {
+      "reference": "BSJ-1507",
+      "slug": "kundan-11",
+      "title": "Kundan bangles",
+      "collection": "kundan",
+      "metal": "22ct yellow gold",
+      "stones": "Kundan",
+      "year": 2021,
+      "featured": false,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Kundan bangles — 22ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "sold",
+      "dossier": {
+        "grossWeight": 49.7,
+        "netMetalWeight": 36.1,
+        "benchHours": 210,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Kundan",
+            "count": 71,
+            "carat": 4.1,
+            "certifier": "GIA",
+            "reportNumber": "[TK]",
+            "treatment": "None detected"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2021
+        },
+        "qcSignedOffBy": "Chetan Bansal",
+        "completedAt": "2021",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-1644",
+      "slug": "jadau-12",
+      "title": "Jadau necklace",
+      "collection": "jadau",
+      "metal": "22ct yellow gold",
+      "stones": "Jadau, enamel reverse",
+      "year": 2022,
+      "featured": false,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Jadau necklace — 22ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "inWorkshop",
+      "dossier": {
+        "grossWeight": 52.87,
+        "netMetalWeight": 38.51,
+        "benchHours": 227,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Jadau",
+            "count": 78,
+            "carat": 4.47,
+            "certifier": "IGI",
+            "reportNumber": "[TK]",
+            "treatment": "enamel reverse"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2022
+        },
+        "qcSignedOffBy": "Shri Ashok Kumar Bansal",
+        "completedAt": "2022",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-1781",
+      "slug": "jadau-13",
+      "title": "Jadau earrings",
+      "collection": "jadau",
+      "metal": "22ct yellow gold",
+      "stones": "Jadau, pearl drop",
+      "year": 2023,
+      "featured": true,
+      "isBespoke": true,
+      "consentOnFile": true,
+      "placeholderLabel": "Jadau earrings — 22ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "sold",
+      "dossier": {
+        "grossWeight": 56.04,
+        "netMetalWeight": 40.92,
+        "benchHours": 54,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing",
+          "Engraving"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Jadau",
+            "count": 85,
+            "carat": 4.84,
+            "certifier": "GIA",
+            "reportNumber": "[TK]",
+            "treatment": "pearl drop"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2023
+        },
+        "qcSignedOffBy": "Chetan Bansal",
+        "completedAt": "2023",
+        "serviceHistory": [
+          {
+            "date": "2026",
+            "work": "Polish and setting check",
+            "chargeable": false
+          }
+        ]
+      }
+    },
+    {
+      "reference": "BSJ-1918",
+      "slug": "temple-14",
+      "title": "Temple necklace",
+      "collection": "temple",
+      "metal": "22ct yellow gold",
+      "stones": "—",
+      "year": 2024,
+      "featured": false,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Temple necklace — 22ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "archive",
+      "dossier": {
+        "grossWeight": 59.21,
+        "netMetalWeight": 13.33,
+        "benchHours": 71,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2024
+        },
+        "qcSignedOffBy": "Shri Ashok Kumar Bansal",
+        "completedAt": "2024",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-2055",
+      "slug": "temple-15",
+      "title": "Temple jhumkas",
+      "collection": "temple",
+      "metal": "22ct yellow gold",
+      "stones": "—",
+      "year": 2025,
+      "featured": false,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Temple jhumkas — 22ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "sold",
+      "dossier": {
+        "grossWeight": 20.38,
+        "netMetalWeight": 15.74,
+        "benchHours": 88,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2025
+        },
+        "qcSignedOffBy": "Chetan Bansal",
+        "completedAt": "2025",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-2192",
+      "slug": "platinum-16",
+      "title": "Wedding band",
+      "collection": "platinum",
+      "metal": "950 platinum",
+      "stones": "—",
+      "year": 2026,
+      "featured": false,
+      "isBespoke": true,
+      "consentOnFile": true,
+      "placeholderLabel": "Wedding band — 950 platinum",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "inWorkshop",
+      "dossier": {
+        "grossWeight": 23.55,
+        "netMetalWeight": 18.15,
+        "benchHours": 105,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing",
+          "Engraving"
+        ],
+        "outsourcedSteps": [],
+        "stones": [],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2026
+        },
+        "qcSignedOffBy": "Shri Ashok Kumar Bansal",
+        "completedAt": "2026",
+        "serviceHistory": [
+          {
+            "date": "2029",
+            "work": "Polish and setting check",
+            "chargeable": false
+          }
+        ]
+      }
+    },
+    {
+      "reference": "BSJ-2329",
+      "slug": "platinum-17",
+      "title": "Solitaire band",
+      "collection": "platinum",
+      "metal": "950 platinum",
+      "stones": "Diamond, GIA certified",
+      "year": 1997,
+      "featured": true,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Solitaire band — 950 platinum",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "sold",
+      "dossier": {
+        "grossWeight": 26.72,
+        "netMetalWeight": 20.56,
+        "benchHours": 122,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Diamond",
+            "count": 3,
+            "carat": 1.32,
+            "certifier": "GIA",
+            "reportNumber": "[TK]",
+            "treatment": "GIA certified"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 1997
+        },
+        "qcSignedOffBy": "Chetan Bansal",
+        "completedAt": "1997",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-2466",
+      "slug": "gold-18",
+      "title": "Italian gold chain",
+      "collection": "gold",
+      "metal": "18ct yellow gold",
+      "stones": "—",
+      "year": 2001,
+      "featured": false,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Italian gold chain — 18ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "archive",
+      "dossier": {
+        "grossWeight": 29.89,
+        "netMetalWeight": 22.97,
+        "benchHours": 139,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2001
+        },
+        "qcSignedOffBy": "Shri Ashok Kumar Bansal",
+        "completedAt": "2001",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-2603",
+      "slug": "gold-19",
+      "title": "Rose gold bangle",
+      "collection": "gold",
+      "metal": "18ct rose gold",
+      "stones": "—",
+      "year": 2004,
+      "featured": false,
+      "isBespoke": true,
+      "consentOnFile": true,
+      "placeholderLabel": "Rose gold bangle — 18ct rose gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "sold",
+      "dossier": {
+        "grossWeight": 33.06,
+        "netMetalWeight": 25.38,
+        "benchHours": 156,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing",
+          "Engraving"
+        ],
+        "outsourcedSteps": [],
+        "stones": [],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2004
+        },
+        "qcSignedOffBy": "Chetan Bansal",
+        "completedAt": "2004",
+        "serviceHistory": [
+          {
+            "date": "2007",
+            "work": "Polish and setting check",
+            "chargeable": false
+          }
+        ]
+      }
+    },
+    {
+      "reference": "BSJ-2740",
+      "slug": "gemstone-20",
+      "title": "Emerald ring",
+      "collection": "gemstone",
+      "metal": "18ct yellow gold",
+      "stones": "Emerald, minor oil",
+      "year": 2008,
+      "featured": false,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Emerald ring — 18ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "inWorkshop",
+      "dossier": {
+        "grossWeight": 36.23,
+        "netMetalWeight": 27.79,
+        "benchHours": 173,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Emerald",
+            "count": 24,
+            "carat": 2.43,
+            "certifier": "IGI",
+            "reportNumber": "[TK]",
+            "treatment": "minor oil"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2008
+        },
+        "qcSignedOffBy": "Shri Ashok Kumar Bansal",
+        "completedAt": "2008",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-2877",
+      "slug": "gemstone-21",
+      "title": "Ruby pendant",
+      "collection": "gemstone",
+      "metal": "18ct yellow gold",
+      "stones": "Ruby, no heat",
+      "year": 2011,
+      "featured": true,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Ruby pendant — 18ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "sold",
+      "dossier": {
+        "grossWeight": 39.4,
+        "netMetalWeight": 30.2,
+        "benchHours": 190,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Ruby",
+            "count": 31,
+            "carat": 2.8,
+            "certifier": "GIA",
+            "reportNumber": "[TK]",
+            "treatment": "no heat"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2011
+        },
+        "qcSignedOffBy": "Chetan Bansal",
+        "completedAt": "2011",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-3014",
+      "slug": "mens-22",
+      "title": "Signet ring",
+      "collection": "mens",
+      "metal": "18ct yellow gold",
+      "stones": "Hand-engraved",
+      "year": 2014,
+      "featured": false,
+      "isBespoke": true,
+      "consentOnFile": true,
+      "placeholderLabel": "Signet ring — 18ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "archive",
+      "dossier": {
+        "grossWeight": 42.57,
+        "netMetalWeight": 32.61,
+        "benchHours": 207,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing",
+          "Engraving"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Hand-engraved",
+            "count": 38,
+            "carat": 3.17,
+            "certifier": "IGI",
+            "reportNumber": "[TK]",
+            "treatment": "None detected"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2014
+        },
+        "qcSignedOffBy": "Shri Ashok Kumar Bansal",
+        "completedAt": "2014",
+        "serviceHistory": [
+          {
+            "date": "2017",
+            "work": "Polish and setting check",
+            "chargeable": false
+          }
+        ]
+      }
+    },
+    {
+      "reference": "BSJ-3151",
+      "slug": "mens-23",
+      "title": "Cufflinks",
+      "collection": "mens",
+      "metal": "18ct yellow gold",
+      "stones": "Onyx",
+      "year": 2016,
+      "featured": false,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Cufflinks — 18ct yellow gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "sold",
+      "dossier": {
+        "grossWeight": 45.74,
+        "netMetalWeight": 35.02,
+        "benchHours": 224,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Onyx",
+            "count": 45,
+            "carat": 3.54,
+            "certifier": "GIA",
+            "reportNumber": "[TK]",
+            "treatment": "None detected"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2016
+        },
+        "qcSignedOffBy": "Chetan Bansal",
+        "completedAt": "2016",
+        "serviceHistory": []
+      }
+    },
+    {
+      "reference": "BSJ-3288",
+      "slug": "everyday-24",
+      "title": "Everyday studs",
+      "collection": "everyday",
+      "metal": "18ct white gold",
+      "stones": "Diamond, IGI certified",
+      "year": 2018,
+      "featured": false,
+      "isBespoke": false,
+      "consentOnFile": true,
+      "placeholderLabel": "Everyday studs — 18ct white gold",
+      "description": "PLACEHOLDER. Replace with the record for this piece: what it was made for, what was done at the bench, and any service history. Keep it factual and under 60 words.",
+      "status": "inWorkshop",
+      "dossier": {
+        "grossWeight": 48.91,
+        "netMetalWeight": 37.43,
+        "benchHours": 51,
+        "operations": [
+          "Wax and casting",
+          "Setting",
+          "Polishing"
+        ],
+        "outsourcedSteps": [],
+        "stones": [
+          {
+            "type": "Diamond",
+            "count": 52,
+            "carat": 3.91,
+            "certifier": "IGI",
+            "reportNumber": "[TK]",
+            "treatment": "IGI certified"
+          }
+        ],
+        "hallmark": {
+          "bisMark": true,
+          "huid": "[TK]",
+          "assayedAt": 2018
+        },
+        "qcSignedOffBy": "Shri Ashok Kumar Bansal",
+        "completedAt": "2018",
+        "serviceHistory": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "_approved": false,
+  "_needs": ["real roles", "years at the bench", "consent from each named person", "portraits"],
+  "_note": "Names are confirmed from the client brief. Roles, tenure and bios are placeholders. Every person listed must consent before publication.",
+
+  "people": [
+    {
+      "name": "Shri Ashok Kumar Bansal",
+      "role": "Founder",
+      "since": 1993,
+      "consentOnFile": false,
+      "note": "Opened the workshop in 1993. Trained eleven years under a goldsmith before that. Still at the bench most mornings."
+    },
+    {
+      "name": "Chetan Bansal",
+      "role": "Manufacturing and quality",
+      "since": 2011,
+      "consentOnFile": false,
+      "note": "Signs off every piece before it leaves the workshop. Started at the bench, not the counter."
+    },
+    {
+      "name": "Karan Bansal",
+      "role": "Design and commissions",
+      "since": 2011,
+      "consentOnFile": false,
+      "note": "Takes most bespoke consultations and draws the first sketch himself."
+    },
+    {
+      "name": "Rajeev Bansal",
+      "role": "Stone sourcing and certification",
+      "since": 2014,
+      "consentOnFile": false,
+      "note": "Buys coloured stones and diamonds in person and matches every certificate to the piece it goes into."
+    },
+    {
+      "name": "[TK] Head goldsmith",
+      "role": "Head goldsmith",
+      "since": null,
+      "consentOnFile": false,
+      "note": "PLACEHOLDER. Naming the senior bench staff is one of the strongest trust signals available and almost nobody in the category does it."
+    }
+  ],
+
+  "workshop": {
+    "goldsmiths": "[TK]",
+    "settersAndPolishers": "[TK]",
+    "longestServing": "[TK] years",
+    "typicalBenchHoursBridalSet": "[TK]",
+    "outsourcedOperations": "None",
+    "_note": "Hemmerle publishes 15 goldsmiths and pieces exceeding 500 hours. Numbers beat adjectives. Get the real ones."
+  }
+}

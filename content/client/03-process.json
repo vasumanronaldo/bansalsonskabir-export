@@ -1,0 +1,16 @@
+{
+  "_approved": false,
+  "_needs": ["durations", "step descriptions"],
+  "_note": "The eight steps are from the client brief and are correct. Prose and timings are placeholders.",
+
+  "steps": [
+    { "order": 1, "title": "Consultation",      "duration": "1 hour",      "description": "We sit down and find out what the piece is for, who will wear it, and how often. Nothing is shown until we understand that." },
+    { "order": 2, "title": "Sketch",            "duration": "3 – 7 days",  "description": "A drawing on paper, revised with you. We price it openly at this stage, before any work begins." },
+    { "order": 3, "title": "CAD or hand-forming","duration": "1 – 2 weeks","description": "Intricate settings are modelled in CAD and shown as a render. Traditional polki and jadau work is formed by hand at the bench." },
+    { "order": 4, "title": "Casting",           "duration": "2 – 3 days",  "description": "Wax is invested and the metal poured in our own foundry. Weight is recorded before and after." },
+    { "order": 5, "title": "Stone setting",     "duration": "2 – 5 weeks", "description": "Each stone is set by hand. Certificates are matched to the stones going into your piece, not to a batch." },
+    { "order": 6, "title": "Polishing",         "duration": "3 – 5 days",  "description": "Finished by hand in stages. The final polish is the last thing done before inspection." },
+    { "order": 7, "title": "Quality inspection","duration": "1 day",       "description": "Checked under a loupe against the drawing, weighed, hallmarked and HUID registered." },
+    { "order": 8, "title": "Presentation",      "duration": "—",           "description": "Weighed, billed and packed at your table. You see exactly what goes into the box." }
+  ]
+}

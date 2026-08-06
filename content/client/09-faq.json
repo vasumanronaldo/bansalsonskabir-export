@@ -1,0 +1,74 @@
+{
+  "_approved": false,
+  "_needs": [
+    "answers verified by the family",
+    "turnaround and deposit figures once policy is set"
+  ],
+  "faqs": [
+    {
+      "group": "buying",
+      "question": "Do you sell lab-grown diamonds?",
+      "answer": "No. We sell natural stones only, certified by GIA or IGI. If you want a lab-grown stone we will tell you honestly where to get one."
+    },
+    {
+      "group": "buying",
+      "question": "Can I see the certificate before I buy?",
+      "answer": "Yes. The certificate for your specific stone is shown at the table and handed over with the piece."
+    },
+    {
+      "group": "buying",
+      "question": "Is everything hallmarked?",
+      "answer": "Every gold piece carries a BIS hallmark and a HUID number. You can verify the HUID yourself on the BIS Care app."
+    },
+    {
+      "group": "visiting",
+      "question": "Do I need an appointment?",
+      "answer": "No. Walk-ins are welcome. An appointment means we keep an hour aside and the person who will make your piece is at the table."
+    },
+    {
+      "group": "visiting",
+      "question": "Is there a private room?",
+      "answer": "Yes. One private cabin, available on request when you book."
+    },
+    {
+      "group": "bespoke",
+      "question": "How long does a commission take?",
+      "answer": "Three to five months for most pieces. Bridal sets can take longer depending on the setting work."
+    },
+    {
+      "group": "bespoke",
+      "question": "Can you rework my mother's jewellery?",
+      "answer": "Yes. The original gold and stones stay yours and are returned to you. Nothing is melted without your consent in writing."
+    },
+    {
+      "group": "after",
+      "question": "What does lifetime service cover?",
+      "answer": "Cleaning, polishing, re-plating and tightening, free, forever, on anything we have made. See the aftercare page for what is chargeable."
+    },
+    {
+      "group": "visiting",
+      "question": "What should I bring?",
+      "answer": "If you are having something reworked, bring the piece and the original bill if you have it. Otherwise, photographs of anything you like are more useful than a description."
+    },
+    {
+      "group": "visiting",
+      "question": "How long does a first visit take?",
+      "answer": "About an hour. We keep the slot free either side so you are not moved along."
+    },
+    {
+      "group": "visiting",
+      "question": "Can I bring my family?",
+      "answer": "Yes. Most bridal appointments are three or four people. Tell us when you book and we will seat you properly."
+    },
+    {
+      "group": "visiting",
+      "question": "What if I am running late?",
+      "answer": "Call or WhatsApp. The slot is yours for the day; we will fit you in whenever you arrive."
+    },
+    {
+      "group": "visiting",
+      "question": "Will I be pressured to buy?",
+      "answer": "No. We contact you once to confirm and once on the day, and not again after your visit."
+    }
+  ]
+}

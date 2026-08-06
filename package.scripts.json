@@ -1,0 +1,15 @@
+{
+  "_note": "Merge these into package.json during Phase 1. Do not rename them.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "content:status": "node scripts/content-status.mjs",
+    "content:edit": "bash scripts/content-edit.sh",
+    "content:push": "node scripts/content-push.mjs",
+    "prebuild": "node scripts/content-status.mjs",
+    "check:launch": "node scripts/content-status.mjs --strict && pnpm typecheck && pnpm build"
+  }
+}
