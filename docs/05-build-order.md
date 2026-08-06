@@ -16,7 +16,7 @@ every later phase depends on them. Colour and type tokens from
 Prettier + ESLint. **No pages yet.**
 *Read: `02-design-system.md` only.*
 
-## [ ] Phase 2 — Design primitives
+## [x] Phase 2 — Design primitives
 `type/` (Display, Lede, Body, Label), `ui/` (LinkArrow, ButtonGhost, Placeholder),
 `layout/Header`, `layout/Footer`. Motion primitives in `lib/motion.ts` with the
 `useReducedMotion` wrapper. Build a `/kitchen-sink` dev-only route rendering every

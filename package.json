@@ -17,6 +17,7 @@
     "check:launch": "node scripts/content-status.mjs --strict && pnpm typecheck && pnpm build"
   },
   "dependencies": {
+    "framer-motion": "^11.18.2",
     "next": "15.5.4",
     "react": "19.2.0",
     "react-dom": "19.2.0"
