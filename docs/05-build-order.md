@@ -36,7 +36,7 @@ This includes the **Bansal Standard** signature section — get this right, it s
 the tone for everything else.
 *Read: `04-pages.md` § Home + `02-design-system.md` § Signature.*
 
-## [ ] Phase 5 — Appointment flow
+## [x] Phase 5 — Appointment flow
 `/appointment` page, form with Zod + react-hook-form, `POST /api/appointment`,
 Resend templates (client confirmation + internal notification), Sanity write,
 rate limiting, honeypot, success state. **Test the full round trip before moving on.**

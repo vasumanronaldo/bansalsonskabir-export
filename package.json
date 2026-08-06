@@ -17,6 +17,7 @@
     "check:launch": "node scripts/content-status.mjs --strict && pnpm typecheck && pnpm build"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.7.1",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^3.99.0",
     "framer-motion": "^11.18.2",
@@ -24,8 +25,11 @@
     "next-sanity": "^13.3.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-hook-form": "^7.84.0",
+    "resend": "^6.18.1",
     "sanity": "^3.99.0",
-    "styled-components": "^6.5.0"
+    "styled-components": "^6.5.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.2.0",
