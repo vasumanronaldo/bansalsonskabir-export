@@ -49,7 +49,7 @@ the **published commission terms** (`content/client/11-commission-terms.md`) —
 both are differentiators, not filler. Nobody named renders without `consentOnFile`.
 *Read: `04-pages.md` only.*
 
-## [ ] Phase 7 — Collections
+## [x] Phase 7 — Collections
 `/collections`, `/collections/[slug]`, and **`/collections/[slug]/[piece]` — the
 maker's dossier**, which is the most differentiating page on the site. `PieceCard`
 with status chips, the mono spec-row record, `generateStaticParams`.
