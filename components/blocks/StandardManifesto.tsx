@@ -17,9 +17,6 @@ const LINES = [
   'We build trust before jewellery.',
   'We create relationships before transactions.',
   'We never compromise on quality.',
-  'We never pressure clients.',
-  'We never sacrifice integrity for profit.',
-  'Every client deserves equal respect.',
 ] as const
 
 export default function StandardManifesto() {
@@ -54,7 +51,7 @@ export default function StandardManifesto() {
               )}
               <motion.p
                 variants={line}
-                className="font-[family-name:var(--font-display)] text-[length:var(--text-display-md)] leading-[1.15] py-5"
+                className="font-[family-name:var(--font-display)] text-[length:var(--text-display-md)] leading-[1.15] py-7"
               >
                 {text}
               </motion.p>

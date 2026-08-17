@@ -38,7 +38,7 @@ export function PieceCard({ piece }: { piece: PieceCardData }) {
             />
           </div>
         ) : (
-          <Placeholder ratio="4:5" label={piece.placeholderLabel || `${piece.title} — ${piece.reference}`} />
+          <Placeholder ratio="4:5" label={piece.placeholderLabel || piece.title} />
         )}
         {chip && (
           <span className="absolute left-3 top-3 bg-obsidian/85 px-2 py-1 font-[family-name:var(--font-mono)] text-[length:var(--text-label)] uppercase tracking-[0.12em] text-pearl">
@@ -48,9 +48,6 @@ export function PieceCard({ piece }: { piece: PieceCardData }) {
       </div>
       <div className="mt-3">
         <p className="font-[family-name:var(--font-body)] text-[length:var(--text-body-sm)] text-charcoal">{piece.title}</p>
-        <p className="mt-0.5 font-[family-name:var(--font-mono)] text-[length:var(--text-label)] uppercase tracking-[0.12em] text-stone">
-          {piece.reference}
-        </p>
       </div>
     </Link>
   )
