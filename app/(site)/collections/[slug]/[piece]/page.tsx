@@ -1,19 +1,16 @@
-// /collections/[slug]/[piece] — THE MAKER'S DOSSIER (docs/04 § dossier).
-// The single most differentiating page on the site. Images left (sticky),
-// record right. Render ONLY fields that exist — never an empty row or "N/A".
-// No enquiry action, no price, no "similar pieces", no client names.
+// /collections/[slug]/[piece] — a named piece (change round D). Heading is the
+// piece's name, then its subtitle and prose description. The maker's dossier
+// (D2) and the PLACEHOLDER paragraph (D4) are removed. Image left (sticky), copy
+// right. No enquiry action, no price, no "similar pieces".
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getPieces } from '@/lib/client-content'
-import { DraftFlag } from '@/components/DraftFlag'
 import { Container } from '@/components/layout/Container'
 import { Display, Body, Label } from '@/components/type'
 import { Placeholder } from '@/components/ui/Placeholder'
 import { LinkArrow } from '@/components/ui/LinkArrow'
-import { DossierRecord, type DossierRow } from '@/components/blocks/DossierRecord'
 import { JsonLd } from '@/components/JsonLd'
 import { breadcrumbJsonLd } from '@/lib/seo'
-import { pieceDossier, allPieceParams, type NormalizedDossier } from '@/lib/collections'
+import { pieceDetail, allPieceParams } from '@/lib/collections'
 
 export async function generateStaticParams() {
   return allPieceParams()
@@ -21,108 +18,49 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; piece: string }> }): Promise<Metadata> {
   const { slug, piece } = await params
-  const d = await pieceDossier(slug, piece)
+  const d = await pieceDetail(slug, piece)
   if (!d) return {}
-  return { title: `${d.title} · ${d.reference}`, description: `${d.title} — the maker's dossier. ${d.reference}, made by Bansal Sons.` }
+  return {
+    title: d.subtitle ? `${d.name} — ${d.subtitle}` : d.name,
+    description: d.description?.replace(/\s+/g, ' ').trim().slice(0, 155),
+  }
 }
 
-function buildGroups(d: NormalizedDossier): DossierRow[][] {
-  const groups: DossierRow[][] = []
-  const push = (rows: (DossierRow | null)[]) => {
-    const kept = rows.filter((r): r is DossierRow => !!r && r.lines.length > 0)
-    if (kept.length) groups.push(kept)
-  }
-  const row = (label: string, ...lines: (string | undefined)[]): DossierRow | null => {
-    const kept = lines.filter((l): l is string => !!l && l.trim().length > 0)
-    return kept.length ? { label, lines: kept } : null
-  }
-
-  // identity
-  push([
-    row('Reference', d.reference),
-    row('Completed', d.completed),
-    row('Status', d.status),
-  ])
-
-  // metal
-  push([
-    row('Metal', d.metal),
-    row('Gross weight', d.grossWeight != null ? `${d.grossWeight} g` : undefined),
-    row('Net metal weight', d.netMetalWeight != null ? `${d.netMetalWeight} g` : undefined),
-  ])
-
-  // stones — multi-line
-  if (d.stones && d.stones.length) {
-    const lines: string[] = []
-    for (const s of d.stones) {
-      const treatment = s.treatment && s.treatment !== '[TK]' ? s.treatment : null
-      const head = [s.type, s.count != null ? `× ${s.count}` : null, s.carat != null ? `${s.carat} ct total` : null, treatment].filter(Boolean).join(' · ')
-      if (head) lines.push(head)
-      // Omit an unfilled ([TK]) report number — never render a placeholder here.
-      const report = s.reportNumber && s.reportNumber !== '[TK]' ? s.reportNumber : null
-      const cert = [s.certifier && s.certifier !== 'none' ? s.certifier : null, report ? `report ${report}` : null].filter(Boolean).join(' ')
-      if (cert) lines.push(cert)
-    }
-    if (lines.length) push([{ label: 'Stones', lines }])
-  }
-
-  // bench
-  push([
-    row('Made at the bench', d.operations?.length ? d.operations.join(' · ') : undefined),
-    // "None" is a claim we make explicitly when the data confirms it (docs § dossier)
-    row('Outsourced', d.outsourced ? (d.outsourced.length ? d.outsourced.join(' · ') : 'None') : undefined),
-    row('Bench hours', d.benchHours != null ? String(d.benchHours) : undefined),
-  ])
-
-  // hallmark
-  const hallmark = d.hallmark ? [d.hallmark.bisMark, d.hallmark.huid ? `HUID ${d.hallmark.huid}` : null].filter(Boolean).join(' · ') : undefined
-  const checkedBy = d.checkedBy ? [d.checkedBy, d.completed].filter(Boolean).join(', ') : undefined
-  push([row('Hallmark', hallmark || undefined), row('Checked by', checkedBy)])
-
-  // service
-  if (d.serviceHistory && d.serviceHistory.length) {
-    const lines = d.serviceHistory.map((s) => [s.date, s.work, s.chargeable != null ? (s.chargeable ? 'chargeable' : 'no charge') : null].filter(Boolean).join(' · '))
-    push([{ label: 'Serviced', lines }])
-  }
-
-  return groups
-}
-
-export default async function DossierPage({ params }: { params: Promise<{ slug: string; piece: string }> }) {
+export default async function PiecePage({ params }: { params: Promise<{ slug: string; piece: string }> }) {
   const { slug, piece } = await params
-  const d = await pieceDossier(slug, piece)
+  const d = await pieceDetail(slug, piece)
   if (!d) notFound()
-  const { _meta } = getPieces()
-  const groups = buildGroups(d)
+
+  const paragraphs = (d.description ?? '')
+    .split(/\n{2,}/)
+    .map((p) => p.trim().replace(/\n/g, ' '))
+    .filter(Boolean)
 
   return (
     <Container className="py-[clamp(2.5rem,6vw,5rem)]">
-      <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Collections', path: '/collections' }, { name: d.collectionSlug, path: `/collections/${d.collectionSlug}` }, { name: d.title, path: `/collections/${d.collectionSlug}/${d.slug}` }])} />
+      <JsonLd data={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Collections', path: '/collections' }, { name: d.collectionSlug, path: `/collections/${d.collectionSlug}` }, { name: d.name, path: `/collections/${d.collectionSlug}/${d.slug}` }])} />
       <LinkArrow href={`/collections/${d.collectionSlug}`}>Back to the collection</LinkArrow>
 
       <div className="mt-8 grid gap-x-14 gap-y-10 lg:grid-cols-2">
-        {/* Images — sticky on desktop */}
+        {/* Image — sticky on desktop */}
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <Placeholder ratio="4:5" ground="charcoal" label={d.placeholderLabel || `${d.title} — ${d.reference}`} />
+          <Placeholder ratio="4:5" ground="charcoal" label={d.name} />
         </div>
 
-        {/* The record */}
+        {/* The piece */}
         <div>
-          <Label className="block">
-            The maker&rsquo;s dossier
-            <DraftFlag meta={_meta} />
-          </Label>
-          <Display size="lg" as="h1" className="mt-3">
-            {d.title}
+          <Display size="lg" as="h1">
+            {d.name}
           </Display>
-          {d.isBespoke && <Label className="mt-3 block">Made as a commission</Label>}
-
-          <div className="mt-10">
-            <DossierRecord groups={groups} />
-          </div>
-
-          {d.description && (
-            <Body className="mt-10 max-w-[52ch] text-stone">{d.description}</Body>
+          {d.subtitle && <Label className="mt-3 block">{d.subtitle}</Label>}
+          {paragraphs.length > 0 && (
+            <div className="mt-8 max-w-[54ch] space-y-5">
+              {paragraphs.map((p, i) => (
+                <Body key={i} className="text-stone">
+                  {p}
+                </Body>
+              ))}
+            </div>
           )}
         </div>
       </div>

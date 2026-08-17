@@ -7,13 +7,9 @@ import { getFeaturedPieces } from '@/sanity/queries'
 import type { PieceCardData } from '@/components/blocks/PieceCard'
 
 interface FilePiece {
-  reference: string
   slug: string
-  title: string
+  name: string
   collection: string
-  featured?: boolean
-  status?: string
-  placeholderLabel?: string
 }
 
 export async function featuredPieces(limit = 6): Promise<PieceCardData[]> {
@@ -31,13 +27,11 @@ export async function featuredPieces(limit = 6): Promise<PieceCardData[]> {
     }
   }
   const { data } = getPieces()
-  const pieces = ((data.pieces as FilePiece[]) ?? []).filter((p) => p.featured)
+  const pieces = (data.pieces as FilePiece[]) ?? []
   return pieces.slice(0, limit).map((p) => ({
-    title: p.title,
-    reference: p.reference,
+    title: p.name,
     slug: p.slug,
     collectionSlug: p.collection,
-    status: p.status,
-    placeholderLabel: p.placeholderLabel,
+    placeholderLabel: p.name,
   }))
 }

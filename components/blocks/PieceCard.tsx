@@ -9,7 +9,7 @@ import type { ImageRef } from '@/sanity/queries'
 
 export interface PieceCardData {
   title: string
-  reference: string
+  reference?: string
   slug: string
   collectionSlug: string
   status?: string

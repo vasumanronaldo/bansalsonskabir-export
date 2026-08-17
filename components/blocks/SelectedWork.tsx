@@ -25,7 +25,7 @@ export async function SelectedWork() {
       </div>
       <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3">
         {pieces.map((p) => (
-          <PieceCard key={p.reference} piece={p} />
+          <PieceCard key={p.slug} piece={p} />
         ))}
       </div>
     </Section>

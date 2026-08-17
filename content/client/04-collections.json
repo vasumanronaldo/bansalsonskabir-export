@@ -1,18 +1,16 @@
 {
-  "_approved": false,
-  "_needs": ["intro copy for each collection"],
+  "_approved": true,
+  "_needs": ["intro copy for each collection", "assign the four rings to Commitment vs Engagement - docs/09-changes-v1.md X4"],
+  "_note": "Client-supplied, 15 Aug 2026. Eleven categories replaced by these eight.",
 
   "collections": [
-    { "slug": "bridal",     "title": "Bridal",              "order": 1,  "shortDescription": "Complete sets built around a single wedding, and around the person wearing them." },
-    { "slug": "diamond",    "title": "Diamond",             "order": 2,  "shortDescription": "Natural stones only, GIA or IGI certified, with the report handed over at the table." },
-    { "slug": "polki",      "title": "Polki",               "order": 3,  "shortDescription": "Uncut diamonds set over foil in the traditional manner, in 22ct gold." },
-    { "slug": "kundan",     "title": "Kundan",              "order": 4,  "shortDescription": "Stones set in pure gold foil, worked entirely by hand." },
-    { "slug": "jadau",      "title": "Jadau",               "order": 5,  "shortDescription": "Engraved and enamelled work in the Mughal tradition, finished front and back." },
-    { "slug": "temple",     "title": "Temple",              "order": 6,  "shortDescription": "South Indian forms in high-karat gold, made for occasion wear." },
-    { "slug": "platinum",   "title": "Platinum",            "order": 7,  "shortDescription": "Bands, solitaires and everyday pieces in 950 platinum." },
-    { "slug": "gold",       "title": "Gold",                "order": 8,  "shortDescription": "Italian, rose and yellow gold in 18ct and 22ct." },
-    { "slug": "gemstone",   "title": "Gemstone",            "order": 9,  "shortDescription": "Emerald, ruby and sapphire, with treatments disclosed in writing before setting." },
-    { "slug": "mens",       "title": "Men's",               "order": 10, "shortDescription": "Signets, bands, cufflinks and chains, made to be worn daily." },
-    { "slug": "everyday",   "title": "Everyday",            "order": 11, "shortDescription": "Light pieces built to survive being worn, not stored." }
+    { "slug": "bridal-necklace",     "title": "Bridal Necklace",     "order": 1, "shortDescription": "" },
+    { "slug": "commitment-rings",    "title": "Commitment Rings",    "order": 2, "shortDescription": "" },
+    { "slug": "diamond-necklace",    "title": "Diamond Necklace",    "order": 3, "shortDescription": "" },
+    { "slug": "engagement-rings",    "title": "Engagement Rings",    "order": 4, "shortDescription": "" },
+    { "slug": "bracelets-and-bangles","title": "Bracelets and Bangles","order": 5, "shortDescription": "" },
+    { "slug": "earrings",            "title": "Earrings",            "order": 6, "shortDescription": "" },
+    { "slug": "everyday-jewellery",  "title": "Everyday Jewellery",  "order": 7, "shortDescription": "" },
+    { "slug": "mens-jewellery",      "title": "Men's Jewellery",     "order": 8, "shortDescription": "" }
   ]
 }
