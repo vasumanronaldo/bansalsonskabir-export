@@ -1,7 +1,6 @@
 // Kitchen sink — DEV ONLY. Renders every design primitive at every size so the
 // system can be critiqued in one place. Hard-guarded out of production builds.
 import { notFound } from 'next/navigation'
-import { getSettings } from '@/lib/client-content'
 import { Container } from '@/components/layout/Container'
 import { Hairline } from '@/components/layout/Hairline'
 import { Header } from '@/components/layout/Header'
@@ -25,11 +24,10 @@ function Row({ title, children }: { title: string; children: React.ReactNode }) 
 
 export default function KitchenSink() {
   if (process.env.NODE_ENV === 'production') notFound()
-  const { data: settings } = getSettings()
 
   return (
     <>
-      <Header wordmark={settings.legalName} />
+      <Header />
       <main>
         <Container className="py-16">
           <Label gold>Design system · kitchen sink</Label>

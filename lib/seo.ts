@@ -5,8 +5,8 @@ import type { Settings } from './client-content'
 const site = () => process.env.NEXT_PUBLIC_SITE_URL || 'https://bansalsonsjewellers.com'
 
 const DAY_MAP: Record<string, string[]> = {
-  'Tuesday – Sunday': ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-  Monday: ['Monday'],
+  'Wednesday – Monday': ['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday'],
+  Tuesday: ['Tuesday'],
 }
 
 /** JewelryStore (a LocalBusiness + Store subtype) for the root layout. */

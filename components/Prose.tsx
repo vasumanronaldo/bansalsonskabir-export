@@ -36,7 +36,10 @@ function inline(text: string, keyBase: string): ReactNode[] {
 }
 
 export function Prose({ markdown, onDark = false }: { markdown: string; onDark?: boolean }) {
-  const blocks = markdown.trim().split(/\n{2,}/)
+  // Strip editorial HTML comments (<!-- ... -->) so notes-to-the-family never
+  // leak onto the rendered page.
+  const clean = markdown.replace(/<!--[\s\S]*?-->/g, '')
+  const blocks = clean.trim().split(/\n{2,}/)
   const out: ReactNode[] = []
   let list: string[] = []
 

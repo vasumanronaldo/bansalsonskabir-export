@@ -1,100 +1,76 @@
 'use client'
 
-// Sticky header (docs/02): hairline, transparent → pearl on scroll. The wordmark
-// is the LEGAL name only (never "the House of Bansal"). Nav labels are route
-// names; the legal name is passed in from the content loader, never hardcoded.
-import { useEffect, useState } from 'react'
+// Header — centred crest lockup with split navigation (as in the render). Solid
+// cream with a hairline so it reads on any hero.
+import { useState } from 'react'
 import Link from 'next/link'
+import { Wordmark } from '@/components/Wordmark'
 import { ButtonGhost } from '@/components/ui/ButtonGhost'
 
-const NAV = [
+const LEFT = [
   { href: '/legacy', label: 'Legacy' },
-  { href: '/maison', label: 'Maison' },
   { href: '/craftsmanship', label: 'Craftsmanship' },
-  { href: '/bespoke', label: 'Bespoke' },
   { href: '/collections', label: 'Collections' },
-  { href: '/journal', label: 'Journal' },
-  { href: '/contact', label: 'Contact' },
 ] as const
+const RIGHT = [
+  { href: '/maison', label: 'Maison' },
+  { href: '/bespoke', label: 'Bespoke' },
+  { href: '/journal', label: 'Journal' },
+] as const
+const ALL = [...LEFT, ...RIGHT, { href: '/contact', label: 'Contact' }] as const
 
-export function Header({ wordmark }: { wordmark: string }) {
-  const [scrolled, setScrolled] = useState(false)
+const navLink =
+  'font-[family-name:var(--font-mono)] text-[length:var(--text-label)] uppercase tracking-[0.16em] text-charcoal transition-colors duration-200 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold'
+
+export function Header() {
   const [open, setOpen] = useState(false)
-
-  useEffect(() => {
-    let raf = 0
-    const onScroll = () => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(() => setScrolled(window.scrollY > 8))
-    }
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      cancelAnimationFrame(raf)
-    }
-  }, [])
-
   return (
-    <header
-      className={`sticky top-0 z-50 transition-colors duration-[250ms] ease-[var(--ease-editorial)] ${
-        scrolled ? 'border-b border-[var(--color-hairline)] bg-pearl' : 'bg-transparent'
-      }`}
-    >
-      <div className="mx-auto flex max-w-[1240px] items-center justify-between px-[var(--spacing-gutter)] py-4">
-        <Link
-          href="/"
-          className="font-[family-name:var(--font-display)] text-[length:var(--text-display-sm)] tracking-tight text-charcoal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-        >
-          {wordmark}
-        </Link>
-
-        <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="font-[family-name:var(--font-body)] text-[length:var(--text-body-sm)] text-charcoal underline-offset-4 transition-colors duration-[250ms] ease-[var(--ease-editorial)] hover:text-gold hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-            >
-              {item.label}
-            </Link>
+    <header className="sticky top-0 z-50 border-b border-[var(--color-hairline)] bg-pearl/95 backdrop-blur-sm">
+      <div className="mx-auto grid max-w-[1240px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-[var(--spacing-gutter)] py-4">
+        {/* left nav */}
+        <nav aria-label="Primary" className="hidden items-center gap-7 justify-self-start lg:flex">
+          {LEFT.map((i) => (
+            <Link key={i.href} href={i.href} className={navLink}>{i.label}</Link>
           ))}
-          <ButtonGhost href="/appointment">Request an appointment</ButtonGhost>
         </nav>
 
+        {/* centred crest */}
+        <Link href="/" className="justify-self-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold lg:col-start-2">
+          <Wordmark />
+        </Link>
+
+        {/* right nav + CTA */}
+        <nav aria-label="Primary" className="hidden items-center gap-7 justify-self-end lg:flex">
+          {RIGHT.map((i) => (
+            <Link key={i.href} href={i.href} className={navLink}>{i.label}</Link>
+          ))}
+          <Link href="/appointment" className={navLink}>Appointment</Link>
+        </nav>
+
+        {/* mobile toggle (left cell) */}
         <button
           type="button"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
-          className="flex h-11 w-11 items-center justify-center border border-[var(--color-hairline)] font-[family-name:var(--font-mono)] text-[length:var(--text-label)] uppercase tracking-[0.12em] text-charcoal lg:hidden"
+          className="col-start-1 row-start-1 flex h-11 w-11 items-center justify-center justify-self-start border border-[var(--color-hairline)] font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.12em] text-charcoal lg:hidden"
         >
-          {open ? 'Close' : 'Menu'}
+          {open ? '×' : '≡'}
         </button>
       </div>
 
       {open && (
-        <nav
-          id="mobile-nav"
-          aria-label="Primary"
-          className="border-t border-[var(--color-hairline)] bg-pearl px-[var(--spacing-gutter)] py-4 lg:hidden"
-        >
+        <nav id="mobile-nav" aria-label="Primary" className="border-t border-[var(--color-hairline)] bg-pearl px-[var(--spacing-gutter)] py-4 lg:hidden">
           <ul className="flex flex-col gap-1">
-            {NAV.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-3 font-[family-name:var(--font-body)] text-charcoal hover:text-gold"
-                >
-                  {item.label}
+            {ALL.map((i) => (
+              <li key={i.href}>
+                <Link href={i.href} onClick={() => setOpen(false)} className="block py-3 font-[family-name:var(--font-body)] text-charcoal hover:text-gold">
+                  {i.label}
                 </Link>
               </li>
             ))}
             <li className="pt-3">
-              <ButtonGhost href="/appointment" className="w-full">
-                Request an appointment
-              </ButtonGhost>
+              <ButtonGhost href="/appointment" className="w-full">Request an appointment</ButtonGhost>
             </li>
           </ul>
         </nav>

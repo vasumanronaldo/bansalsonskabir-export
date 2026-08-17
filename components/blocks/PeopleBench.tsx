@@ -38,7 +38,7 @@ export function PeopleBench() {
           const named = p.consentOnFile
           return (
             <li key={i}>
-              <Placeholder ratio="4:5" ground="charcoal" label={named ? `${p.name} — portrait` : 'Portrait — consent pending'} />
+              <Placeholder ratio="4:5" ground="charcoal" seed={p.role} label={named ? `${p.name} — portrait` : 'Portrait — consent pending'} />
               <div className="mt-4">
                 {named ? (
                   <Display size="sm" as="h3">

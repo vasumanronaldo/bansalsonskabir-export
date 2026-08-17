@@ -4,23 +4,23 @@
    The showroom, translated: pearl field, obsidian feature walls, satin gold
    at hairline weight. Zero radius. No shadows. No gradients. */
 @theme {
-  /* Field */
-  --color-pearl: #f7f5f1; /* default page background */
-  --color-pearl-deep: #efebe4; /* alternating section band */
+  /* Field — warm cream + espresso (traditional-luxe, not cool minimal) */
+  --color-pearl: #f4ede1; /* default page background — warm cream */
+  --color-pearl-deep: #eaded0; /* alternating section band */
 
-  /* Ink */
-  --color-charcoal: #22211f; /* primary text, dark sections */
-  --color-obsidian: #141311; /* black-marble feature sections */
-  --color-stone: #8c8a85; /* secondary text, captions */
-  --color-stone-light: #b5b2ab; /* tertiary, on-dark secondary */
+  /* Ink — warm browns */
+  --color-charcoal: #2a231a; /* primary text, dark sections */
+  --color-obsidian: #191108; /* espresso feature sections */
+  --color-stone: #8a7d6a; /* secondary text, captions — warm taupe */
+  --color-stone-light: #c6b6a0; /* tertiary, on-dark secondary */
 
-  /* Accent — used sparingly (≤3 per viewport) */
-  --color-gold: #b08d57; /* satin gold: rules, marks, hover */
-  --color-gold-soft: #c9ac7e; /* on-dark gold text only */
+  /* Accent — satin gold */
+  --color-gold: #b4915a; /* rules, marks, hover */
+  --color-gold-soft: #cdb082; /* on-dark gold text only */
 
   /* Structure */
-  --color-hairline: rgb(34 33 31 / 0.12);
-  --color-hairline-inv: rgb(247 245 241 / 0.14);
+  --color-hairline: rgb(42 35 26 / 0.14);
+  --color-hairline-inv: rgb(244 237 225 / 0.16);
 
   /* Fonts — bound in lib/fonts.ts via next/font, exposed as CSS vars */
   --font-display: var(--font-bodoni), Georgia, 'Times New Roman', serif;

@@ -4,7 +4,6 @@ import type { Metadata } from 'next'
 import { getFounder } from '@/lib/client-content'
 import { DraftFlag } from '@/components/DraftFlag'
 import { Section } from '@/components/layout/Section'
-import { Container } from '@/components/layout/Container'
 import { Display, Lede, Label } from '@/components/type'
 import { Prose } from '@/components/Prose'
 import { Placeholder } from '@/components/ui/Placeholder'
@@ -32,7 +31,7 @@ export default function LegacyPage() {
       <Section field="pearl-deep">
         <div className="grid gap-x-12 gap-y-10 md:grid-cols-[minmax(0,26rem)_1fr]">
           <div>
-            <Placeholder ratio="4:5" ground="charcoal" label="Shri Ashok Kumar Bansal — portrait, 1993" />
+            <Placeholder ratio="4:5" ground="charcoal" label="Shri Ashok Kumar Bansal — at the bench, 1993" />
             <Label className="mt-4 block">
               The founder
               <DraftFlag meta={_meta} />
@@ -46,7 +45,12 @@ export default function LegacyPage() {
 
       {/* Timeline */}
       <Section field="pearl">
-        <Timeline />
+        <div className="grid gap-x-12 gap-y-10 lg:grid-cols-[1fr_minmax(0,20rem)]">
+          <Timeline />
+          <div className="hidden lg:block">
+            <Placeholder ratio="4:5" label="The showroom at C-50" className="sticky top-28" />
+          </div>
+        </div>
       </Section>
 
       {/* The manifesto — verbatim (docs/04 § Legacy #4) */}
@@ -74,9 +78,17 @@ export default function LegacyPage() {
       </Section>
 
       <Section field="pearl">
-        <Container className="!px-0">
-          <LinkArrow href="/craftsmanship">See how a piece is made</LinkArrow>
-        </Container>
+        <div className="grid items-center gap-x-12 gap-y-8 md:grid-cols-2">
+          <Placeholder ratio="3:2" label="At the bench, C-50" />
+          <div>
+            <Display size="md" as="p" className="max-w-[16ch]">
+              Every piece, made in this room.
+            </Display>
+            <div className="mt-6">
+              <LinkArrow href="/craftsmanship">See how a piece is made</LinkArrow>
+            </div>
+          </div>
+        </div>
       </Section>
     </>
   )

@@ -5,10 +5,39 @@
 // what it still needs) so <DraftFlag> can mark unconfirmed content — in
 // development only, never in a production build.
 
-import { readFileSync, readdirSync } from 'node:fs'
-import { join } from 'node:path'
+// Content is imported (not read from disk) so it bundles into the server code —
+// Cloudflare Workers has no filesystem. JSON imports keep their object shape;
+// .md imports arrive as raw strings via the next.config.ts asset/source rule.
+import settingsJson from '@/content/client/00-settings.json'
+import timelineJson from '@/content/client/02-timeline.json'
+import processJson from '@/content/client/03-process.json'
+import collectionsJson from '@/content/client/04-collections.json'
+import piecesJson from '@/content/client/05-pieces.json'
+import faqJson from '@/content/client/09-faq.json'
+import peopleJson from '@/content/client/10-people.json'
+import founderMd from '@/content/client/01-founder.md'
+import pricingMd from '@/content/client/06-pricing.md'
+import aftercareMd from '@/content/client/07-aftercare.md'
+import privacyMd from '@/content/client/08-privacy.md'
+import commissionMd from '@/content/client/11-commission-terms.md'
 
-const DIR = join(process.cwd(), 'content', 'client')
+const JSON_FILES: Record<string, Record<string, unknown>> = {
+  '00-settings.json': settingsJson as Record<string, unknown>,
+  '02-timeline.json': timelineJson as Record<string, unknown>,
+  '03-process.json': processJson as Record<string, unknown>,
+  '04-collections.json': collectionsJson as Record<string, unknown>,
+  '05-pieces.json': piecesJson as Record<string, unknown>,
+  '09-faq.json': faqJson as Record<string, unknown>,
+  '10-people.json': peopleJson as Record<string, unknown>,
+}
+const MD_FILES: Record<string, string> = {
+  '01-founder.md': founderMd,
+  '06-pricing.md': pricingMd,
+  '07-aftercare.md': aftercareMd,
+  '08-privacy.md': privacyMd,
+  '11-commission-terms.md': commissionMd,
+}
+const ALL_FILES = [...Object.keys(JSON_FILES), ...Object.keys(MD_FILES)].sort()
 
 export interface ContentMeta {
   /** file name, e.g. "00-settings.json" */
@@ -27,20 +56,19 @@ function countTk(raw: string): number {
 
 // ── JSON files: `_approved` / `_needs` ─────────────────────────────────────
 function loadJson<T>(file: string): { data: T; _meta: ContentMeta } {
-  const raw = readFileSync(join(DIR, file), 'utf8')
-  const json = JSON.parse(raw) as Record<string, unknown> & T
+  const json = JSON_FILES[file] as Record<string, unknown> & T
   const _meta: ContentMeta = {
     file,
     approved: json._approved === true,
     needs: (json._needs as string[]) ?? [],
-    tk: countTk(raw),
+    tk: countTk(JSON.stringify(json)),
   }
   return { data: json, _meta }
 }
 
 // ── Markdown files: YAML front matter `approved:` / `needs:` + body ────────
 function loadMarkdown(file: string): { body: string; _meta: ContentMeta } {
-  const raw = readFileSync(join(DIR, file), 'utf8')
+  const raw = MD_FILES[file] ?? ''
   const fm = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)
   if (!fm) {
     return { body: raw, _meta: { file, approved: false, needs: ['missing front matter'], tk: countTk(raw) } }
@@ -108,8 +136,7 @@ export const showDraftAffordances = process.env.NODE_ENV !== 'production'
 
 /** Programmatic status of every content file (mirrors content-status.mjs). */
 export function contentStatus(): ContentMeta[] {
-  return readdirSync(DIR)
-    .filter((f) => (f.endsWith('.json') || f.endsWith('.md')) && f !== 'README.md')
-    .sort()
-    .map((file) => (file.endsWith('.json') ? loadJson(file)._meta : loadMarkdown(file)._meta))
+  return ALL_FILES.map((file) =>
+    file.endsWith('.json') ? loadJson(file)._meta : loadMarkdown(file)._meta,
+  )
 }

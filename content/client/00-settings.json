@@ -1,14 +1,23 @@
 {
   "_approved": false,
-  "_needs": ["hours", "gstin", "geo", "parking", "domain", "yearsOpen"],
+  "_needs": [
+    "hours",
+    "gstin",
+    "geo",
+    "parking",
+    "domain",
+    "yearsOpen"
+  ],
   "_note": "Verified facts are already correct. Everything in _needs is a plausible placeholder.",
-
   "legalName": "Bansal Sons Jewellers",
   "editorialName": "the House of Bansal",
   "foundedYear": 1993,
   "founder": "Shri Ashok Kumar Bansal",
-  "leadership": ["Chetan Bansal", "Karan Bansal", "Rajeev Bansal"],
-
+  "leadership": [
+    "Chetan Bansal",
+    "Karan Bansal",
+    "Rajeev Bansal"
+  ],
   "address": {
     "line1": "C-50 Malviya Nagar",
     "line2": "Near Laxmi Narayan Mandir",
@@ -17,33 +26,56 @@
     "region": "Delhi",
     "country": "IN"
   },
-
   "phone": "+918527292840",
   "whatsapp": "918527292840",
   "email": "bansalsonsjewellers18@gmail.com",
   "instagram": "bansalsons_jewellers",
-
   "domain": "https://bansalsonsjewellers.com",
-
   "hours": [
-    { "days": "Tuesday – Sunday", "open": "11:00", "close": "20:00" },
-    { "days": "Monday", "open": null, "close": null, "label": "Closed" }
+    {
+      "days": "Wednesday – Monday",
+      "open": "11:00",
+      "close": "20:00"
+    },
+    {
+      "days": "Tuesday",
+      "open": null,
+      "close": null,
+      "label": "Closed"
+    }
   ],
-
   "appointmentSlots": [
-    { "value": "morning",   "label": "Morning · 11:00 – 13:00" },
-    { "value": "afternoon", "label": "Afternoon · 13:00 – 16:00" },
-    { "value": "evening",   "label": "Evening · 16:00 – 19:00" }
+    {
+      "value": "morning",
+      "label": "Morning · 11:00 – 13:00"
+    },
+    {
+      "value": "afternoon",
+      "label": "Afternoon · 13:00 – 16:00"
+    },
+    {
+      "value": "evening",
+      "label": "Evening · 16:00 – 19:00"
+    }
   ],
-
   "parking": "Street parking is available on the C-block service lane. Valet is not offered.",
-  "metro": { "station": "Malviya Nagar", "line": "Yellow Line", "walkMinutes": 7 },
+  "metro": {
+    "station": "Malviya Nagar",
+    "line": "Yellow Line",
+    "walkMinutes": 7
+  },
   "landmark": "Laxmi Narayan Mandir",
-
-  "geo": { "latitude": 28.5383, "longitude": 77.2064, "_precision": "approximate — take exact coordinates from the Google Business Profile listing" },
-
+  "geo": {
+    "latitude": 28.5383,
+    "longitude": 77.2064,
+    "_precision": "approximate — take exact coordinates from the Google Business Profile listing"
+  },
   "gstin": "07AAAAA0000A1Z5",
   "bisRegistration": "BIS-TK-000000",
-
-  "certifications": ["GIA", "IGI", "BIS Hallmark", "HUID"]
+  "certifications": [
+    "GIA",
+    "IGI",
+    "BIS Hallmark",
+    "HUID"
+  ]
 }

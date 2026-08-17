@@ -1,15 +1,21 @@
 {
   "_approved": false,
-  "_needs": ["real roles", "years at the bench", "consent from each named person", "portraits"],
+  "_needs": [
+    "real roles",
+    "years at the bench",
+    "consent from each named person",
+    "portraits",
+    "founder's year of passing (for the timeline/memorial)"
+  ],
   "_note": "Names are confirmed from the client brief. Roles, tenure and bios are placeholders. Every person listed must consent before publication.",
-
   "people": [
     {
       "name": "Shri Ashok Kumar Bansal",
-      "role": "Founder",
+      "role": "Founder (1993)",
       "since": 1993,
       "consentOnFile": false,
-      "note": "Opened the workshop in 1993. Trained eleven years under a goldsmith before that. Still at the bench most mornings."
+      "note": "Opened the workshop in 1993 and set the standard the house still keeps. Trained eleven years under a goldsmith before that. The house continues under his sons and nephew.",
+      "inMemoriam": true
     },
     {
       "name": "Chetan Bansal",
@@ -40,7 +46,6 @@
       "note": "PLACEHOLDER. Naming the senior bench staff is one of the strongest trust signals available and almost nobody in the category does it."
     }
   ],
-
   "workshop": {
     "goldsmiths": "[TK]",
     "settersAndPolishers": "[TK]",

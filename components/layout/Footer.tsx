@@ -4,6 +4,7 @@
 import { getSettings } from '@/lib/client-content'
 import { DraftFlag } from '@/components/DraftFlag'
 import { Label } from '@/components/type/Label'
+import { Wordmark } from '@/components/Wordmark'
 
 // "+918527292840" → "+91 85272 92840" for display; tel: uses the raw value.
 function prettyPhone(raw: string): string {
@@ -20,11 +21,9 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1240px] gap-x-8 gap-y-12 px-[var(--spacing-gutter)] py-[clamp(3.5rem,7vw,6rem)] md:grid-cols-2 lg:grid-cols-4">
         {/* Wordmark + line */}
         <div className="lg:col-span-1">
-          <p className="font-[family-name:var(--font-display)] text-[length:var(--text-display-sm)]">
-            {s.legalName}
-            <DraftFlag meta={_meta} />
-          </p>
-          <p className="mt-3 font-[family-name:var(--font-body)] text-[length:var(--text-body-sm)] text-stone-light">
+          <Wordmark center={false} onDark />
+          <DraftFlag meta={_meta} />
+          <p className="mt-4 font-[family-name:var(--font-body)] text-[length:var(--text-body-sm)] text-stone-light">
             Made under one roof since {s.foundedYear}.
           </p>
         </div>

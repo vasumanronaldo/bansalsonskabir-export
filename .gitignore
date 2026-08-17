@@ -1,8 +1,13 @@
 node_modules/
 .next/
 out/
-.env.local
+# Secrets / env — never commit any of these
+.env
+.env.*
 .env*.local
+.dev.vars
+.dev.vars.*
+!.env.example
 .vercel
 .DS_Store
 *.log
@@ -15,3 +20,7 @@ next-env.d.ts
 
 # Sanity generated import
 sanity/import/
+
+# Cloudflare / OpenNext build output
+.open-next/
+.wrangler/

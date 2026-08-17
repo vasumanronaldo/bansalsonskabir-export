@@ -1,7 +1,7 @@
 ---
 approved: false
-needs: [founder's own words, year details, family names beyond the three principals]
-note: Plausible placeholder written in the house voice. Replace after speaking to the family.
+needs: [year of the founder's passing, a family story from the early years, year details, family names beyond the three principals]
+note: Plausible placeholder written in the house voice. The founder has passed away — keep every reference to him in the past tense. Replace after speaking to the family.
 ---
 
 # The founder
@@ -20,10 +20,12 @@ to buy. If the stone was wrong for the setting, if the occasion did not warrant
 the expense, if the family would be better served waiting a season — he said so,
 and lost the sale, and kept the family.
 
-Three decades on, that is still how the house is run. His sons Chetan and Karan,
-and his nephew Rajeev, work the same floor. Many of the families who came in the
-first years now send their children.
+Shri Ashok Kumar Bansal is no longer with us, but that is still how the house is
+run. His sons Chetan and Karan, and his nephew Rajeev, work the same floor and
+hold to the same standard. Many of the families who came in the first years now
+send their children.
 
-<!-- REPLACE: ask Shri Ashok Kumar Bansal for one story from the early years —
+<!-- REPLACE: ask the family for one story of the founder from the early years —
      a specific commission, a specific family, a specific mistake. One concrete
-     anecdote is worth the whole page above. -->
+     anecdote is worth the whole page above. Confirm the year of his passing. -->
+

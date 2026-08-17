@@ -14,7 +14,10 @@
     "content:edit": "bash scripts/content-edit.sh",
     "content:push": "node scripts/content-push.mjs",
     "prebuild": "node scripts/content-status.mjs",
-    "check:launch": "node scripts/content-status.mjs --strict && pnpm typecheck && pnpm build"
+    "check:launch": "node scripts/content-status.mjs --strict && pnpm typecheck && pnpm build",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",
@@ -36,6 +39,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.2.0",
+    "@opennextjs/cloudflare": "^1.20.2",
     "@tailwindcss/postcss": "4.1.14",
     "@types/node": "22.10.10",
     "@types/react": "19.2.0",
@@ -45,6 +49,7 @@
     "prettier": "3.4.2",
     "prettier-plugin-tailwindcss": "0.6.11",
     "tailwindcss": "4.1.14",
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "wrangler": "^4.119.0"
   }
 }
