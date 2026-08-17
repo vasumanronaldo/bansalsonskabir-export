@@ -149,15 +149,16 @@ one-word edit in `content/client/05-pieces.json`.
 | Astoria — diamond halo statement | **Commitment Rings** | Statement halo, worn as a commitment or anniversary piece |
 | Fleuré — floral cocktail | **Commitment Rings** | A cocktail ring is not an engagement ring |
 
-### X5 — Craftsmanship and Bespoke now carry identical content
+### X5 — RESOLVED: process documented once, linked from Bespoke
 
-Both pages now run the same eight steps with the same durations and the same text.
-Two pages of duplicate content is bad for the reader and bad for search.
+Both pages ran the same eight steps with the same durations and text — duplicate
+content, bad for the reader and bad for search.
 
-Recommended split, for approval: **Craftsmanship** keeps the eight technical steps
-as the record of how the house works. **Bespoke** keeps the terms (deposit,
-changes, cancellation, delivery, ownership) and links to Craftsmanship for the
-process. One process, described once.
+**Decided (approved).** **Craftsmanship** keeps the eight technical steps as the
+record of how the house works. **Bespoke** keeps the terms (deposit, changes,
+cancellation, delivery, ownership) and links to Craftsmanship for the process; the
+duplicated journey has been removed from the Bespoke page. One process, described
+once.
 
 ### X6 — Instagram handle
 

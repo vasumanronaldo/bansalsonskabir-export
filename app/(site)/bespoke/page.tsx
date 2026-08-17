@@ -1,14 +1,14 @@
 // /bespoke — Bespoke Atelier (docs/04 § Bespoke + build-order Phase 6). The
-// journey reuses the process (un-numbered), and the published commission terms
-// (11-commission-terms.md) are a deliberate differentiator — most houses never
-// publish them.
+// process is documented once, on Craftsmanship (X5), and linked from here; the
+// published commission terms (11-commission-terms.md) are a deliberate
+// differentiator — most houses never publish them.
 import type { Metadata } from 'next'
 import { getCommissionTerms } from '@/lib/client-content'
 import { DraftFlag } from '@/components/DraftFlag'
 import { Section } from '@/components/layout/Section'
 import { Display, Lede, Body, Label } from '@/components/type'
 import { Prose } from '@/components/Prose'
-import { ProcessSequence } from '@/components/blocks/ProcessSequence'
+import { LinkArrow } from '@/components/ui/LinkArrow'
 import { CtaBand } from '@/components/blocks/CtaBand'
 
 export const metadata: Metadata = {
@@ -33,10 +33,15 @@ export default function BespokePage() {
         </Lede>
       </Section>
 
-      {/* The journey — the process, without numbers */}
+      {/* X5: the process is documented once, on Craftsmanship — link, don't duplicate */}
       <Section field="pearl-deep">
-        <Label className="mb-10 block">The journey</Label>
-        <ProcessSequence numbered={false} withImages={false} />
+        <Label className="mb-6 block">The journey</Label>
+        <Body className="max-w-[52ch]">
+          A commission runs through the same eight steps as everything we make.
+        </Body>
+        <div className="mt-6">
+          <LinkArrow href="/craftsmanship">See how a piece is made</LinkArrow>
+        </div>
       </Section>
 
       {/* Remodelling */}
