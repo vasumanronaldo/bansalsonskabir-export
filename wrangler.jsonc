@@ -11,6 +11,13 @@
   "observability": {
     "enabled": true
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "bansal-sons-admin",
+      "database_id": "ded40c57-30c2-419e-a96c-b8797be116ee"
+    }
+  ],
   "vars": {
     "NEXT_PUBLIC_SANITY_PROJECT_ID": "6705lek2",
     "NEXT_PUBLIC_SANITY_DATASET": "production",

@@ -7,3 +7,6 @@ onlyBuiltDependencies:
   - unrs-resolver
   - esbuild
   - workerd
+allowBuilds:
+  esbuild: set this to true or false
+  workerd: set this to true or false
