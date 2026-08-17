@@ -24,7 +24,7 @@ export function Footer() {
           <Wordmark center={false} onDark />
           <DraftFlag meta={_meta} />
           <p className="mt-4 font-[family-name:var(--font-body)] text-[length:var(--text-body-sm)] text-stone-light">
-            Made under one roof since {s.foundedYear}.
+            Made by us since {s.foundedYear}.
           </p>
         </div>
 

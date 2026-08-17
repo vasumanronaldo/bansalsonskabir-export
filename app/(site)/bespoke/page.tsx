@@ -29,7 +29,7 @@ export default function BespokePage() {
         <Lede className="mt-8">
           A commission starts with a conversation, not a catalogue. Bring a photograph, a drawing, an old
           piece you want reworked, or nothing at all. We will sketch, price it openly, and show you the piece
-          in progress before it is finished. Most commissions take three to five months.
+          in progress before it is finished. Most commissions take two to four weeks.
         </Lede>
       </Section>
 

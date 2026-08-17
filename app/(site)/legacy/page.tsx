@@ -79,10 +79,10 @@ export default function LegacyPage() {
 
       <Section field="pearl">
         <div className="grid items-center gap-x-12 gap-y-8 md:grid-cols-2">
-          <Placeholder ratio="3:2" label="At the bench, C-50" />
+          <Placeholder ratio="3:2" label="At the bench" />
           <div>
             <Display size="md" as="p" className="max-w-[16ch]">
-              Every piece, made in this room.
+              Every piece, made by us.
             </Display>
             <div className="mt-6">
               <LinkArrow href="/craftsmanship">See how a piece is made</LinkArrow>

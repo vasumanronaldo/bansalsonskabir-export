@@ -24,7 +24,7 @@ export function Hero() {
           Before there is jewellery, there is trust.
         </Display>
         <Lede className="mt-8 text-stone-light">
-          A family workshop in South Delhi, in its third generation. Every piece we sell, we have made. Every
+          A heritage jewellery outlet in South Delhi, in its third generation. Every piece we sell, we have made. Every
           stone we set, we can account for.
         </Lede>
         <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">

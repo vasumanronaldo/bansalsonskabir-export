@@ -5,9 +5,9 @@ import { Hairline } from '@/components/layout/Hairline'
 import { Display, Body, Label } from '@/components/type'
 
 const PROOFS = [
-  { label: 'Manufacturer', heading: 'Made under our own roof', body: 'Nothing is bought in and rebranded. Design, casting, setting, polishing and finishing all happen in our workshop.' },
+  { label: 'Manufacturer', heading: 'Made in our own workshops', body: 'Nothing is bought in and rebranded. Design, casting, setting, polishing and finishing all happen in our own workshops.' },
   { label: 'Certification', heading: 'Natural diamonds only', body: 'GIA and IGI certified. Every gold piece BIS hallmarked and HUID registered. Lab-grown stones are not sold here.' },
-  { label: 'Continuity', heading: 'One family, one address', body: 'Founded in 1993 by Shri Ashok Kumar Bansal. Run today by his sons and nephew, in the same neighbourhood.' },
+  { label: 'Continuity', heading: 'One family, one address', body: 'Founded in 1993 by Shri Ashok Kumar Bansal. Run today by his sons.' },
   { label: 'Transparency', heading: 'Billed in front of you', body: 'Weighing, billing and packing are done at your table. You are told how the price is built before you decide.' },
   { label: 'Aftercare', heading: 'Serviced for life', body: 'Cleaning, polishing, resizing and repair, at no charge, for anything we have made.' },
 ] as const
