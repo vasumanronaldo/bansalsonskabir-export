@@ -1,7 +1,7 @@
 ---
-approved: false
-needs: [buyback percentages, exchange terms, what is chargeable, warranty period]
-note: DUMMY POLICY. Every figure below is a placeholder. Confirm before publishing.
+approved: true
+needs: []
+note: Client-supplied, 15 Aug 2026. Turnaround lines render only when a figure is present; with none, the whole Turnaround section is hidden. Adding a figure makes it appear on its own.
 ---
 
 # Aftercare, buyback and exchange
@@ -11,17 +11,24 @@ note: DUMMY POLICY. Every figure below is a placeholder. Confirm before publishi
 - Cleaning and polishing
 - Rhodium re-plating on white gold
 - Tightening of settings and claws
-- Ring resizing, `[TK]` times
+- Ring resizing
 - Restringing of pearl and bead work
+
+If gold is required for any sizing, repair or finishing, the gold used will be
+chargeable.
 
 ## Chargeable
 
-- Replacement of a lost stone, at stone cost `[TK]`
+- Replacement of a lost stone, charged at the stone cost
 - Structural repair after damage, quoted at the bench
 - Remodelling into a new piece, quoted as a commission
 - Work on pieces not made by us, quoted after inspection
 
 ## Turnaround
+
+<!-- Each line renders ONLY if its figure is present. With every figure absent,
+     this entire section (heading, intro and list) does not render. Replace a
+     [TK] with a number and that line - and the section - appears automatically. -->
 
 We publish these because nobody else does, and because a vague promise of
 "lifetime service" is worth nothing without a timeframe attached.
@@ -30,24 +37,21 @@ We publish these because nobody else does, and because a vague promise of
 - Resizing — `[TK]` working days
 - Claw and setting repair — `[TK]` working days
 - Restringing — `[TK]` working days
-- Stone replacement — quoted after inspection, typically `[TK]`
+- Stone replacement — quoted after inspection
 
-If we will exceed these, you are told when you hand the piece over.
-
-## Damage caused by others
-
-If a piece has been worked on elsewhere, we will still service it, but we will
-tell you what we find first and what we can and cannot stand behind. `[TK]`
+If we expect to exceed the stated turnaround, you are told when you hand the piece
+over.
 
 ## Buyback
 
-We buy back any piece we have made. `[TK]` of the current metal value, `[TK]` of
-the certified stone value at the day's rate. The original invoice is required.
+We buy back all pieces we have made.
+
+You receive the full value of the metal originally bought from us, based on its
+applicable metal value at the time of buyback.
 
 ## Exchange
 
-Full metal value against a new piece, `[TK]`. Stones are re-valued at the day's
-rate. There is no time limit.
+Exchange your piece for a new one.
 
-<!-- REPLACE: the buyback and exchange numbers are the most sensitive items on
-     the site. Confirm with all three principals in writing before this page ships. -->
+Stones are not returned or credited on exchange, except diamonds, which are valued
+separately.

@@ -16,6 +16,24 @@ export const metadata: Metadata = {
   description: 'From a sketch on paper to a piece in a box — made under one roof, and billed in front of you.',
 }
 
+// X2 (docs/09 § X2): the Turnaround section shows only figures that exist. Drop
+// any turnaround line whose figure is still unfilled ([TK]); if none carry a real
+// figure, hide the whole section — heading, intro, list and outro — never an empty
+// heading. Data-driven: fill a [TK] with a number and the line and section return.
+function pruneTurnaround(md: string): string {
+  const lines = md.split('\n')
+  const start = lines.findIndex((l) => /^##\s+Turnaround\s*$/.test(l))
+  if (start === -1) return md
+  let end = lines.findIndex((l, i) => i > start && /^#{1,2}\s+\S/.test(l))
+  if (end === -1) end = lines.length
+  const section = lines.slice(start, end)
+  const isFigureLine = (l: string) => /^-\s+.*working days/i.test(l)
+  const anyRealFigure = section.some((l) => isFigureLine(l) && !/\[TK\]/.test(l))
+  if (!anyRealFigure) return [...lines.slice(0, start), ...lines.slice(end)].join('\n')
+  const kept = section.filter((l) => !(isFigureLine(l) && /\[TK\]/.test(l)))
+  return [...lines.slice(0, start), ...kept, ...lines.slice(end)].join('\n')
+}
+
 export default function CraftsmanshipPage() {
   const pricing = getPricing()
   const aftercare = getAftercare()
@@ -87,7 +105,7 @@ export default function CraftsmanshipPage() {
             <DraftFlag meta={aftercare._meta} />
           </Label>
           <div className="mt-8">
-            <Prose markdown={aftercare.body} />
+            <Prose markdown={pruneTurnaround(aftercare.body)} />
           </div>
         </div>
       </Section>
