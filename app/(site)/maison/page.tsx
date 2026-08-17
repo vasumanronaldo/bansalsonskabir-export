@@ -17,13 +17,16 @@ export const metadata: Metadata = {
 export default function MaisonPage() {
   const { data: s, _meta } = getSettings()
   const visit = getVisit()
-  // The visit is now client copy (content/client/12-visit.md): four sentences,
-  // rendered as the short sequence. The leading "# What a visit is like" heading
-  // is dropped — the section already carries that label.
-  const visitLines = visit.body
+  // Maison copy now lives in content/client/12-visit.md. Split it into the visit
+  // sequence ("# What a visit is like") and "## The room". The room text is a
+  // placeholder pending the client's replacement (E1) — hence the DraftFlag.
+  const parts = visit.body.split(/^##\s+The room\s*$/m)
+  const roomPart = parts[1] ?? ''
+  const visitLines = (parts[0] ?? '')
     .split(/\n{2,}/)
     .map((p) => p.trim().replace(/\n/g, ' '))
     .filter((p) => p && !p.startsWith('#'))
+  const roomText = roomPart.trim().replace(/\s*\n\s*/g, ' ')
 
   return (
     <>
@@ -41,11 +44,8 @@ export default function MaisonPage() {
             <Display size="md" as="h2">
               The room
             </Display>
-            <Body className="mt-6">
-              Grey Italian marble underfoot, black marble on the feature walls, and light from above. Nine
-              seating areas, so a conversation is never overheard, and one private cabin for the occasions
-              that call for it. Nothing is behind glass you cannot ask to hold.
-            </Body>
+            <DraftFlag meta={visit._meta} />
+            <Body className="mt-6">{roomText}</Body>
           </div>
           <Placeholder ratio="3:2" ground="obsidian" label="The showroom — marble and light" />
         </div>
