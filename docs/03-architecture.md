@@ -1,5 +1,11 @@
 # 03 — Architecture
 
+> **Superseded in part.** The live build runs on **Cloudflare Workers**, and
+> content is managed by a **self-hosted admin portal on D1 and R2** — not Sanity,
+> not Vercel. Where this document and `docs/10-admin-portal.md` disagree about
+> hosting, database or CMS, that file wins. Everything here about routes,
+> rendering, performance budget and `content/client/` still applies.
+
 ## Stack
 
 | Concern | Choice | Why |

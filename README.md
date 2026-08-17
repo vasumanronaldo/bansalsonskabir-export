@@ -45,6 +45,12 @@ doc to read for the task at hand, so no session pulls in the whole spec.
 | `docs/07-references.md` | Competitor audit. Evidence only — the spec governs |
 | `REFERENCE-PROMPT.md` | The prompt to run the audit in ChatGPT |
 | `docs/08-mockup-review.md` | Review of the v1 mockup. Layout reference only |
+| `docs/09-changes-v1.md` | Client revision round, 15 Aug 2026. Governs while active |
+| `CHANGE-PROMPT.md` | The prompt to run that revision round |
+| `docs/10-admin-portal.md` | Self-hosted admin portal: schema, auth, images, screens |
+| `admin/schema.sql` | D1 schema, ready to apply |
+| `admin/skeleton/` | Auth implementation, route table, worker types |
+| `ADMIN-PROMPT.md` | The prompt to build the portal |
 
 ## Client content
 

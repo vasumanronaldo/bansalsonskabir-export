@@ -45,3 +45,25 @@ FACTS AND IMAGERY
 - An abstract-value row (Design / Quality / Integrity style) instead of a
   demonstrated fact
 - Headings set in caps rather than sentence case
+
+CHANGE ROUND v1 (while docs/09-changes-v1.md is active)
+- "three to five months" surviving anywhere - bespoke is two to four weeks
+- A BSJ reference code rendered on the homepage grid or a piece page
+- Any maker's dossier spec row still rendered or commented out
+- The Bansal Standard rendering more than six lines
+- GSTIN or BIS registration number still in the footer
+- "Valet is not offered" still present
+- Any item from section X built rather than skipped
+- The client's supplied piece copy edited or "improved"
+
+ADMIN PORTAL (when Phase 10 is in the diff)
+- A session token stored unhashed in D1
+- `===` or `==` used to compare a password hash, session id or CSRF token
+- A login path that returns a different message or takes a different time for
+  unknown user vs wrong password
+- A cookie missing HttpOnly, Secure or SameSite=Strict
+- A mutating endpoint without a CSRF check
+- `/admin` reachable without a session, or present in sitemap or robots
+- An upload path that trusts the filename or the client-sent MIME type
+- Any price field, column or input anywhere in the portal
+- A publish path that allows an image with empty alt text

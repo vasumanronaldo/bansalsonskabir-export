@@ -11,6 +11,8 @@ Open the one doc that matches your current task, then stop.
 | A specific page's sections + copy | `docs/04-pages.md` |
 | What to build next, in order | `docs/05-build-order.md` |
 | Unconfirmed client facts, policy, dummy data | `content/client/README.md` |
+| **A revision round from the client** | `docs/09-changes-v1.md` — governs when active |
+| The admin portal, auth, D1, R2 | `docs/10-admin-portal.md` |
 
 `docs/07-references.md` and `docs/08-mockup-review.md` are **deliberately not in
 this table.** It is a competitor
@@ -29,9 +31,12 @@ A brochure site for a family jewellery maison in South Delhi. Appointment-first,
 
 ## Stack (fixed — do not substitute)
 
-Next.js 15 App Router · TypeScript (strict) · Tailwind CSS v4 · Framer Motion ·
-Sanity v3 (CMS, embedded Studio at `/studio`) · Resend (transactional email) ·
-Vercel (hosting) · Vercel Analytics
+**Cloudflare Workers** · TypeScript (strict) · Tailwind CSS v4 · D1 (database) ·
+R2 (images) · Resend (transactional email)
+
+There is **no third-party CMS**. Content is managed through a self-hosted admin
+portal at `/admin` — see `docs/10-admin-portal.md`. Anywhere an older doc says
+Sanity, Vercel or Next.js, that doc is out of date and this line governs.
 
 ## Hard facts — never invent or alter these
 
@@ -40,6 +45,7 @@ Vercel (hosting) · Vercel Analytics
 - C-50 Malviya Nagar, Near Laxmi Narayan Mandir, New Delhi 110017
 - +91 85272 92840 (phone + WhatsApp) · bansalsonsjewellers18@gmail.com
 - Instagram: @bansalsons_jewellers
+- Bespoke lead time is **two to four weeks**, not three to five months
 - **Never write "35 years" or "35+ years."** 1993→2026 is 33 years.
   Correct forms: "Since 1993", "over three decades", "three generations".
 - Legal/structural name: **Bansal Sons Jewellers**.
@@ -62,6 +68,10 @@ Vercel (hosting) · Vercel Analytics
   `content/client/` via `lib/client-content.ts`. The August 2026 mockup contains
   a wrong founder name, wrong address, wrong phone and wrong email
 - Never let a `DRAFT` marker or a `[TK]` value render in a production build
+- Never add a price column, field or input — including in the admin portal
+- Never weaken anything in `admin/skeleton/auth.ts` for convenience. Session
+  tokens are stored hashed, comparisons are constant-time, and login timing does
+  not reveal whether an account exists
 - No client faces or names anywhere without an explicit `consentOnFile` flag
 
 ## Working rules
