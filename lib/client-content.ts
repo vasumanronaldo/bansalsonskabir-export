@@ -20,6 +20,7 @@ import pricingMd from '@/content/client/06-pricing.md'
 import aftercareMd from '@/content/client/07-aftercare.md'
 import privacyMd from '@/content/client/08-privacy.md'
 import commissionMd from '@/content/client/11-commission-terms.md'
+import visitMd from '@/content/client/12-visit.md'
 
 const JSON_FILES: Record<string, Record<string, unknown>> = {
   '00-settings.json': settingsJson as Record<string, unknown>,
@@ -36,6 +37,7 @@ const MD_FILES: Record<string, string> = {
   '07-aftercare.md': aftercareMd,
   '08-privacy.md': privacyMd,
   '11-commission-terms.md': commissionMd,
+  '12-visit.md': visitMd,
 }
 const ALL_FILES = [...Object.keys(JSON_FILES), ...Object.keys(MD_FILES)].sort()
 
@@ -130,6 +132,7 @@ export const getPrivacy = () => loadMarkdown('08-privacy.md')
 export const getFaq = () => loadJson<{ faqs: unknown[] }>('09-faq.json')
 export const getPeople = () => loadJson<People>('10-people.json')
 export const getCommissionTerms = () => loadMarkdown('11-commission-terms.md')
+export const getVisit = () => loadMarkdown('12-visit.md')
 
 /** True when we're allowed to surface DRAFT / [TK] affordances (dev only). */
 export const showDraftAffordances = process.env.NODE_ENV !== 'production'

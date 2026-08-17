@@ -1,7 +1,7 @@
 // /maison — The Maison (docs/04 § Maison). The showroom described honestly;
 // converts NRIs and first-time visitors. People-at-the-bench is consent-gated.
 import type { Metadata } from 'next'
-import { getSettings } from '@/lib/client-content'
+import { getSettings, getVisit } from '@/lib/client-content'
 import { DraftFlag } from '@/components/DraftFlag'
 import { Section } from '@/components/layout/Section'
 import { Display, Lede, Body, Label } from '@/components/type'
@@ -14,18 +14,16 @@ export const metadata: Metadata = {
   description: 'The showroom in Malviya Nagar, South Delhi — grey marble, one private cabin, and an honest visit.',
 }
 
-// The visit, as a short prose sequence (docs/04 § Maison #3) — not numbered.
-const VISIT = [
-  'Greeted by a member of the family, where possible.',
-  'Seated, and offered tea.',
-  'Shown pieces on a tray, one at a time — never crowded.',
-  'Told what you are looking at, and what it costs to make.',
-  'Weighed, billed and packed at your table.',
-  'A blessing before the piece leaves with you.',
-]
-
 export default function MaisonPage() {
   const { data: s, _meta } = getSettings()
+  const visit = getVisit()
+  // The visit is now client copy (content/client/12-visit.md): four sentences,
+  // rendered as the short sequence. The leading "# What a visit is like" heading
+  // is dropped — the section already carries that label.
+  const visitLines = visit.body
+    .split(/\n{2,}/)
+    .map((p) => p.trim().replace(/\n/g, ' '))
+    .filter((p) => p && !p.startsWith('#'))
 
   return (
     <>
@@ -58,8 +56,8 @@ export default function MaisonPage() {
         <div className="grid gap-x-12 gap-y-8 md:grid-cols-[16rem_1fr]">
           <Label className="pt-1">What a visit is like</Label>
           <ul className="space-y-4">
-            {VISIT.map((line) => (
-              <li key={line}>
+            {visitLines.map((line) => (
+              <li key={line.slice(0, 24)}>
                 <Lede>{line}</Lede>
               </li>
             ))}
