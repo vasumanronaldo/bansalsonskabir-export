@@ -1,31 +1,38 @@
 ---
-approved: false
-needs: [year of the founder's passing, a family story from the early years, year details, family names beyond the three principals]
-note: Plausible placeholder written in the house voice. The founder has passed away — keep every reference to him in the past tense. Replace after speaking to the family.
+approved: true
+needs: [confirm whether Rajeev is a son or nephew - see docs/09-changes-v1.md X3]
+note: Client-supplied text, 15 Aug 2026. Use verbatim.
 ---
 
 # The founder
 
 Shri Ashok Kumar Bansal opened the workshop in 1993 with one bench, one safe and
-a bound order book. He had trained under a goldsmith for eleven years before that
-and had no interest in retail as it was then practised — pieces bought in from
-elsewhere, marked up, and sold with a story attached.
+a bound order book. By then, he had already spent years working in the jewellery
+industry, learning the trade from the ground up and developing a deep
+understanding of craftsmanship, materials and the standards that good jewellery
+demanded. He had no interest in retail as it was then practised — pieces bought
+in from elsewhere, marked up, and sold with a story attached.
 
-His position was simple and he never moved from it: if the house was going to put
-its name on a piece, the house would make it. Every commission from the first year
-was drawn, cast, set and finished under his own supervision.
+His position was simple, and he never moved from it: if the house was going to
+put its name on a piece, the house would make it. Every commission from the first
+year was drawn, cast, set and finished under his own supervision.
 
 The second belief took longer for the trade to accept. He would tell a client not
 to buy. If the stone was wrong for the setting, if the occasion did not warrant
-the expense, if the family would be better served waiting a season — he said so,
-and lost the sale, and kept the family.
+the expense, or if the family would be better served waiting a season — he said
+so. He was willing to lose the sale rather than compromise his judgement, and in
+doing so, he earned something far more valuable: the family's trust.
 
-Shri Ashok Kumar Bansal is no longer with us, but that is still how the house is
-run. His sons Chetan and Karan, and his nephew Rajeev, work the same floor and
-hold to the same standard. Many of the families who came in the first years now
-send their children.
+That standard became the foundation of Bansal Sons.
 
-<!-- REPLACE: ask the family for one story of the founder from the early years —
-     a specific commission, a specific family, a specific mistake. One concrete
-     anecdote is worth the whole page above. Confirm the year of his passing. -->
+His legacy was carried forward by his sons, Chetan and Karan, and his son Rajeev,
+who continue to work with the same principles that defined the house from its
+beginning. The same floor, the same attention to detail, and the same belief that
+a jeweller's name must stand behind every piece that leaves the house.
 
+Many of the families who walked through the doors in those first years still do.
+Today, their children and grandchildren come to the same house — a quiet
+continuation of a trust that has passed from one generation to the next.
+
+<!-- IMAGE: replace. NO name caption on this photograph. Do not write
+     "Shri Ashok Kumar Bansal — at the bench, 1993". -->

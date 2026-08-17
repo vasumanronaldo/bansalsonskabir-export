@@ -1,37 +1,37 @@
 {
-  "_approved": false,
-  "_needs": ["all years after 1993", "all event descriptions"],
-  "_note": "Six plausible milestones. Replace years and text with the real history.",
+  "_approved": true,
+  "_needs": ["resolve the Mumbai facility vs 'made under our own roof' conflict - docs/09-changes-v1.md X1"],
+  "_note": "Client-supplied, 15 Aug 2026. Use verbatim. Photograph to be replaced.",
 
   "events": [
     {
       "year": 1993,
-      "title": "The first bench",
-      "description": "Shri Ashok Kumar Bansal opens a single-bench workshop in South Delhi, making to order for a handful of families."
+      "title": "The First Bench",
+      "description": "Shri Ashok Kumar Bansal opens a single-bench retail outlet in Malviya Nagar, working alongside his sons and creating jewellery to order for a select handful of families."
     },
     {
       "year": 1999,
-      "title": "The move to Malviya Nagar",
-      "description": "The house takes the premises at C-50, beside Laxmi Narayan Mandir, where it still stands."
+      "title": "Manufacturing Brought Fully In-House",
+      "description": "The house strengthens its commitment to craftsmanship by bringing manufacturing fully in-house, with its own manufacturing facility in Mumbai, giving the family greater control over the making, finishing and quality of every piece."
     },
     {
       "year": 2006,
-      "title": "Manufacturing brought fully in-house",
-      "description": "Casting, setting and polishing move under one roof, ending all reliance on outside workshops."
+      "title": "Expanding Our Presence in the United States",
+      "description": "The house extends its presence beyond India, establishing its reach in the United States and building relationships with clients across borders while carrying forward the same standards of trust, craftsmanship and personal service."
     },
     {
       "year": 2011,
-      "title": "The second generation joins",
-      "description": "Chetan and Karan Bansal begin at the bench before taking on the front of house."
+      "title": "A New Chapter",
+      "description": "The house continues to grow while remaining firmly rooted in the principles on which it was founded: craftsmanship, integrity, transparency and long-standing relationships."
     },
     {
-      "year": 2017,
-      "title": "The showroom is rebuilt",
-      "description": "Grey Italian marble, black marble walls, nine seating areas and a private cabin."
+      "year": 2021,
+      "title": "The Showroom Is Rebuilt",
+      "description": "The showroom is rebuilt with grey Italian marble, black marble walls, nine seating areas and a private cabin — creating a more considered setting for private consultations and bespoke work."
     },
     {
       "year": 2023,
-      "title": "Thirty years",
+      "title": "Thirty Years",
       "description": "Many of the families who came in the first decade now bring their children."
     }
   ]

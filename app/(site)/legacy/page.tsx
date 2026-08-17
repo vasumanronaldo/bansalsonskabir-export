@@ -31,7 +31,7 @@ export default function LegacyPage() {
       <Section field="pearl-deep">
         <div className="grid gap-x-12 gap-y-10 md:grid-cols-[minmax(0,26rem)_1fr]">
           <div>
-            <Placeholder ratio="4:5" ground="charcoal" label="Shri Ashok Kumar Bansal — at the bench, 1993" />
+            <Placeholder ratio="4:5" ground="charcoal" label="The founder at his bench" />
             <Label className="mt-4 block">
               The founder
               <DraftFlag meta={_meta} />
