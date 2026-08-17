@@ -8,7 +8,12 @@
  *   - Unknown user and wrong password return the same message and same timing.
  */
 
-const PBKDF2_ITERATIONS = 600_000;
+// Cloudflare Workers' WebCrypto rejects PBKDF2 iteration counts above 100_000
+// per deriveBits call. We chain rounds so the total work factor still meets the
+// 600_000 that docs/10 § 4 requires (6 × 100_000). Node (the seed script) runs
+// the identical construction, so hashes match across environments.
+const PBKDF2_ITERATIONS = 100_000;
+const PBKDF2_ROUNDS = 6;
 const SESSION_TTL_MS = 12 * 60 * 60 * 1000;
 
 const enc = new TextEncoder();
@@ -33,14 +38,17 @@ export async function hashPassword(
 ): Promise<{ hash: string; salt: string }> {
   const salt = saltB64 ? unb64(saltB64) : crypto.getRandomValues(new Uint8Array(16));
 
-  const key = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, [
-    'deriveBits',
-  ]);
-  const bits = await crypto.subtle.deriveBits(
-    { name: 'PBKDF2', salt, iterations: PBKDF2_ITERATIONS, hash: 'SHA-256' },
-    key,
-    256
-  );
+  let material: Uint8Array = enc.encode(password);
+  let bits = new ArrayBuffer(0);
+  for (let round = 0; round < PBKDF2_ROUNDS; round++) {
+    const key = await crypto.subtle.importKey('raw', material, 'PBKDF2', false, ['deriveBits']);
+    bits = await crypto.subtle.deriveBits(
+      { name: 'PBKDF2', salt, iterations: PBKDF2_ITERATIONS, hash: 'SHA-256' },
+      key,
+      256
+    );
+    material = new Uint8Array(bits);
+  }
 
   return { hash: b64(new Uint8Array(bits)), salt: b64(salt) };
 }

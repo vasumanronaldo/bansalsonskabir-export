@@ -25,10 +25,19 @@ const targets = flags.has('--remote-only') ? ['--remote'] : flags.has('--local-o
 const enc = new TextEncoder()
 const b64 = (u8) => Buffer.from(u8).toString('base64')
 
+// Must match lib/admin/auth.ts exactly: Workers caps PBKDF2 at 100k/call, so we
+// chain 6 rounds (600k effective), feeding each round's output into the next.
+const PBKDF2_ITERATIONS = 100_000
+const PBKDF2_ROUNDS = 6
 async function hashPassword(password) {
   const salt = crypto.getRandomValues(new Uint8Array(16))
-  const key = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits'])
-  const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt, iterations: 600_000, hash: 'SHA-256' }, key, 256)
+  let material = enc.encode(password)
+  let bits
+  for (let r = 0; r < PBKDF2_ROUNDS; r++) {
+    const key = await crypto.subtle.importKey('raw', material, 'PBKDF2', false, ['deriveBits'])
+    bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt, iterations: PBKDF2_ITERATIONS, hash: 'SHA-256' }, key, 256)
+    material = new Uint8Array(bits)
+  }
   return { hash: b64(new Uint8Array(bits)), salt: b64(salt) }
 }
 
