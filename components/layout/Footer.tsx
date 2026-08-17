@@ -89,9 +89,6 @@ export function Footer() {
       {/* Marks */}
       <div className="border-t border-[var(--color-hairline-inv)]">
         <div className="mx-auto flex max-w-[1240px] flex-col gap-3 px-[var(--spacing-gutter)] py-6 font-[family-name:var(--font-mono)] text-[length:var(--text-label)] uppercase tracking-[0.12em] text-stone-light md:flex-row md:items-center md:justify-between">
-          <span>
-            GSTIN {s.gstin} · {s.bisRegistration}
-          </span>
           <span>{s.certifications.join(' · ')}</span>
           <span className="text-stone">
             © {s.foundedYear}—present {s.legalName}
