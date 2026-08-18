@@ -2,8 +2,7 @@
 // file content (04-collections.json, 05-pieces.json). Change round D: pieces are
 // named pieces with prose — no maker's dossier, no reference code, no price.
 import { getCollections as getCollectionsFile, getPieces } from './client-content'
-import { sanityConfigured } from '@/sanity/env'
-import { getCollections as sanityCollections, type CollectionCard } from '@/sanity/queries'
+import type { CollectionCard } from '@/sanity/queries'
 import type { PieceCardData } from '@/components/blocks/PieceCard'
 
 interface FileCollection {
@@ -47,10 +46,6 @@ function toCard(p: FilePiece): PieceCardData {
 
 // ── public API ──
 export async function collectionsIndex(): Promise<CollectionCard[]> {
-  if (sanityConfigured) {
-    const s = await sanityCollections()
-    if (s.length) return s
-  }
   const { data } = getCollectionsFile()
   const cols = (data.collections as FileCollection[]) ?? []
   return cols

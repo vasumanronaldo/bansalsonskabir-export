@@ -1,9 +1,8 @@
-// Journal loader. Journal content lives only in Sanity (no file dummies), so the
-// index is empty until the CMS is connected — the pages render a graceful empty
-// state meanwhile, and light up automatically once posts exist.
-import { sanityConfigured } from '@/sanity/env'
-import { client } from '@/sanity/lib/client'
-import { getJournalIndex as sanityIndex, journalBySlugQuery, type JournalCard, type ImageRef } from '@/sanity/queries'
+// Journal loader. Journal content was Sanity-only and none is published, so the
+// reads return empty and the pages render their graceful empty state. Kept out of
+// the request path entirely (no per-request Sanity fetch) so the pages stay static
+// and cheap on Workers. Wire to D1 alongside the rest of the content later.
+import type { JournalCard, ImageRef } from '@/sanity/queries'
 
 export const JOURNAL_CATEGORIES = [
   { value: 'education', label: 'Education' },
@@ -19,22 +18,19 @@ export interface JournalPostFull extends JournalCard {
 }
 
 export async function journalIndex(): Promise<JournalCard[]> {
-  if (!sanityConfigured) return []
-  return sanityIndex()
+  return []
 }
 
-export async function journalPost(slug: string): Promise<JournalPostFull | null> {
-  if (!sanityConfigured) return null
-  return client.fetch<JournalPostFull | null>(journalBySlugQuery, { slug }).catch(() => null)
+export async function journalPost(_slug: string): Promise<JournalPostFull | null> {
+  return null
 }
 
-export async function relatedPosts(category: string | null, excludeSlug: string, n = 3): Promise<JournalCard[]> {
-  const all = await journalIndex()
-  return all.filter((p) => p.slug !== excludeSlug && (!category || p.category === category)).slice(0, n)
+export async function relatedPosts(_category: string | null, _excludeSlug: string, _n = 3): Promise<JournalCard[]> {
+  return []
 }
 
 export async function allJournalParams(): Promise<{ slug: string }[]> {
-  return (await journalIndex()).map((p) => ({ slug: p.slug }))
+  return []
 }
 
 export type { JournalCard, ImageRef }
