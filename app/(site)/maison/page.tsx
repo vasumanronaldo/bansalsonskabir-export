@@ -47,7 +47,7 @@ export default function MaisonPage() {
             <DraftFlag meta={visit._meta} />
             <Body className="mt-6">{roomText}</Body>
           </div>
-          <Placeholder ratio="3:2" ground="obsidian" label="The showroom — marble and light" photo="/images/house/showroom-interior.jpg" />
+          <Placeholder ratio="3:2" ground="obsidian" label="The showroom — marble and light" photo="/images/house/showroom-interior.jpg" alt="The Bansal Sons showroom interior, with lit display cases along panelled walls." />
         </div>
       </Section>
 

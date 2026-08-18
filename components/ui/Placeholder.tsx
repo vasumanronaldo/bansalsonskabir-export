@@ -82,6 +82,7 @@ export function Placeholder({
   label,
   seed,
   photo,
+  alt,
   className = '',
 }: {
   ratio?: Ratio
@@ -92,6 +93,8 @@ export function Placeholder({
   /** A real client photograph (public/images/…). When set, it replaces the demo
    *  art entirely — rendered clean, no caption. */
   photo?: string
+  /** Hand-written alt for the real photograph (falls back to label). */
+  alt?: string
   className?: string
 }) {
   void _ground
@@ -101,7 +104,7 @@ export function Placeholder({
     return (
       <div className={`relative overflow-hidden ${RATIO[ratio]} bg-pearl ${className}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={photo} alt={label} className="absolute inset-0 h-full w-full object-cover" />
+        <img src={photo} alt={alt ?? label} className="absolute inset-0 h-full w-full object-cover" />
       </div>
     )
   }

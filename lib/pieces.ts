@@ -7,6 +7,7 @@ interface FilePiece {
   slug: string
   name: string
   collection: string
+  images?: { src: string; alt: string }[]
 }
 
 export async function featuredPieces(limit = 6): Promise<PieceCardData[]> {
@@ -17,5 +18,7 @@ export async function featuredPieces(limit = 6): Promise<PieceCardData[]> {
     slug: p.slug,
     collectionSlug: p.collection,
     placeholderLabel: p.name,
+    photo: p.images?.[0]?.src,
+    photoAlt: p.images?.[0]?.alt,
   }))
 }

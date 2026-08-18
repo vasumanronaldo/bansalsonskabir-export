@@ -15,6 +15,10 @@ export interface PieceCardData {
   status?: string
   placeholderLabel?: string
   image?: ImageRef | null
+  /** Real client photograph (public/images/…) + its alt. Set for the homepage
+   *  featured grid; collection grids stay on demo art until the D round. */
+  photo?: string
+  photoAlt?: string
 }
 
 const STATUS_CHIP: Record<string, string> = { sold: 'Sold', inWorkshop: 'At the bench' }
@@ -38,7 +42,7 @@ export function PieceCard({ piece }: { piece: PieceCardData }) {
             />
           </div>
         ) : (
-          <Placeholder ratio="4:5" label={piece.placeholderLabel || piece.title} photo={`/images/pieces/${piece.slug}.jpg`} />
+          <Placeholder ratio="4:5" label={piece.placeholderLabel || piece.title} photo={piece.photo} alt={piece.photoAlt} />
         )}
         {chip && (
           <span className="absolute left-3 top-3 bg-obsidian/85 px-2 py-1 font-[family-name:var(--font-mono)] text-[length:var(--text-label)] uppercase tracking-[0.12em] text-pearl">

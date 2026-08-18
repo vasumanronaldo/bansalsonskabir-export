@@ -11,7 +11,12 @@
       "subtitle": "The Queen of Jewels",
       "collection": "bridal-necklace",
       "description": "A celebration of India's timeless royal jewellery tradition, Ratneshvari is an extraordinary choker crafted in 22-carat gold, illuminated by the natural depth of emeralds and the soft, luminous beauty of real pearls. At the centre lies a sculpted emerald, framed within an intricate architecture of gold and surrounded by a constellation of finely set stones. From this magnificent centre, layers of pearls and emeralds descend in graceful symmetry, meeting ornate gold motifs inspired by the grandeur of traditional Indian craftsmanship. The matching earrings echo the same royal vocabulary — carved emeralds, intricate goldwork and cascading drops — creating a complete ensemble that feels at once ceremonial, opulent and unmistakably heirloom. The richness of 22-carat gold brings warmth to the composition, while the deep green of the emeralds and the natural lustre of the pearls create a striking contrast. Every element has been brought together to celebrate the beauty of craftsmanship that was never meant to be rushed, mass-produced or forgotten.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/ratneshvari.jpg",
+          "alt": "A 22-carat gold bridal choker centred on a carved emerald, ringed with uncut diamonds and hung with pearl and emerald drops."
+        }
+      ],
       "consentOnFile": true
     },
     {
@@ -20,7 +25,12 @@
       "subtitle": "The Royal Splendour of the Nine Gems",
       "collection": "bridal-necklace",
       "description": "Rooted in one of India's most enduring jewellery traditions, Navratna Rajshri celebrates the sacred harmony of the nine precious gemstones, each representing a celestial force and brought together in a composition of timeless elegance. Crafted in 22-carat gold, the necklace is formed through delicate strands of lustrous pearls, punctuated by nine richly coloured gemstones — each chosen for its distinctive character and brilliance. At the centre, a deep red ruby commands attention, while emerald, sapphire, yellow sapphire, coral and the remaining Navratna stones create a vivid constellation of colour along the necklace. Intricate gold detailing, natural pearls and finely finished settings give the piece an unmistakable sense of heritage, while its graceful silhouette allows the richness of the stones to remain the focus. The matching earrings complete the ensemble, carrying the same arrangement of gemstones, pearls and gold craftsmanship in a refined expression of traditional Indian jewellery. More than an ornament, Navratna Rajshri is a celebration of balance, tradition and auspiciousness — a jewel conceived in the spirit of India's royal heritage and made to become an heirloom for generations.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/navratna-rajshri.jpg",
+          "alt": "A layered pearl-and-gold necklace set with the nine navratna gemstones, with a matching pendant and earrings."
+        }
+      ],
       "consentOnFile": true
     },
     {
@@ -29,7 +39,12 @@
       "subtitle": "The Splendour of Goddess Lakshmi",
       "collection": "bridal-necklace",
       "description": "A magnificent expression of India's sacred jewellery tradition, Shri Lakshmi Vaibhav draws inspiration from the grandeur of South Indian temple ornaments, where gold was created not merely as adornment, but as an offering to divinity. At its centre, Goddess Lakshmi presides over an elaborate composition of sculpted gold, surrounded by intricate floral, peacock and temple-inspired motifs. Every surface is richly worked, creating the depth and architectural character traditionally associated with temple jewellery. Deep green emerald drops punctuate the warm richness of the gold, while delicate ruby accents bring touches of colour and auspicious brilliance to the composition. The matching earrings continue the same devotional language, carrying the central goddess motif into a complete ceremonial ensemble. The result is a jewel of extraordinary presence — opulent yet deeply rooted in tradition, designed to evoke the splendour of temple architecture translated into gold. A celebration of Lakshmi, prosperity and timeless Indian craftsmanship — created as an heirloom to be treasured, worn and passed down through generations.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/shri-lakshmi-vaibhav.jpg",
+          "alt": "A gold temple necklace with a sculpted deity centrepiece and cascading green emerald bead drops."
+        }
+      ],
       "consentOnFile": true
     },
     {
@@ -38,7 +53,12 @@
       "subtitle": "The Radiance of Gold",
       "collection": "bridal-necklace",
       "description": "A celebration of the grandeur of Indian bridal jewellery, Kanakprabha is an expression of craftsmanship in its most opulent form — where layers of richly worked gold come together to create a jewel of remarkable depth, detail and presence. The sweeping choker is built around intricate gold filigree and sculptural detailing, arranged in successive layers that create a beautifully architectural silhouette. Delicate pink stones add a soft, regal contrast to the warmth of the gold, while cascading emerald drops bring a deep green brilliance to the composition. At its centre, an intricately worked medallion provides the focal point, surrounded by finely detailed motifs that echo the ornamental language of traditional Indian jewellery. The matching earrings carry the same vocabulary of goldwork, gemstones and delicate drops, completing the ensemble with perfect symmetry. There is an unmistakable richness to Kanakprabha — the kind that comes not from excess, but from the patience and precision of the craftsman. Every curve, granulation and setting contributes to a jewel designed to be admired at close distance and remembered for generations. A jewel of enduring Indian grandeur — created for the bride who wears tradition not as a memory, but as a legacy.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/kanakprabha.jpg",
+          "alt": "A broad 22-carat gold bridal necklace patterned with pink stones and finished with emerald bead drops."
+        }
+      ],
       "consentOnFile": true
     },
     {
@@ -47,7 +67,12 @@
       "subtitle": "Diamond Halo Statement Ring",
       "collection": "commitment-rings",
       "description": "A sophisticated expression of modern luxury, Astoria features a brilliant round centre diamond framed by a sculptural arrangement of baguette-cut and pavé diamonds. Set against a warm gold band, the contrasting tones create a refined two-tone effect while adding exceptional dimension and brilliance. Elegant yet distinctive, Astoria is designed for those who appreciate classic diamond jewellery with a contemporary edge.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/astoria.jpg",
+          "alt": "A diamond halo statement ring in yellow and white gold with a pavé-set band."
+        }
+      ],
       "consentOnFile": true,
       "_note": "Default assignment - see docs/09-changes-v1.md X4. One-word edit to change."
     },
@@ -57,7 +82,12 @@
       "subtitle": "Classic Solitaire Diamond Ring",
       "collection": "engagement-rings",
       "description": "Pure, elegant and effortlessly timeless, Elysia places a brilliant princess-cut centre diamond at the heart of a refined gold setting. The clean four-prong design allows the stone to command attention while the polished band keeps the overall silhouette beautifully understated. A modern expression of the solitaire — refined enough for everyday wear and significant enough to become an heirloom.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/elysia.jpg",
+          "alt": "A round solitaire diamond ring in a plain polished yellow-gold band."
+        }
+      ],
       "consentOnFile": true,
       "_note": "Default assignment - see docs/09-changes-v1.md X4. One-word edit to change."
     },
@@ -67,7 +97,12 @@
       "subtitle": "Diamond Floral Cocktail Ring",
       "collection": "commitment-rings",
       "description": "A contemporary interpretation of the classic floral jewel, Fleuré is composed of layered petals crafted in white and rose-toned metal, each illuminated by a delicate pavé of diamonds. The dimensional arrangement gives the flower remarkable volume, while the mixed-metal finish adds warmth and modern sophistication. A statement ring designed to feel artistic, feminine and unmistakably luxurious.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/fleure.jpg",
+          "alt": "A floral cocktail ring in rose and white gold, its petals pavé-set with diamonds."
+        }
+      ],
       "consentOnFile": true,
       "_note": "Default assignment - see docs/09-changes-v1.md X4. One-word edit to change."
     },
@@ -77,7 +112,12 @@
       "subtitle": "Three-Stone Diamond Ring",
       "collection": "engagement-rings",
       "description": "Timeless in silhouette yet unmistakably luxurious, Celeste features a brilliant centre diamond complemented by two pear-shaped side stones, creating a graceful three-stone composition. The diamonds are held in a refined white-metal setting that allows each stone to capture and reflect the light from every angle. Elegant, symbolic, and effortlessly sophisticated, Celeste is a modern classic designed to last beyond trends.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/celeste.jpg",
+          "alt": "A three-stone diamond ring in white gold with pear-cut stones flanking the centre."
+        }
+      ],
       "consentOnFile": true,
       "_note": "Default assignment - see docs/09-changes-v1.md X4. One-word edit to change."
     },
@@ -87,7 +127,12 @@
       "subtitle": "Ruby & Diamond Sculptural Earrings",
       "collection": "earrings",
       "description": "Bold yet beautifully fluid, Seraphine is defined by sweeping curves of rich ruby tones intertwined with brilliant diamond accents. The elongated open silhouette creates an illusion of movement, while the alternating bands of colour and light give the earrings remarkable depth. A contemporary statement designed for the woman who prefers jewellery with presence, individuality and effortless elegance.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/seraphine.jpg",
+          "alt": "Ribbon-twist drop earrings pavé-set with rubies and white diamonds."
+        }
+      ],
       "consentOnFile": true
     },
     {
@@ -96,7 +141,12 @@
       "subtitle": "Gold Cascade Earrings",
       "collection": "earrings",
       "description": "Elara brings together polished gold, delicate architectural detailing and a series of fine cascading chains that move beautifully with the wearer. The sculptural gold dome creates a striking focal point, while the graduated chains add length, fluidity and an understated sense of drama. A distinctive pair for those who appreciate contemporary jewellery with a touch of timeless glamour.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/elara.jpg",
+          "alt": "Gold jhumka earrings finished with fine chain tassels."
+        }
+      ],
       "consentOnFile": true
     },
     {
@@ -105,7 +155,12 @@
       "subtitle": "Golden Pearl Drop Earrings",
       "collection": "earrings",
       "description": "Aurelia pairs luminous golden-toned pearl drops with refined diamond-set detailing for a look that is both graceful and luxurious. The clean geometric upper setting provides a modern contrast to the soft, rounded pearls, creating a beautifully balanced composition. Elegant enough for evening occasions yet refined enough for everyday luxury, Aurelia is a timeless addition to any fine jewellery collection.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/aurelia.jpg",
+          "alt": "Drop earrings pairing baguette diamonds with a large golden South Sea pearl."
+        }
+      ],
       "consentOnFile": true
     },
     {
@@ -114,7 +169,12 @@
       "subtitle": "Emerald Peacock Drop Earrings",
       "collection": "earrings",
       "description": "An unexpected meeting of colour, craftsmanship and playful elegance, Serenity features richly coloured emerald-cut green gemstones paired with intricately sculpted peacock motifs. Brilliant diamond accents highlight the detailed goldwork, while delicate ornamental drops complete the elongated silhouette. A distinctive statement pair created for those who seek fine jewellery with personality and an artistic point of view.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/serenity.jpg",
+          "alt": "Gold peacock drop earrings with diamond detailing and a single pearl drop."
+        }
+      ],
       "consentOnFile": true
     },
     {
@@ -123,7 +183,12 @@
       "subtitle": "Golden Jhumka Earrings",
       "collection": "earrings",
       "description": "Inspired by the enduring beauty of traditional Indian jhumkas, Saanvi transforms a timeless silhouette into an expression of sculptural gold craftsmanship. Intricately textured floral tops flow into graduated bell-shaped forms, creating depth and movement while maintaining the warmth and richness of gold. A classic statement designed to celebrate Indian heritage with an elegant, contemporary finish.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/saanvi.jpg",
+          "alt": "Tiered bell-shaped gold jhumka earrings with dense granulation."
+        }
+      ],
       "consentOnFile": true
     },
     {
@@ -132,7 +197,12 @@
       "subtitle": "Ruby Floral Drop Earrings",
       "collection": "earrings",
       "description": "A romantic celebration of colour and brilliance, Valentine features vivid ruby-toned gemstones arranged in an elegant floral silhouette, finished with graceful pear-shaped drops. Surrounded by a delicate diamond halo, each gemstone catches the light beautifully, creating a rich contrast between deep crimson colour and icy brilliance. A statement pair designed to bring sophistication and drama to any occasion.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/valentine.jpg",
+          "alt": "Ruby cluster drop earrings finished with pear-cut ruby drops."
+        }
+      ],
       "consentOnFile": true
     },
     {
@@ -141,7 +211,12 @@
       "subtitle": "Emerald Diamond Drop Earrings",
       "collection": "earrings",
       "description": "Striking emeralds take centre stage in Verona, framed by a refined halo of brilliant diamonds and topped with an intricate floral-inspired motif. The deep green of the emeralds creates a luxurious contrast against the cool brilliance of the diamond setting. Finished with a clean, elongated silhouette, Verona is an elegant statement piece that transitions effortlessly from evening glamour to sophisticated occasion wear.",
-      "images": [],
+      "images": [
+        {
+          "src": "/images/pieces/verona.jpg",
+          "alt": "Emerald-cut emerald drop earrings framed with brilliant-cut diamonds."
+        }
+      ],
       "consentOnFile": true
     }
   ]

@@ -44,7 +44,7 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
       <div className="mt-8 grid gap-x-14 gap-y-10 lg:grid-cols-2">
         {/* Image — sticky on desktop */}
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <Placeholder ratio="4:5" ground="charcoal" label={d.name} photo={`/images/pieces/${d.slug}.jpg`} />
+          <Placeholder ratio="4:5" ground="charcoal" label={d.name} />
         </div>
 
         {/* The piece */}

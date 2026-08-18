@@ -14,16 +14,26 @@ interface Step {
   description?: string
 }
 
-// Real client process photos by step order. Step 3 (cad/hand-forming) is held —
-// it shows a person's face; pending client confirmation it keeps the demo art.
+// Real client process photos + hand-written alt, by step order.
 const STEP_PHOTO: Record<number, string> = {
   1: '01-consultation',
   2: '02-sketch',
+  3: '03-cad-hand-forming',
   4: '04-casting',
   5: '05-stone-setting',
   6: '06-polishing',
   7: '07-quality-inspection',
   8: '08-presentation',
+}
+const STEP_ALT: Record<number, string> = {
+  1: 'A finished gold and emerald necklace laid out during a client consultation.',
+  2: 'Hands holding a diamond and emerald earring against its pencil design sketch.',
+  3: 'A jeweller examining a stone through a loupe at the workbench.',
+  4: 'Cut gemstones and hand tools laid out on the casting bench.',
+  5: "A goldsmith's hands setting a stone into a ring with a fine tool.",
+  6: 'A gold ring held against a polishing wheel at the bench.',
+  7: 'A diamond necklace inspected with a jeweller\'s loupe on a black tray.',
+  8: 'Finished emerald and diamond earrings presented on a padded tray.',
 }
 
 export function ProcessSequence({ numbered = true, withImages = true }: { numbered?: boolean; withImages?: boolean }) {
@@ -58,7 +68,7 @@ export function ProcessSequence({ numbered = true, withImages = true }: { number
                 )}
               </div>
               {withImages && (
-                <Placeholder ratio="3:2" ground="charcoal" label={`${s.title} — the bench`} photo={STEP_PHOTO[s.order] ? `/images/process/${STEP_PHOTO[s.order]}.jpg` : undefined} />
+                <Placeholder ratio="3:2" ground="charcoal" label={`${s.title} — the bench`} photo={STEP_PHOTO[s.order] ? `/images/process/${STEP_PHOTO[s.order]}.jpg` : undefined} alt={STEP_ALT[s.order]} />
               )}
             </div>
           </li>
