@@ -81,6 +81,7 @@ export function Placeholder({
   ground: _ground = 'charcoal',
   label,
   seed,
+  photo,
   className = '',
 }: {
   ratio?: Ratio
@@ -88,10 +89,24 @@ export function Placeholder({
   label: string
   /** Overrides the hash source so identical captions can show different photos. */
   seed?: string
+  /** A real client photograph (public/images/…). When set, it replaces the demo
+   *  art entirely — rendered clean, no caption. */
+  photo?: string
   className?: string
 }) {
   void _ground
-  const photo = pickPhoto(label, ratio, seed ?? label)
+
+  // Real client photograph — render it clean (product renders sit on white).
+  if (photo) {
+    return (
+      <div className={`relative overflow-hidden ${RATIO[ratio]} bg-pearl ${className}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={photo} alt={label} className="absolute inset-0 h-full w-full object-cover" />
+      </div>
+    )
+  }
+
+  const demo = pickPhoto(label, ratio, seed ?? label)
   return (
     <div
       role="img"
@@ -100,7 +115,7 @@ export function Placeholder({
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`/demo/photos/${photo}.jpg`}
+        src={`/demo/photos/${demo}.jpg`}
         alt=""
         aria-hidden
         className="absolute inset-0 h-full w-full object-cover"

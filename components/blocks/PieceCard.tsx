@@ -38,7 +38,7 @@ export function PieceCard({ piece }: { piece: PieceCardData }) {
             />
           </div>
         ) : (
-          <Placeholder ratio="4:5" label={piece.placeholderLabel || piece.title} />
+          <Placeholder ratio="4:5" label={piece.placeholderLabel || piece.title} photo={`/images/pieces/${piece.slug}.jpg`} />
         )}
         {chip && (
           <span className="absolute left-3 top-3 bg-obsidian/85 px-2 py-1 font-[family-name:var(--font-mono)] text-[length:var(--text-label)] uppercase tracking-[0.12em] text-pearl">

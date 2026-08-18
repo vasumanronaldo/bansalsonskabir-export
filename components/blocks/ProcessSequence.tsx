@@ -14,6 +14,18 @@ interface Step {
   description?: string
 }
 
+// Real client process photos by step order. Step 3 (cad/hand-forming) is held —
+// it shows a person's face; pending client confirmation it keeps the demo art.
+const STEP_PHOTO: Record<number, string> = {
+  1: '01-consultation',
+  2: '02-sketch',
+  4: '04-casting',
+  5: '05-stone-setting',
+  6: '06-polishing',
+  7: '07-quality-inspection',
+  8: '08-presentation',
+}
+
 export function ProcessSequence({ numbered = true, withImages = true }: { numbered?: boolean; withImages?: boolean }) {
   const { data, _meta } = getProcess()
   const steps = ((data.steps as Step[]) ?? []).slice().sort((a, b) => a.order - b.order)
@@ -46,7 +58,7 @@ export function ProcessSequence({ numbered = true, withImages = true }: { number
                 )}
               </div>
               {withImages && (
-                <Placeholder ratio="3:2" ground="charcoal" label={`${s.title} — the bench`} />
+                <Placeholder ratio="3:2" ground="charcoal" label={`${s.title} — the bench`} photo={STEP_PHOTO[s.order] ? `/images/process/${STEP_PHOTO[s.order]}.jpg` : undefined} />
               )}
             </div>
           </li>

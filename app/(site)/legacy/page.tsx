@@ -48,7 +48,7 @@ export default function LegacyPage() {
         <div className="grid gap-x-12 gap-y-10 lg:grid-cols-[1fr_minmax(0,20rem)]">
           <Timeline />
           <div className="hidden lg:block">
-            <Placeholder ratio="4:5" label="The showroom at C-50" className="sticky top-28" />
+            <Placeholder ratio="4:5" label="The showroom at C-50" photo="/images/house/timeline.jpg" className="sticky top-28" />
           </div>
         </div>
       </Section>
@@ -79,7 +79,7 @@ export default function LegacyPage() {
 
       <Section field="pearl">
         <div className="grid items-center gap-x-12 gap-y-8 md:grid-cols-2">
-          <Placeholder ratio="3:2" label="At the bench" />
+          <Placeholder ratio="3:2" label="At the bench" photo="/images/house/at-the-bench.jpg" />
           <div>
             <Display size="md" as="p" className="max-w-[16ch]">
               Every piece, made by us.
