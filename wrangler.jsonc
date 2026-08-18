@@ -18,6 +18,12 @@
       "database_id": "ded40c57-30c2-419e-a96c-b8797be116ee"
     }
   ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "bansal-sons-images"
+    }
+  ],
   "vars": {
     "NEXT_PUBLIC_SANITY_PROJECT_ID": "6705lek2",
     "NEXT_PUBLIC_SANITY_DATASET": "production",

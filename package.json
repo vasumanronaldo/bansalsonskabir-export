@@ -19,7 +19,9 @@
     "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "admin:migrate": "wrangler d1 execute bansal-sons-admin --remote --file=admin/schema.sql",
-    "admin:user:add": "node scripts/admin-user-add.mjs"
+    "admin:user:add": "node scripts/admin-user-add.mjs",
+    "admin:seed": "node scripts/admin-seed.mjs",
+    "admin:backup": "node scripts/admin-backup.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",

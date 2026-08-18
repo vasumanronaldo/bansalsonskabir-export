@@ -2,6 +2,7 @@
 // Forces the one-time-password change before anything else. The real screens
 // (pieces, collections, enquiries, settings, users) arrive in 10c–10f.
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { requireSession, mustChangePassword } from '@/lib/admin/session'
 
@@ -20,9 +21,14 @@ export default async function AdminHome() {
         <p className="mt-1 text-stone-light">
           {session.user.email} · {session.user.role}
         </p>
-        <p className="mt-8 max-w-[50ch] text-stone-light">
-          Auth layer verified. The portal screens — pieces, images, collections, enquiries, settings — land in the
-          next session (10c–10f).
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link href="/admin/pieces" className="border border-gold-soft px-4 py-2 font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.2em] text-gold-soft transition-colors hover:bg-gold-soft hover:text-obsidian">
+            Manage pieces
+          </Link>
+        </div>
+        <p className="mt-6 max-w-[50ch] text-sm text-stone-light">
+          Pieces + photo uploads are live. Collections, settings, enquiries and users come next (10e); the public
+          site starts reading from here in 10f.
         </p>
         <form method="POST" action="/admin/api/logout" className="mt-8">
           <input type="hidden" name="csrf" value={session.csrf} />
