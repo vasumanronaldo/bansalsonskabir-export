@@ -8,6 +8,7 @@ import { Wordmark } from '@/components/Wordmark'
 import { ButtonGhost } from '@/components/ui/ButtonGhost'
 
 const LEFT = [
+  { href: '/', label: 'Home' },
   { href: '/legacy', label: 'Legacy' },
   { href: '/craftsmanship', label: 'Craftsmanship' },
   { href: '/collections', label: 'Collections' },
