@@ -5,14 +5,17 @@
 import type { Metadata } from 'next'
 import { getSettings } from '@/lib/client-content'
 import { getFaqItems } from '@/lib/house-content'
+import { withSeoOverride, businessOverride } from '@/lib/admin/settings-db'
 import { DraftFlag } from '@/components/DraftFlag'
 import { Container } from '@/components/layout/Container'
 import { Display, Label } from '@/components/type'
 import { AppointmentForm } from '@/components/blocks/AppointmentForm'
 
-export const metadata: Metadata = {
-  title: 'Request a private appointment',
-  description: 'Book a private appointment at Bansal Sons Jewellers, Malviya Nagar. No obligation, no queue.',
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride('appointment', {
+    title: 'Request a private appointment',
+    description: 'Book a private appointment at Bansal Sons Jewellers, Malviya Nagar. No obligation, no queue.',
+  })
 }
 
 function prettyPhone(raw: string) {
@@ -25,6 +28,11 @@ export const dynamic = 'force-dynamic'
 export default async function AppointmentPage() {
   const { data: s, _meta } = getSettings()
   const visiting = (await getFaqItems()).filter((f) => f.group === 'visiting')
+  // Contact fields the family can override in Settings; blank falls back to file.
+  const biz = await businessOverride()
+  const phone = biz.phone ?? s.phone
+  const whatsapp = (biz.whatsapp ?? s.whatsapp).replace(/\D/g, '')
+  const email = biz.email ?? s.email
 
   return (
     <Container className="py-[clamp(3rem,7vw,6rem)]">
@@ -38,7 +46,7 @@ export default async function AppointmentPage() {
       <div className="mt-14 grid gap-x-12 gap-y-14 lg:grid-cols-[minmax(0,560px)_1fr]">
         {/* Form */}
         <div>
-          <AppointmentForm timeOptions={s.appointmentSlots} contactPhone={s.phone} />
+          <AppointmentForm timeOptions={s.appointmentSlots} contactPhone={phone} />
         </div>
 
         {/* Obsidian contact + FAQ panel */}
@@ -61,9 +69,9 @@ export default async function AppointmentPage() {
             ))}
           </ul>
           <ul className="mt-6 space-y-1 text-[length:var(--text-body-sm)]">
-            <li><a href={`tel:${s.phone}`} className="hover:text-gold-soft">{prettyPhone(s.phone)}</a></li>
-            <li><a href={`https://wa.me/${s.whatsapp}`} target="_blank" rel="noreferrer noopener" className="hover:text-gold-soft">WhatsApp</a></li>
-            <li><a href={`mailto:${s.email}`} className="hover:text-gold-soft">{s.email}</a></li>
+            <li><a href={`tel:${phone.replace(/\s/g, '')}`} className="hover:text-gold-soft">{prettyPhone(phone)}</a></li>
+            <li><a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noreferrer noopener" className="hover:text-gold-soft">WhatsApp</a></li>
+            <li><a href={`mailto:${email}`} className="hover:text-gold-soft">{email}</a></li>
           </ul>
           <p className="mt-4 text-[length:var(--text-body-sm)] text-stone-light">
             Nearest metro: {s.metro.station} ({s.metro.line}), {s.metro.walkMinutes} min. {s.parking}

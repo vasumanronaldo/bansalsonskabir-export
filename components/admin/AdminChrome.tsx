@@ -17,6 +17,7 @@ export function AdminChrome({ name, csrf, children }: { name: string; csrf: stri
             <Link href="/admin/pages" className="hover:text-gold-soft">Pages</Link>
             <Link href="/admin/content" className="hover:text-gold-soft">House</Link>
             <Link href="/admin/appointments" className="hover:text-gold-soft">Appointments</Link>
+            <Link href="/admin/settings" className="hover:text-gold-soft">Settings</Link>
           </nav>
         </div>
         <div className="flex items-center gap-4 font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.16em] text-stone-light">

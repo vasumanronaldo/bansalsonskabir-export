@@ -10,10 +10,13 @@ import { Placeholder } from '@/components/ui/Placeholder'
 import { LinkArrow } from '@/components/ui/LinkArrow'
 import { Timeline } from '@/components/blocks/Timeline'
 import { getTimelineEvents } from '@/lib/house-content'
+import { withSeoOverride } from '@/lib/admin/settings-db'
 
-export const metadata: Metadata = {
-  title: 'Our Legacy',
-  description: 'A house built one family at a time, in South Delhi since 1993.',
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride('legacy', {
+    title: 'Our Legacy',
+    description: 'A house built one family at a time, in South Delhi since 1993.',
+  })
 }
 
 export const dynamic = 'force-dynamic'

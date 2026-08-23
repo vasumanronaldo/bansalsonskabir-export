@@ -10,11 +10,14 @@ import { Display, Lede, Body, Label } from '@/components/type'
 import { Prose } from '@/components/Prose'
 import { ProcessSequence } from '@/components/blocks/ProcessSequence'
 import { getProcessSteps } from '@/lib/house-content'
+import { withSeoOverride } from '@/lib/admin/settings-db'
 import { CtaBand } from '@/components/blocks/CtaBand'
 
-export const metadata: Metadata = {
-  title: 'Craftsmanship',
-  description: 'From a sketch on paper to a piece in a box — made under one roof, and billed in front of you.',
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride('craftsmanship', {
+    title: 'Craftsmanship',
+    description: 'From a sketch on paper to a piece in a box — made under one roof, and billed in front of you.',
+  })
 }
 
 // X2 (docs/09 § X2): the Turnaround section shows only figures that exist. Drop

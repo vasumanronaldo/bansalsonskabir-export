@@ -8,11 +8,14 @@ import { Display, Lede, Body, Label } from '@/components/type'
 import { Placeholder } from '@/components/ui/Placeholder'
 import { PeopleBench } from '@/components/blocks/PeopleBench'
 import { getBenchPeople } from '@/lib/house-content'
+import { withSeoOverride } from '@/lib/admin/settings-db'
 import { CtaBand } from '@/components/blocks/CtaBand'
 
-export const metadata: Metadata = {
-  title: 'The Maison',
-  description: 'The showroom in Malviya Nagar, South Delhi — grey marble, one private cabin, and an honest visit.',
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride('maison', {
+    title: 'The Maison',
+    description: 'The showroom in Malviya Nagar, South Delhi — grey marble, one private cabin, and an honest visit.',
+  })
 }
 
 export const dynamic = 'force-dynamic'

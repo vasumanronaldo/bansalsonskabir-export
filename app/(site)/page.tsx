@@ -7,11 +7,18 @@ import StandardManifestoLazy from '@/components/blocks/StandardManifestoLazy'
 import { SelectedWork } from '@/components/blocks/SelectedWork'
 import { HouseIntro } from '@/components/blocks/HouseIntro'
 import { AppointmentCta } from '@/components/blocks/AppointmentCta'
+import type { Metadata } from 'next'
 import { getPageBlocks } from '@/lib/blocks'
+import { withSeoOverride } from '@/lib/admin/settings-db'
 
 // Dynamic so the family's page-copy edits show without a rebuild. One cheap D1
 // read per request; if it fails, getPageBlocks returns the committed defaults.
 export const dynamic = 'force-dynamic'
+
+// Home inherits the layout title/description unless the family overrides them.
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride('home', {})
+}
 
 export default async function HomePage() {
   const b = await getPageBlocks('home')
