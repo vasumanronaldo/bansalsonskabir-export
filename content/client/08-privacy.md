@@ -1,6 +1,6 @@
 ---
 approved: false
-needs: [legal review, data retention period, grievance officer name]
+needs: [legal review, grievance officer name]
 note: DUMMY POLICY drafted in plain language. Must be reviewed by a lawyer before launch.
 ---
 
@@ -23,7 +23,7 @@ appointments. Nothing more.
 
 ## How long we keep it
 
-`[TK]` months after your appointment, or until you ask us to delete it, whichever
+12 months after your appointment, or until you ask us to delete it, whichever
 is sooner.
 
 ## What we do not do
