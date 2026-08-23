@@ -5,8 +5,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { BUSINESS_FIELDS, type SettingsForm } from '@/lib/admin/settings-shared'
 
-const LABEL = 'block font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone-light'
-const INPUT = 'mt-2 w-full border border-hairline-inv bg-charcoal/40 px-3 py-2 text-pearl focus:border-gold-soft focus:outline-none'
+const LABEL = 'block font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone'
+const INPUT = 'mt-2 w-full border border-hairline bg-white px-3 py-2 text-charcoal focus:border-gold focus:outline-none'
 const SUB = 'font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone'
 
 export function SettingsEditor({ form: initial, seoPages, csrf }: { form: SettingsForm; seoPages: { key: string; label: string }[]; csrf: string }) {
@@ -53,8 +53,8 @@ export function SettingsEditor({ form: initial, seoPages, csrf }: { form: Settin
         <p className={SUB}>Search-result wording, per page</p>
         <div className="mt-3 space-y-5">
           {seoPages.map((p) => (
-            <div key={p.key} className="border border-hairline-inv bg-charcoal/20 p-4">
-              <p className="text-sm text-pearl">{p.label}</p>
+            <div key={p.key} className="border border-hairline bg-white p-4">
+              <p className="text-sm text-charcoal">{p.label}</p>
               <div className="mt-2 grid gap-3 sm:grid-cols-2">
                 <input placeholder="Title (blank = default)" value={form.seo[p.key]?.title ?? ''} onChange={(e) => setSeo(p.key, 'title', e.target.value)} className={INPUT} />
                 <input placeholder="Description (blank = default)" value={form.seo[p.key]?.description ?? ''} onChange={(e) => setSeo(p.key, 'description', e.target.value)} className={INPUT} />
@@ -65,11 +65,11 @@ export function SettingsEditor({ form: initial, seoPages, csrf }: { form: Settin
       </div>
 
       <div className="flex items-center gap-4 font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.16em]">
-        <button onClick={save} disabled={status === 'saving'} className="border border-gold-soft px-4 py-2.5 text-gold-soft transition-colors hover:bg-gold-soft hover:text-obsidian disabled:opacity-40">
+        <button onClick={save} disabled={status === 'saving'} className="border border-gold px-4 py-2.5 text-gold transition-colors hover:bg-gold hover:text-obsidian disabled:opacity-40">
           {status === 'saving' ? 'Saving…' : 'Save settings'}
         </button>
-        {status === 'ok' && <span className="text-[#8fbf8f]">Saved</span>}
-        {status === 'err' && <span className="text-[#c98b8b]">{msg}</span>}
+        {status === 'ok' && <span className="text-[#3f7d3f]">Saved</span>}
+        {status === 'err' && <span className="text-[#a23a3a]">{msg}</span>}
       </div>
     </div>
   )

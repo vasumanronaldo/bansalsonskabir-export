@@ -27,43 +27,43 @@ export default async function AppointmentsPage({ searchParams }: { searchParams:
   const qs = new URLSearchParams({ status, ...(sp.from ? { from: sp.from } : {}), ...(sp.to ? { to: sp.to } : {}) }).toString()
 
   const chip = 'font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.16em]'
-  const statusColor: Record<string, string> = { new: 'text-gold-soft', contacted: 'text-[#8fbf8f]', booked: 'text-[#8fbf8f]', closed: 'text-stone' }
+  const statusColor: Record<string, string> = { new: 'text-gold', contacted: 'text-[#3f7d3f]', booked: 'text-[#3f7d3f]', closed: 'text-stone' }
 
   return (
     <AdminChrome name={session.user.name} csrf={session.csrf}>
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h1 className="font-[family-name:var(--font-display)] text-2xl">Appointments</h1>
-        <a href={`/admin/api/appointments/export?${qs}`} className="border border-hairline-inv px-4 py-2 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-pearl hover:border-gold-soft">
+        <a href={`/admin/api/appointments/export?${qs}`} className="border border-hairline px-4 py-2 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-charcoal hover:border-gold">
           Export CSV
         </a>
       </div>
 
       <form method="GET" className="mt-6 flex flex-wrap items-end gap-3">
-        <label className={`${chip} block text-stone-light`}>
+        <label className={`${chip} block text-stone`}>
           Status
-          <select name="status" defaultValue={status} className="mt-1 block border border-hairline-inv bg-charcoal px-2 py-1.5 text-sm text-pearl">
+          <select name="status" defaultValue={status} className="mt-1 block border border-hairline bg-white px-2 py-1.5 text-sm text-charcoal">
             {['all', ...ENQ_STATUSES].map((s) => <option key={s} value={s}>{s}</option>)}
           </select>
         </label>
-        <label className={`${chip} block text-stone-light`}>From<input type="date" name="from" defaultValue={sp.from} className="mt-1 block border border-hairline-inv bg-charcoal px-2 py-1.5 text-sm text-pearl" /></label>
-        <label className={`${chip} block text-stone-light`}>To<input type="date" name="to" defaultValue={sp.to} className="mt-1 block border border-hairline-inv bg-charcoal px-2 py-1.5 text-sm text-pearl" /></label>
-        <button className="border border-gold-soft px-4 py-1.5 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-gold-soft hover:bg-gold-soft hover:text-obsidian">Filter</button>
+        <label className={`${chip} block text-stone`}>From<input type="date" name="from" defaultValue={sp.from} className="mt-1 block border border-hairline bg-white px-2 py-1.5 text-sm text-charcoal" /></label>
+        <label className={`${chip} block text-stone`}>To<input type="date" name="to" defaultValue={sp.to} className="mt-1 block border border-hairline bg-white px-2 py-1.5 text-sm text-charcoal" /></label>
+        <button className="border border-gold px-4 py-1.5 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-gold hover:bg-gold hover:text-obsidian">Filter</button>
       </form>
 
-      <p className="mt-4 text-[0.7rem] uppercase tracking-[0.14em] text-stone-light">{rows.length} enquir{rows.length === 1 ? 'y' : 'ies'}</p>
+      <p className="mt-4 text-[0.7rem] uppercase tracking-[0.14em] text-stone">{rows.length} enquir{rows.length === 1 ? 'y' : 'ies'}</p>
 
-      <ul className="mt-3 divide-y divide-[var(--color-hairline-inv)] border-y border-[var(--color-hairline-inv)]">
-        {rows.length === 0 && <li className="py-8 text-stone-light">No enquiries in this view.</li>}
+      <ul className="mt-3 divide-y divide-[var(--color-hairline)] border-y border-[var(--color-hairline)]">
+        {rows.length === 0 && <li className="py-8 text-stone">No enquiries in this view.</li>}
         {rows.map((r) => (
           <li key={r.id}>
-            <Link href={`/admin/appointments/${r.id}`} className="grid grid-cols-[1fr_auto] items-center gap-3 py-4 hover:bg-charcoal/40 sm:grid-cols-[1.4fr_1fr_1fr_auto]">
+            <Link href={`/admin/appointments/${r.id}`} className="grid grid-cols-[1fr_auto] items-center gap-3 py-4 hover:bg-pearl-deep/60 sm:grid-cols-[1.4fr_1fr_1fr_auto]">
               <span className="min-w-0">
                 <span className="block truncate font-[family-name:var(--font-display)]">{r.name}</span>
-                <span className="block text-[0.7rem] text-stone-light">{r.phone}</span>
+                <span className="block text-[0.7rem] text-stone">{r.phone}</span>
               </span>
-              <span className="hidden text-[0.75rem] text-stone-light sm:block">{r.occasion ?? '—'}</span>
-              <span className="hidden text-[0.75rem] text-stone-light sm:block">{r.preferred_date ?? '—'}</span>
-              <span className={`${chip} ${statusColor[r.status] ?? 'text-stone-light'} justify-self-end`}>{r.status} · {fmt(r.submitted_at)}</span>
+              <span className="hidden text-[0.75rem] text-stone sm:block">{r.occasion ?? '—'}</span>
+              <span className="hidden text-[0.75rem] text-stone sm:block">{r.preferred_date ?? '—'}</span>
+              <span className={`${chip} ${statusColor[r.status] ?? 'text-stone'} justify-self-end`}>{r.status} · {fmt(r.submitted_at)}</span>
             </Link>
           </li>
         ))}

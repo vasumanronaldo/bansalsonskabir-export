@@ -25,15 +25,15 @@ export default async function ContentIndex() {
   return (
     <AdminChrome name={session.user.name} csrf={session.csrf}>
       <h1 className="font-[family-name:var(--font-display)] text-3xl">House content</h1>
-      <p className="mt-2 max-w-2xl text-stone-light">The living parts of the site — the story, the process, the people, the questions people ask.</p>
+      <p className="mt-2 max-w-2xl text-stone">The living parts of the site — the story, the process, the people, the questions people ask.</p>
       <div className="mt-8 grid gap-5 sm:grid-cols-2">
         {cards.map(({ c, count }) => (
-          <Link key={c.type} href={`/admin/content/${c.type}`} className="group border border-hairline-inv bg-charcoal/30 p-6 transition-colors hover:border-gold-soft">
+          <Link key={c.type} href={`/admin/content/${c.type}`} className="group border border-hairline bg-white p-6 transition-colors hover:border-gold">
             <div className="flex items-baseline justify-between">
-              <h2 className="font-[family-name:var(--font-display)] text-xl group-hover:text-gold-soft">{c.label}</h2>
-              <span className="font-[family-name:var(--font-mono)] text-sm text-stone-light">{count}</span>
+              <h2 className="font-[family-name:var(--font-display)] text-xl group-hover:text-gold">{c.label}</h2>
+              <span className="font-[family-name:var(--font-mono)] text-sm text-stone">{count}</span>
             </div>
-            <p className="mt-2 text-sm text-stone-light">Drives {c.drives}.</p>
+            <p className="mt-2 text-sm text-stone">Drives {c.drives}.</p>
           </Link>
         ))}
       </div>

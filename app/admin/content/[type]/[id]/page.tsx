@@ -26,7 +26,7 @@ export default async function CollectionEdit({ params }: { params: Promise<{ typ
 
   return (
     <AdminChrome name={session.user.name} csrf={session.csrf}>
-      <Link href={backHref} className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone-light hover:text-gold-soft">← {c.label}</Link>
+      <Link href={backHref} className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone hover:text-gold">← {c.label}</Link>
       <h1 className="mt-1 mb-8 font-[family-name:var(--font-display)] text-3xl">{isNew ? `New ${c.singular}` : `Edit ${c.singular}`}</h1>
       <CollectionEditor type={type} fields={c.fields} row={row} csrf={session.csrf} backHref={backHref} singular={c.singular} />
     </AdminChrome>

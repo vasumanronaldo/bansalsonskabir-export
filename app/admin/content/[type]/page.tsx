@@ -21,34 +21,34 @@ export default async function CollectionList({ params }: { params: Promise<{ typ
   await ensureCollectionSeeded(type)
   const rows = await listCollection(type)
 
-  const action = 'border border-gold-soft px-4 py-2.5 font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.18em] text-gold-soft transition-colors hover:bg-gold-soft hover:text-obsidian'
+  const action = 'border border-gold px-4 py-2.5 font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.18em] text-gold transition-colors hover:bg-gold hover:text-obsidian'
 
   return (
     <AdminChrome name={session.user.name} csrf={session.csrf}>
       <div className="flex items-center justify-between gap-4">
         <div>
-          <Link href="/admin/content" className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone-light hover:text-gold-soft">← House content</Link>
+          <Link href="/admin/content" className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone hover:text-gold">← House content</Link>
           <h1 className="mt-1 font-[family-name:var(--font-display)] text-3xl">{c.label}</h1>
         </div>
         <Link href={`/admin/content/${type}/new`} className={action}>Add {c.singular}</Link>
       </div>
-      <p className="mt-2 max-w-2xl text-sm text-stone-light">Drives {c.drives}.</p>
+      <p className="mt-2 max-w-2xl text-sm text-stone">Drives {c.drives}.</p>
 
-      <ul className="mt-8 border border-hairline-inv bg-charcoal/20">
-        {rows.length === 0 && <li className="px-5 py-6 text-stone-light">Nothing here yet.</li>}
+      <ul className="mt-8 border border-hairline bg-white">
+        {rows.length === 0 && <li className="px-5 py-6 text-stone">Nothing here yet.</li>}
         {rows.map((r) => (
-          <li key={String(r.id)} className="border-b border-hairline-inv last:border-b-0">
-            <Link href={`/admin/content/${type}/${r.id}`} className="flex items-center justify-between gap-4 px-5 py-4 hover:bg-charcoal/40">
+          <li key={String(r.id)} className="border-b border-hairline last:border-b-0">
+            <Link href={`/admin/content/${type}/${r.id}`} className="flex items-center justify-between gap-4 px-5 py-4 hover:bg-pearl-deep/60">
               <span className="flex items-baseline gap-3">
                 {c.subtitleField && r[c.subtitleField] != null && r[c.subtitleField] !== '' && (
                   <span className="shrink-0 font-[family-name:var(--font-mono)] text-[0.7rem] uppercase tracking-[0.14em] text-stone">{String(r[c.subtitleField])}</span>
                 )}
-                <span className="text-pearl">{String(r[c.titleField] ?? '—')}</span>
+                <span className="text-charcoal">{String(r[c.titleField] ?? '—')}</span>
               </span>
               <span className="flex shrink-0 items-center gap-3">
                 {'published' in r && r.published === 0 && <span className="font-[family-name:var(--font-mono)] text-[0.58rem] uppercase tracking-[0.16em] text-stone">Hidden</span>}
-                {'consent_on_file' in r && r.consent_on_file === 0 && <span className="font-[family-name:var(--font-mono)] text-[0.58rem] uppercase tracking-[0.16em] text-[#c98b8b]">No consent</span>}
-                <span className="text-gold-soft">→</span>
+                {'consent_on_file' in r && r.consent_on_file === 0 && <span className="font-[family-name:var(--font-mono)] text-[0.58rem] uppercase tracking-[0.16em] text-[#a23a3a]">No consent</span>}
+                <span className="text-gold">→</span>
               </span>
             </Link>
           </li>

@@ -8,8 +8,8 @@ import { useRouter } from 'next/navigation'
 import type { Field } from '@/lib/admin/collections'
 import type { Row } from '@/lib/admin/collection-db'
 
-const LABEL = 'block font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone-light'
-const INPUT = 'mt-2 w-full border border-hairline-inv bg-charcoal/40 px-3 py-2 text-pearl focus:border-gold-soft focus:outline-none'
+const LABEL = 'block font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone'
+const INPUT = 'mt-2 w-full border border-hairline bg-white px-3 py-2 text-charcoal focus:border-gold focus:outline-none'
 
 export function CollectionEditor({
   type,
@@ -83,11 +83,11 @@ export function CollectionEditor({
           {f.type === 'checkbox' ? (
             <label className="flex items-center gap-3">
               <input type="checkbox" checked={Boolean(form[f.name])} onChange={(e) => set(f.name, e.target.checked)} className="h-4 w-4 accent-[color:var(--color-gold)]" />
-              <span className="text-sm text-pearl">{f.label}</span>
+              <span className="text-sm text-charcoal">{f.label}</span>
             </label>
           ) : (
             <label className="block">
-              <span className={LABEL}>{f.label}{f.required && <span className="text-gold-soft"> *</span>}</span>
+              <span className={LABEL}>{f.label}{f.required && <span className="text-gold"> *</span>}</span>
               {f.type === 'textarea' ? (
                 <textarea value={String(form[f.name] ?? '')} onChange={(e) => set(f.name, e.target.value)} rows={4} className={`${INPUT} resize-y`} />
               ) : f.type === 'select' ? (
@@ -103,14 +103,14 @@ export function CollectionEditor({
         </div>
       ))}
 
-      {err && <p className="text-[#c98b8b]">{err}</p>}
+      {err && <p className="text-[#a23a3a]">{err}</p>}
 
       <div className="flex items-center gap-4 pt-2 font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.16em]">
-        <button onClick={save} disabled={busy} className="border border-gold-soft px-4 py-2.5 text-gold-soft transition-colors hover:bg-gold-soft hover:text-obsidian disabled:opacity-40">
+        <button onClick={save} disabled={busy} className="border border-gold px-4 py-2.5 text-gold transition-colors hover:bg-gold hover:text-obsidian disabled:opacity-40">
           {busy ? 'Saving…' : row ? 'Save changes' : `Add ${singular}`}
         </button>
-        <a href={backHref} className="text-stone-light hover:text-pearl">Cancel</a>
-        {row && <button onClick={remove} disabled={busy} className="ml-auto text-[#c98b8b] hover:text-[#e6b0b0]">Delete</button>}
+        <a href={backHref} className="text-stone hover:text-charcoal">Cancel</a>
+        {row && <button onClick={remove} disabled={busy} className="ml-auto text-[#a23a3a] hover:text-[#a23a3a]">Delete</button>}
       </div>
     </div>
   )

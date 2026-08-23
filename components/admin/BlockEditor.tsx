@@ -6,7 +6,7 @@ import { useState } from 'react'
 import type { BlockRow } from '@/lib/admin/blocks-db'
 
 const PAGE_TITLE: Record<string, string> = { home: 'Home page' }
-const H = 'font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.24em] text-stone-light'
+const H = 'font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.24em] text-stone'
 
 function Field({ block, csrf }: { block: BlockRow; csrf: string }) {
   const [value, setValue] = useState(block.value)
@@ -40,30 +40,30 @@ function Field({ block, csrf }: { block: BlockRow; csrf: string }) {
   }
 
   return (
-    <div className="border-t border-hairline-inv py-4">
+    <div className="border-t border-hairline py-4">
       <div className="flex items-baseline justify-between gap-4">
-        <label className="text-sm text-pearl">{block.label}</label>
-        {!isDefault && <span className="shrink-0 font-[family-name:var(--font-mono)] text-[0.58rem] uppercase tracking-[0.16em] text-gold-soft">Edited</span>}
+        <label className="text-sm text-charcoal">{block.label}</label>
+        {!isDefault && <span className="shrink-0 font-[family-name:var(--font-mono)] text-[0.58rem] uppercase tracking-[0.16em] text-gold">Edited</span>}
       </div>
       {multiline ? (
         <textarea
           value={value}
           onChange={(e) => { setValue(e.target.value); setStatus('idle') }}
           rows={Math.max(2, Math.ceil(value.length / 70))}
-          className="mt-2 w-full resize-y border border-hairline-inv bg-charcoal/40 px-3 py-2 text-pearl focus:border-gold-soft focus:outline-none"
+          className="mt-2 w-full resize-y border border-hairline bg-white px-3 py-2 text-charcoal focus:border-gold focus:outline-none"
         />
       ) : (
         <input
           value={value}
           onChange={(e) => { setValue(e.target.value); setStatus('idle') }}
-          className="mt-2 w-full border border-hairline-inv bg-charcoal/40 px-3 py-2 text-pearl focus:border-gold-soft focus:outline-none"
+          className="mt-2 w-full border border-hairline bg-white px-3 py-2 text-charcoal focus:border-gold focus:outline-none"
         />
       )}
       <div className="mt-2 flex items-center gap-3 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.14em]">
         <button
           onClick={() => send(`/admin/api/blocks/${encodeURIComponent(block.key)}`, 'PATCH', { value })}
           disabled={!dirty || status === 'saving'}
-          className="border border-gold-soft px-3 py-1.5 text-gold-soft transition-colors hover:bg-gold-soft hover:text-obsidian disabled:cursor-not-allowed disabled:opacity-30"
+          className="border border-gold px-3 py-1.5 text-gold transition-colors hover:bg-gold hover:text-obsidian disabled:cursor-not-allowed disabled:opacity-30"
         >
           {status === 'saving' ? 'Saving…' : 'Save'}
         </button>
@@ -71,13 +71,13 @@ function Field({ block, csrf }: { block: BlockRow; csrf: string }) {
           <button
             onClick={() => { if (confirm('Restore the original wording for this block?')) send(`/admin/api/blocks/${encodeURIComponent(block.key)}`, 'POST') }}
             disabled={status === 'saving'}
-            className="text-stone-light hover:text-pearl"
+            className="text-stone hover:text-charcoal"
           >
             Reset to default
           </button>
         )}
-        {status === 'ok' && !dirty && <span className="text-[#8fbf8f]">Saved</span>}
-        {status === 'err' && <span className="text-[#c98b8b]">{msg}</span>}
+        {status === 'ok' && !dirty && <span className="text-[#3f7d3f]">Saved</span>}
+        {status === 'err' && <span className="text-[#a23a3a]">{msg}</span>}
       </div>
     </div>
   )
@@ -90,7 +90,7 @@ export function BlockEditor({ blocks, csrf }: { blocks: BlockRow[]; csrf: string
       {pages.map((page) => (
         <section key={page}>
           <p className={H}>{PAGE_TITLE[page] ?? page}</p>
-          <div className="mt-2 border border-hairline-inv bg-charcoal/20 px-5 pb-2">
+          <div className="mt-2 border border-hairline bg-white px-5 pb-2">
             {blocks.filter((b) => b.page === page).map((b) => <Field key={b.key} block={b} csrf={csrf} />)}
           </div>
         </section>

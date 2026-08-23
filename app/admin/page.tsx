@@ -1,11 +1,13 @@
-// /admin — the landing dashboard (docs/11 § 2). Five blocks, no charts, no vanity
-// metrics. "Needs you" first: anything blocked, waiting or unanswered.
+// /admin — the landing dashboard (docs/11 § 2). Luxury light layout: a welcome
+// hero, gold stat cards, and "needs you" first. Every number is real and links
+// to where you act on it — no vanity metrics, no invented sales figures.
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { requireSession, mustChangePassword } from '@/lib/admin/session'
 import { getDashboard, type ActivityRow } from '@/lib/admin/dashboard-db'
 import { AdminChrome } from '@/components/admin/AdminChrome'
+import { Card, StatCard, SectionHeader, ACTION, LABEL } from '@/components/admin/ui'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Admin', robots: { index: false, follow: false } }
@@ -34,88 +36,102 @@ function activityLine(a: ActivityRow): string {
   return `${who} ${verb} ${what}`
 }
 
-const H = 'font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.24em] text-stone-light'
-const CARD = 'border border-hairline-inv bg-charcoal/30 p-5'
+// Inline glyphs for the stat cards.
+const G = (d: string) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d={d} /></svg>
+)
 
 export default async function AdminHome() {
   const session = await requireSession()
   if (await mustChangePassword(session.user.id)) redirect('/admin/password')
   const d = await getDashboard()
 
+  const first = session.user.name.split(' ')[0]
+  const istHour = (new Date().getUTCHours() + 5) % 24
+  const greeting = istHour < 12 ? 'Good morning' : istHour < 17 ? 'Good afternoon' : 'Good evening'
+  const unpublishedTotal = d.unpublished.pieces + d.unpublished.journal + d.unpublished.collections
+
   const needs: Array<{ text: string; href: string; note?: string }> = []
-  if (d.newAppointments) needs.push({ text: `${d.newAppointments} new appointment request${d.newAppointments === 1 ? '' : 's'}`, href: '/admin/appointments?status=new' })
+  if (d.newAppointments) needs.push({ text: `${d.newAppointments} new appointment request${d.newAppointments === 1 ? '' : 's'}`, href: '/admin/appointments?status=new', note: 'awaiting your reply' })
   if (d.piecesMissingAlt) needs.push({ text: `${d.piecesMissingAlt} piece${d.piecesMissingAlt === 1 ? '' : 's'} missing alt text`, href: '/admin/pieces', note: 'blocked from publishing' })
   if (d.journalDrafts) needs.push({ text: `${d.journalDrafts} journal post${d.journalDrafts === 1 ? '' : 's'} in draft`, href: '/admin/journal' })
 
-  const action = 'border border-gold-soft px-4 py-2.5 font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.18em] text-gold-soft transition-colors hover:bg-gold-soft hover:text-obsidian'
-
   return (
     <AdminChrome name={session.user.name} csrf={session.csrf}>
-      <h1 className="font-[family-name:var(--font-display)] text-3xl">Good to see you, {session.user.name.split(' ')[0]}.</h1>
-
-      {/* NEEDS YOU */}
-      <section className="mt-8">
-        <p className={H}>Needs you</p>
-        <div className={`mt-3 ${CARD}`}>
-          {needs.length === 0 ? (
-            <p className="text-stone-light">Nothing needs you right now.</p>
-          ) : (
-            <ul className="space-y-3">
-              {needs.map((n) => (
-                <li key={n.text}>
-                  <Link href={n.href} className="flex items-center justify-between gap-4 hover:text-gold-soft">
-                    <span>{n.text}{n.note && <span className="ml-2 text-[0.7rem] text-stone">· {n.note}</span>}</span>
-                    <span className="text-gold-soft">→</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
+      {/* Welcome hero */}
+      <section className="relative overflow-hidden rounded-2xl border border-hairline bg-gradient-to-r from-[#efe6d6] via-[#f4ede1] to-[#f4ede1] shadow-[0_1px_3px_rgba(42,35,26,0.05)]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/demo/photos/necklace-ruby.jpg" alt="" aria-hidden className="pointer-events-none absolute right-0 top-0 hidden h-full w-1/2 object-cover opacity-70 sm:block [mask-image:linear-gradient(to_right,transparent,black_55%)]" />
+        <div className="relative px-7 py-9 sm:px-9 sm:py-11">
+          <p className={LABEL}>Welcome back</p>
+          <h1 className="mt-2 font-[family-name:var(--font-display)] text-[2.4rem] leading-[1.05] text-charcoal sm:text-[2.9rem]">
+            {greeting}, {first}.
+          </h1>
+          <p className="mt-2 max-w-md text-stone">Here&rsquo;s what&rsquo;s happening across the house today.</p>
         </div>
       </section>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-2">
-        {/* THIS WEEK */}
-        <section>
-          <p className={H}>This week</p>
-          <div className={`mt-3 ${CARD}`}>
-            <div className="flex items-baseline justify-between"><span className="text-stone-light">Appointment requests</span><span className="font-[family-name:var(--font-display)] text-2xl">{d.weekAppointments}</span></div>
-            <div className="mt-3 flex items-baseline justify-between"><span className="text-stone-light">Most recent</span><span>{ago(d.mostRecent)}</span></div>
-          </div>
-        </section>
-
-        {/* UNPUBLISHED */}
-        <section>
-          <p className={H}>Unpublished</p>
-          <div className={`mt-3 ${CARD} font-[family-name:var(--font-mono)] text-sm tracking-[0.06em]`}>
-            Pieces {d.unpublished.pieces} · Journal {d.unpublished.journal} · Collections {d.unpublished.collections}
-          </div>
-        </section>
+      {/* Stat cards */}
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <StatCard label="New appointments" value={d.newAppointments} icon={G('M4 5h16v16H4zM4 9h16M8 3v4M16 3v4')} note={d.newAppointments ? <Link href="/admin/appointments?status=new" className="text-gold hover:underline">Awaiting your reply →</Link> : 'All caught up'} />
+        <StatCard label="This week" value={d.weekAppointments} icon={G('M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM12 7v5l3 2')} note={<>Requests · most recent {ago(d.mostRecent)}</>} />
+        <StatCard label="Unpublished" value={unpublishedTotal} icon={G('M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z')} note={<>Pieces {d.unpublished.pieces} · Journal {d.unpublished.journal} · Collections {d.unpublished.collections}</>} />
+        <StatCard label="Missing alt text" value={d.piecesMissingAlt} icon={G('M3 5h18v14H3zM3 15l5-5 4 4 3-3 6 6')} note={d.piecesMissingAlt ? <Link href="/admin/pieces" className="text-gold hover:underline">Add descriptions →</Link> : 'Every piece described'} />
       </div>
 
-      {/* QUICK ACTIONS */}
-      <section className="mt-8">
-        <p className={H}>Quick actions</p>
-        <div className="mt-3 flex flex-wrap gap-3">
-          <Link href="/admin/pieces/new" className={action}>Add a piece</Link>
-          <Link href="/admin/journal/new" className={action}>Write a journal post</Link>
-          <Link href="/admin/media" className={action}>Photographs</Link>
-        </div>
-      </section>
+      <div className="mt-6 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+        {/* Needs you + recent activity */}
+        <div className="space-y-6">
+          <div>
+            <SectionHeader title="Needs you" />
+            <Card>
+              {needs.length === 0 ? (
+                <p className="text-stone">Nothing needs you right now. Beautifully quiet.</p>
+              ) : (
+                <ul className="divide-y divide-hairline">
+                  {needs.map((n, i) => (
+                    <li key={n.text} className={i === 0 ? 'pb-3' : 'py-3 last:pb-0'}>
+                      <Link href={n.href} className="group flex items-center justify-between gap-4">
+                        <span className="text-charcoal">
+                          {n.text}
+                          {n.note && <span className="ml-2 text-[0.75rem] text-stone">· {n.note}</span>}
+                        </span>
+                        <span className="text-gold transition-transform group-hover:translate-x-0.5">→</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </Card>
+          </div>
 
-      {/* RECENT ACTIVITY */}
-      <section className="mt-8">
-        <p className={H}>Recent activity</p>
-        <ul className={`mt-3 ${CARD} space-y-2`}>
-          {d.recent.length === 0 && <li className="text-stone-light">No activity yet.</li>}
-          {d.recent.map((a, i) => (
-            <li key={i} className="flex items-baseline justify-between gap-4 text-sm">
-              <span className="text-pearl">{activityLine(a)}</span>
-              <span className="shrink-0 font-[family-name:var(--font-mono)] text-[0.7rem] text-stone">{hm(a.at)}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+          <div>
+            <SectionHeader title="Recent activity" />
+            <Card className="!p-0">
+              <ul className="divide-y divide-hairline">
+                {d.recent.length === 0 && <li className="px-6 py-5 text-stone">No activity yet.</li>}
+                {d.recent.map((a, i) => (
+                  <li key={i} className="flex items-baseline justify-between gap-4 px-6 py-3.5">
+                    <span className="text-[0.9rem] text-charcoal">{activityLine(a)}</span>
+                    <span className="shrink-0 font-[family-name:var(--font-mono)] text-[0.68rem] text-stone">{hm(a.at)}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
+        </div>
+
+        {/* Quick actions */}
+        <div>
+          <SectionHeader title="Quick actions" />
+          <Card className="space-y-3">
+            <Link href="/admin/pieces/new" className={`${ACTION} w-full justify-center`}>Add a piece</Link>
+            <Link href="/admin/journal/new" className={`${ACTION} w-full justify-center`}>Write a journal post</Link>
+            <Link href="/admin/media" className={`${ACTION} w-full justify-center`}>Photographs</Link>
+            <Link href="/admin/pages" className={`${ACTION} w-full justify-center`}>Edit page copy</Link>
+          </Card>
+        </div>
+      </div>
     </AdminChrome>
   )
 }

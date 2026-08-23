@@ -128,14 +128,14 @@ export function JournalEditor({ post, csrf }: { post: JournalRecord; csrf: strin
     if (coverImageId) await fetch(`/admin/api/images/${coverImageId}`, { method: 'PATCH', headers: jsonHeaders, body: JSON.stringify({ alt }) })
   }
 
-  const label = 'block font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone-light'
-  const field = 'mt-2 block w-full border border-hairline-inv bg-charcoal px-3 py-2 text-pearl outline-none focus:border-gold-soft'
+  const label = 'block font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone'
+  const field = 'mt-2 block w-full border border-hairline bg-white px-3 py-2 text-charcoal outline-none focus:border-gold'
 
   return (
     <div className="pb-28">
       <div className="flex items-baseline justify-between">
         <h1 className="font-[family-name:var(--font-display)] text-2xl">{title || 'Untitled post'}</h1>
-        <span className={`font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.16em] ${published ? 'text-[#8fbf8f]' : 'text-stone-light'}`}>{published ? 'Published' : 'Draft'} · /journal/{slug}</span>
+        <span className={`font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.16em] ${published ? 'text-[#3f7d3f]' : 'text-stone'}`}>{published ? 'Published' : 'Draft'} · /journal/{slug}</span>
       </div>
 
       <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -172,7 +172,7 @@ export function JournalEditor({ post, csrf }: { post: JournalRecord; csrf: strin
             )}
           </div>
           <div className="flex-1">
-            <button type="button" onClick={() => fileInput.current?.click()} className="border border-hairline-inv px-3 py-1.5 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.16em] text-pearl hover:border-gold-soft">
+            <button type="button" onClick={() => fileInput.current?.click()} className="border border-hairline px-3 py-1.5 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.16em] text-charcoal hover:border-gold">
               {uploading ? 'Uploading…' : coverKey ? 'Replace cover' : 'Upload cover'}
             </button>
             <input ref={fileInput} type="file" accept="image/*" hidden onChange={(e) => onCover(e.target.files?.[0])} />
@@ -182,7 +182,7 @@ export function JournalEditor({ post, csrf }: { post: JournalRecord; csrf: strin
                 placeholder="Cover alt text (required to publish)"
                 onChange={(e) => setCoverAlt(e.target.value)}
                 onBlur={(e) => saveCoverAlt(e.target.value)}
-                className={`mt-2 w-full border bg-charcoal px-2 py-1 text-sm text-pearl outline-none focus:border-gold-soft ${coverAlt.trim() ? 'border-hairline-inv' : 'border-[#7a5a2e]'}`}
+                className={`mt-2 w-full border bg-white px-2 py-1 text-sm text-charcoal outline-none focus:border-gold ${coverAlt.trim() ? 'border-hairline' : 'border-[#7a5a2e]'}`}
               />
             )}
           </div>
@@ -214,17 +214,17 @@ export function JournalEditor({ post, csrf }: { post: JournalRecord; csrf: strin
       </div>
 
       {/* Action bar */}
-      <div className="fixed inset-x-0 bottom-0 border-t border-hairline-inv bg-obsidian/95 px-6 py-3 backdrop-blur">
+      <div className="fixed inset-x-0 bottom-0 border-t border-hairline bg-white/95 px-6 py-3 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4">
-          <p className={`text-sm ${msg?.kind === 'err' ? 'text-[#e6b0b0]' : 'text-[#8fbf8f]'}`}>{msg?.text}</p>
+          <p className={`text-sm ${msg?.kind === 'err' ? 'text-[#a23a3a]' : 'text-[#3f7d3f]'}`}>{msg?.text}</p>
           <div className="flex items-center gap-3">
-            <button onClick={save} disabled={busy} className="border border-hairline-inv px-4 py-2 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-pearl hover:border-gold-soft disabled:opacity-40">Save draft</button>
-            <button onClick={togglePublish} disabled={busy || (!published && missing.length > 0)} title={!published && missing.length ? `Add ${missing.join(', ')} first` : undefined} className="border border-gold-soft bg-gold-soft px-4 py-2 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-obsidian hover:bg-transparent hover:text-gold-soft disabled:cursor-not-allowed disabled:opacity-40">
+            <button onClick={save} disabled={busy} className="border border-hairline px-4 py-2 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-charcoal hover:border-gold disabled:opacity-40">Save draft</button>
+            <button onClick={togglePublish} disabled={busy || (!published && missing.length > 0)} title={!published && missing.length ? `Add ${missing.join(', ')} first` : undefined} className="border border-gold bg-gold px-4 py-2 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-obsidian hover:bg-transparent hover:text-gold disabled:cursor-not-allowed disabled:opacity-40">
               {published ? 'Unpublish' : 'Publish'}
             </button>
           </div>
         </div>
-        {!published && missing.length > 0 && <p className="mx-auto mt-1 max-w-5xl text-right text-[0.65rem] text-stone-light">Add {missing.join(', ')} to publish.</p>}
+        {!published && missing.length > 0 && <p className="mx-auto mt-1 max-w-5xl text-right text-[0.65rem] text-stone">Add {missing.join(', ')} to publish.</p>}
       </div>
     </div>
   )

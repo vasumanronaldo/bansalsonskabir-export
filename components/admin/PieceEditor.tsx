@@ -133,14 +133,14 @@ export function PieceEditor({ piece, collections, csrf }: { piece: PieceRecord; 
     await fetch('/admin/api/images/reorder', { method: 'POST', headers, body: JSON.stringify({ pieceId: piece.id, ids: next.map((i) => i.id) }) })
   }
 
-  const label = 'block font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone-light'
-  const field = 'mt-2 block w-full border border-hairline-inv bg-charcoal px-3 py-2 text-pearl outline-none focus:border-gold-soft'
+  const label = 'block font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-stone'
+  const field = 'mt-2 block w-full border border-hairline bg-white px-3 py-2 text-charcoal outline-none focus:border-gold'
 
   return (
     <div className="pb-28">
       <div className="flex items-baseline justify-between">
         <h1 className="font-[family-name:var(--font-display)] text-2xl">{name || 'Untitled piece'}</h1>
-        <span className={`font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.16em] ${published ? 'text-[#8fbf8f]' : 'text-stone-light'}`}>
+        <span className={`font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.16em] ${published ? 'text-[#3f7d3f]' : 'text-stone'}`}>
           {published ? 'Published' : 'Draft'} · /{piece.slug}
         </span>
       </div>
@@ -171,7 +171,7 @@ export function PieceEditor({ piece, collections, csrf }: { piece: PieceRecord; 
       <label className={`${label} mt-8`}>
         Description
         <textarea value={description} maxLength={DESC_MAX} onChange={(e) => setDescription(e.target.value)} rows={8} className={`${field} resize-y font-[family-name:var(--font-body)] normal-case tracking-normal`} />
-        <span className="mt-1 block text-right text-[0.6rem] text-stone-light">{description.length}/{DESC_MAX}</span>
+        <span className="mt-1 block text-right text-[0.6rem] text-stone">{description.length}/{DESC_MAX}</span>
       </label>
 
       {/* Images */}
@@ -180,11 +180,11 @@ export function PieceEditor({ piece, collections, csrf }: { piece: PieceRecord; 
         <div
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => { e.preventDefault(); onFiles(e.dataTransfer.files) }}
-          className="mt-2 flex items-center justify-center border border-dashed border-hairline-inv bg-charcoal/40 px-6 py-8 text-center text-sm text-stone-light"
+          className="mt-2 flex items-center justify-center border border-dashed border-hairline bg-white px-6 py-8 text-center text-sm text-stone"
         >
           <div>
             Drag photographs here, or{' '}
-            <button type="button" onClick={() => fileInput.current?.click()} className="text-gold-soft underline underline-offset-4">choose files</button>.
+            <button type="button" onClick={() => fileInput.current?.click()} className="text-gold underline underline-offset-4">choose files</button>.
             <br />
             <span className="text-[0.7rem]">Resized to WebP in your browser before upload. {uploading > 0 && `Uploading ${uploading}…`}</span>
             <input ref={fileInput} type="file" accept="image/*" multiple hidden onChange={(e) => onFiles(e.target.files)} />
@@ -194,7 +194,7 @@ export function PieceEditor({ piece, collections, csrf }: { piece: PieceRecord; 
         {images.length > 0 && (
           <ul className="mt-4 space-y-3">
             {images.map((img, i) => (
-              <li key={img.id} className="flex items-start gap-3 border border-hairline-inv bg-charcoal/30 p-3">
+              <li key={img.id} className="flex items-start gap-3 border border-hairline bg-white p-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={`/img/${img.r2_key_640 ?? img.r2_key}`} alt="" className="h-20 w-20 shrink-0 object-cover" />
                 <div className="min-w-0 flex-1">
@@ -203,17 +203,17 @@ export function PieceEditor({ piece, collections, csrf }: { piece: PieceRecord; 
                     placeholder="Alt text (required to publish)"
                     onChange={(e) => setAlt(img.id, e.target.value)}
                     onBlur={(e) => patchImage(img.id, { alt: e.target.value })}
-                    className={`w-full border bg-charcoal px-2 py-1 text-sm text-pearl outline-none focus:border-gold-soft ${img.alt.trim() ? 'border-hairline-inv' : 'border-[#7a5a2e]'}`}
+                    className={`w-full border bg-white px-2 py-1 text-sm text-charcoal outline-none focus:border-gold ${img.alt.trim() ? 'border-hairline' : 'border-[#7a5a2e]'}`}
                   />
                   <div className="mt-2 flex flex-wrap items-center gap-3 font-[family-name:var(--font-mono)] text-[0.58rem] uppercase tracking-[0.14em]">
                     {img.is_cover ? (
-                      <span className="text-gold-soft">Cover</span>
+                      <span className="text-gold">Cover</span>
                     ) : (
-                      <button type="button" onClick={() => makeCover(img.id)} className="text-stone-light hover:text-gold-soft">Set cover</button>
+                      <button type="button" onClick={() => makeCover(img.id)} className="text-stone hover:text-gold">Set cover</button>
                     )}
-                    <button type="button" onClick={() => move(img.id, -1)} disabled={i === 0} className="text-stone-light hover:text-pearl disabled:opacity-30">↑</button>
-                    <button type="button" onClick={() => move(img.id, 1)} disabled={i === images.length - 1} className="text-stone-light hover:text-pearl disabled:opacity-30">↓</button>
-                    <button type="button" onClick={() => removeImage(img.id)} className="text-[#c98b8b] hover:text-[#e6b0b0]">Delete</button>
+                    <button type="button" onClick={() => move(img.id, -1)} disabled={i === 0} className="text-stone hover:text-charcoal disabled:opacity-30">↑</button>
+                    <button type="button" onClick={() => move(img.id, 1)} disabled={i === images.length - 1} className="text-stone hover:text-charcoal disabled:opacity-30">↓</button>
+                    <button type="button" onClick={() => removeImage(img.id)} className="text-[#a23a3a] hover:text-[#a23a3a]">Delete</button>
                   </div>
                 </div>
               </li>
@@ -223,24 +223,24 @@ export function PieceEditor({ piece, collections, csrf }: { piece: PieceRecord; 
       </div>
 
       {/* Sticky action bar */}
-      <div className="fixed inset-x-0 bottom-0 border-t border-hairline-inv bg-obsidian/95 px-6 py-3 backdrop-blur">
+      <div className="fixed inset-x-0 bottom-0 border-t border-hairline bg-white/95 px-6 py-3 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4">
-          <p className={`text-sm ${msg?.kind === 'err' ? 'text-[#e6b0b0]' : 'text-[#8fbf8f]'}`}>{msg?.text}</p>
+          <p className={`text-sm ${msg?.kind === 'err' ? 'text-[#a23a3a]' : 'text-[#3f7d3f]'}`}>{msg?.text}</p>
           <div className="flex items-center gap-3">
-            <button onClick={save} disabled={busy} className="border border-hairline-inv px-4 py-2 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-pearl hover:border-gold-soft disabled:opacity-40">
+            <button onClick={save} disabled={busy} className="border border-hairline px-4 py-2 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-charcoal hover:border-gold disabled:opacity-40">
               Save draft
             </button>
             <button
               onClick={togglePublish}
               disabled={busy || (!published && missingAlt)}
               title={!published && missingAlt ? 'Every image needs alt text before publishing' : undefined}
-              className="border border-gold-soft bg-gold-soft px-4 py-2 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-obsidian hover:bg-transparent hover:text-gold-soft disabled:cursor-not-allowed disabled:opacity-40"
+              className="border border-gold bg-gold px-4 py-2 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.2em] text-obsidian hover:bg-transparent hover:text-gold disabled:cursor-not-allowed disabled:opacity-40"
             >
               {published ? 'Unpublish' : 'Publish'}
             </button>
           </div>
         </div>
-        {!published && missingAlt && <p className="mx-auto mt-1 max-w-5xl text-right text-[0.65rem] text-stone-light">Add alt text to every image to publish.</p>}
+        {!published && missingAlt && <p className="mx-auto mt-1 max-w-5xl text-right text-[0.65rem] text-stone">Add alt text to every image to publish.</p>}
       </div>
     </div>
   )

@@ -42,7 +42,7 @@ export default async function EnquiryPage({ params }: { params: Promise<{ id: st
     ['Submitted', e.submitted_at],
     ['Notified', e.notified_at || 'not sent'],
   ]
-  const btn = 'inline-block border border-gold-soft px-4 py-2 font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.2em] text-gold-soft hover:bg-gold-soft hover:text-obsidian'
+  const btn = 'inline-block border border-gold px-4 py-2 font-[family-name:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.2em] text-gold hover:bg-gold hover:text-obsidian'
 
   return (
     <AdminChrome name={session.user.name} csrf={session.csrf}>
@@ -57,9 +57,9 @@ export default async function EnquiryPage({ params }: { params: Promise<{ id: st
 
       <dl className="mt-8 max-w-xl">
         {rows.map(([k, v]) => (
-          <div key={k} className="flex gap-4 border-b border-[var(--color-hairline-inv)] py-2.5">
-            <dt className="w-32 shrink-0 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.16em] text-stone-light">{k}</dt>
-            <dd className="text-sm text-pearl">{v}</dd>
+          <div key={k} className="flex gap-4 border-b border-[var(--color-hairline)] py-2.5">
+            <dt className="w-32 shrink-0 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.16em] text-stone">{k}</dt>
+            <dd className="text-sm text-charcoal">{v}</dd>
           </div>
         ))}
       </dl>

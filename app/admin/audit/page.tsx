@@ -24,7 +24,7 @@ export default async function AuditPage({ searchParams }: { searchParams: Promis
   const [rows, filters] = await Promise.all([listAudit({ user: sp.user, entity: sp.entity }), auditFilters()])
 
   const chip = (on: boolean) =>
-    `px-3 py-1.5 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.14em] ${on ? 'text-gold-soft border border-gold-soft' : 'text-stone-light border border-hairline-inv hover:text-pearl'}`
+    `px-3 py-1.5 font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.14em] ${on ? 'text-gold border border-gold' : 'text-stone border border-hairline hover:text-charcoal'}`
   const qs = (patch: Record<string, string | undefined>) => {
     const p = new URLSearchParams()
     const merged = { user: sp.user, entity: sp.entity, ...patch }
@@ -51,13 +51,13 @@ export default async function AuditPage({ searchParams }: { searchParams: Promis
         </div>
       </div>
 
-      <ul className="mt-6 border border-hairline-inv bg-charcoal/20">
-        {rows.length === 0 && <li className="px-5 py-6 text-stone-light">No entries.</li>}
+      <ul className="mt-6 border border-hairline bg-white">
+        {rows.length === 0 && <li className="px-5 py-6 text-stone">No entries.</li>}
         {rows.map((r) => (
-          <li key={r.id} className="flex items-baseline justify-between gap-4 border-b border-hairline-inv px-5 py-3 text-sm last:border-b-0">
-            <span className="text-pearl">
-              <span className="text-stone-light">{r.user ?? 'System'}</span> {VERB[r.action] ?? r.action}{' '}
-              <span className="font-[family-name:var(--font-mono)] text-[0.72rem] tracking-[0.06em] text-stone-light">{r.entity}</span>
+          <li key={r.id} className="flex items-baseline justify-between gap-4 border-b border-hairline px-5 py-3 text-sm last:border-b-0">
+            <span className="text-charcoal">
+              <span className="text-stone">{r.user ?? 'System'}</span> {VERB[r.action] ?? r.action}{' '}
+              <span className="font-[family-name:var(--font-mono)] text-[0.72rem] tracking-[0.06em] text-stone">{r.entity}</span>
               {r.entity_id && r.entity_id !== 'csv' && r.entity_id !== 'json' && <span className="text-stone"> · {r.entity_id.slice(0, 8)}</span>}
             </span>
             <span className="shrink-0 font-[family-name:var(--font-mono)] text-[0.68rem] text-stone">{when(r.at)}</span>
