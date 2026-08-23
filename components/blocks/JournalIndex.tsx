@@ -6,7 +6,7 @@ import { useMemo, useState } from 'react'
 import { JournalCard } from '@/components/blocks/JournalCard'
 import { Body } from '@/components/type'
 import { JOURNAL_CATEGORIES } from '@/lib/journal'
-import type { JournalCard as JournalCardData } from '@/sanity/queries'
+import type { JournalCardData } from '@/lib/journal'
 
 const PER_PAGE = 12
 

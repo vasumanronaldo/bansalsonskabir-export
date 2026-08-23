@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 export async function GET(_req: Request, { params }: { params: Promise<{ key: string[] }> }): Promise<Response> {
   const { key } = await params
   const k = key.join('/')
-  if (!k.startsWith('pieces/') || k.includes('..')) return new Response('Not found', { status: 404 })
+  if (!/^(pieces|journals)\//.test(k) || k.includes('..')) return new Response('Not found', { status: 404 })
 
   const obj = await getObject(k)
   if (!obj) return new Response('Not found', { status: 404 })

@@ -30,28 +30,29 @@ export function sniffImage(buf: ArrayBuffer): string | null {
 }
 
 export async function putImage(
-  pieceId: string,
+  entity: { type: string; id: string },
   full: ArrayBuffer,
   thumb: ArrayBuffer,
   dims: { width: number; height: number },
   userId: string,
 ): Promise<{ id: string; r2_key: string; r2_key_640: string; alt: string; is_cover: number; width: number; height: number; sort_order: number }> {
   const uuid = crypto.randomUUID()
-  const key = `pieces/${pieceId}/${uuid}.webp`
-  const key640 = `pieces/${pieceId}/${uuid}@640.webp`
+  const key = `${entity.type}s/${entity.id}/${uuid}.webp`
+  const key640 = `${entity.type}s/${entity.id}/${uuid}@640.webp`
   const meta = { httpMetadata: { contentType: 'image/webp' } }
   await bucket().put(key, full, meta)
   await bucket().put(key640, thumb, meta)
 
   const id = crypto.randomUUID()
-  const next = await db().prepare('SELECT COALESCE(MAX(sort_order), -1) + 1 AS n, COUNT(*) AS c FROM images WHERE piece_id = ? AND deleted_at IS NULL').bind(pieceId).first<{ n: number; c: number }>()
+  const pieceId = entity.type === 'piece' ? entity.id : null
+  const next = await db().prepare('SELECT COALESCE(MAX(sort_order), -1) + 1 AS n, COUNT(*) AS c FROM images WHERE entity_type = ? AND entity_id = ? AND deleted_at IS NULL').bind(entity.type, entity.id).first<{ n: number; c: number }>()
   const sort = next?.n ?? 0
-  const isCover = (next?.c ?? 0) === 0 ? 1 : 0 // first image becomes the cover
+  const isCover = entity.type === 'piece' && (next?.c ?? 0) === 0 ? 1 : 0 // first piece image becomes its cover
   await db()
-    .prepare('INSERT INTO images (id, piece_id, r2_key, r2_key_640, width, height, bytes, alt, sort_order, is_cover) VALUES (?, ?, ?, ?, ?, ?, ?, "", ?, ?)')
-    .bind(id, pieceId, key, key640, dims.width, dims.height, full.byteLength, sort, isCover)
+    .prepare('INSERT INTO images (id, piece_id, entity_type, entity_id, r2_key, r2_key_640, width, height, bytes, alt, sort_order, is_cover) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, "", ?, ?)')
+    .bind(id, pieceId, entity.type, entity.id, key, key640, dims.width, dims.height, full.byteLength, sort, isCover)
     .run()
-  await audit(userId, 'create', 'image', id, { piece_id: pieceId })
+  await audit(userId, 'create', 'image', id, { entity_type: entity.type, entity_id: entity.id })
   return { id, r2_key: key, r2_key_640: key640, alt: '', is_cover: isCover, width: dims.width, height: dims.height, sort_order: sort }
 }
 

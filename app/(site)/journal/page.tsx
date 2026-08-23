@@ -6,6 +6,7 @@ import { JournalIndex } from '@/components/blocks/JournalIndex'
 import { NewsletterSignup } from '@/components/blocks/NewsletterSignup'
 import { journalIndex } from '@/lib/journal'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: 'Journal',
   description: 'How to buy well, inside the workshop, and the history of the house.',

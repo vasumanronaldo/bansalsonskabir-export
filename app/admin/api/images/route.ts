@@ -15,11 +15,13 @@ export async function POST(req: Request): Promise<Response> {
 
   const form = await req.formData()
   const pieceId = String(form.get('pieceId') ?? '')
+  const entityType = String(form.get('entityType') ?? (pieceId ? 'piece' : ''))
+  const entityId = String(form.get('entityId') ?? pieceId)
   const full = form.get('full')
   const thumb = form.get('thumb')
   const width = Number(form.get('width') ?? 0)
   const height = Number(form.get('height') ?? 0)
-  if (!pieceId || !(full instanceof Blob) || !(thumb instanceof Blob)) return jsonError(400, 'Missing fields')
+  if (!entityType || !entityId || !(full instanceof Blob) || !(thumb instanceof Blob)) return jsonError(400, 'Missing fields')
   if (full.size > MAX_BYTES || thumb.size > MAX_BYTES) return jsonError(413, 'Image exceeds the 8MB limit')
 
   const fullBuf = await full.arrayBuffer()
@@ -28,6 +30,6 @@ export async function POST(req: Request): Promise<Response> {
     return jsonError(415, 'That file is not a valid image')
   }
 
-  const image = await putImage(pieceId, fullBuf, thumbBuf, { width, height }, guard.session.user.id)
+  const image = await putImage({ type: entityType, id: entityId }, fullBuf, thumbBuf, { width, height }, guard.session.user.id)
   return new Response(JSON.stringify({ image }), { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } })
 }

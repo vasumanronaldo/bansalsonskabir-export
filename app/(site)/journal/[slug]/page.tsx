@@ -1,34 +1,30 @@
-// /journal/[slug] — an article (docs/04 § Journal). max-w-68ch, portable text,
-// author + date in mono, related posts at foot. No reading time.
+// /journal/[slug] — an article (docs/04 § Journal). Reads a published post from
+// D1; body is the 3-rule markdown-lite; cover from R2. max-w-68ch, no reading time.
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
 import { Section } from '@/components/layout/Section'
 import { Container } from '@/components/layout/Container'
 import { Display, Body, Label } from '@/components/type'
 import { LinkArrow } from '@/components/ui/LinkArrow'
 import { Placeholder } from '@/components/ui/Placeholder'
-import { PortableTextBody } from '@/components/PortableTextBody'
+import { JournalBody } from '@/components/JournalBody'
 import { JournalCard } from '@/components/blocks/JournalCard'
 import { JsonLd } from '@/components/JsonLd'
 import { breadcrumbJsonLd } from '@/lib/seo'
 import { getSettings } from '@/lib/client-content'
-import { journalPost, relatedPosts, allJournalParams, JOURNAL_CATEGORIES } from '@/lib/journal'
-import { urlFor } from '@/sanity/lib/image'
+import { journalPost, relatedPosts, JOURNAL_CATEGORIES } from '@/lib/journal'
+
+export const dynamic = 'force-dynamic'
 
 const CAT_LABEL = Object.fromEntries(JOURNAL_CATEGORIES.map((c) => [c.value, c.label]))
-
-export async function generateStaticParams() {
-  return allJournalParams()
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const post = await journalPost(slug)
   if (!post) return {}
   return {
-    title: post.seo?.title || post.title,
-    description: post.seo?.description || post.excerpt || undefined,
+    title: post.seoTitle || post.title,
+    description: post.seoDescription || post.excerpt || undefined,
   }
 }
 
@@ -79,16 +75,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {/* Cover */}
       <Section field="pearl" className="!py-0">
         <Container className="!max-w-[80ch]">
-          {post.coverImage?.asset ? (
-            <Image
-              src={urlFor(post.coverImage).width(1600).height(900).fit('crop').url()}
-              alt={post.title}
-              width={1600}
-              height={900}
-              priority
-              sizes="(max-width: 900px) 100vw, 80ch"
-              className="h-auto w-full"
-            />
+          {post.coverSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={post.coverSrc} alt={post.coverAlt} className="h-auto w-full" />
           ) : (
             <Placeholder ratio="3:2" ground="charcoal" label={`${post.title} — cover`} />
           )}
@@ -98,7 +87,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {/* Body */}
       <Section field="pearl">
         <Container className="!max-w-[68ch] !px-[var(--spacing-gutter)]">
-          {post.body ? <PortableTextBody value={post.body} /> : <Body muted>This article is being written.</Body>}
+          {post.body.trim() ? <JournalBody body={post.body} /> : <Body muted>This article is being written.</Body>}
         </Container>
       </Section>
 

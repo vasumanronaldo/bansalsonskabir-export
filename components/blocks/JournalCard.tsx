@@ -1,18 +1,16 @@
-// Journal card (docs/02, docs/04 § Journal). Editorial, not e-commerce.
-import Image from 'next/image'
+// Journal card (docs/02, docs/04 § Journal). Editorial, not e-commerce. Cover
+// from the D1/R2 media path.
 import Link from 'next/link'
 import { Placeholder } from '@/components/ui/Placeholder'
 import { Display, Body, Label } from '@/components/type'
-import { urlFor } from '@/sanity/lib/image'
 import { JOURNAL_CATEGORIES } from '@/lib/journal'
-import type { JournalCard as JournalCardData } from '@/sanity/queries'
+import type { JournalCardData } from '@/lib/journal'
 
 const CAT_LABEL = Object.fromEntries(JOURNAL_CATEGORIES.map((c) => [c.value, c.label]))
 
 function fmtDate(iso: string | null): string {
   if (!iso) return ''
-  const d = new Date(iso)
-  return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
+  return new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
 export function JournalCard({ post }: { post: JournalCardData }) {
@@ -21,14 +19,12 @@ export function JournalCard({ post }: { post: JournalCardData }) {
       href={`/journal/${post.slug}`}
       className="group block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
     >
-      {post.coverImage?.asset ? (
+      {post.coverSrc ? (
         <div className="aspect-[3/2] overflow-hidden bg-charcoal">
-          <Image
-            src={urlFor(post.coverImage).width(900).height(600).fit('crop').url()}
-            alt={post.title}
-            width={900}
-            height={600}
-            sizes="(max-width: 768px) 100vw, 50vw"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={post.coverSrc}
+            alt={post.coverAlt}
             className="h-full w-full object-cover transition-transform duration-[1100ms] ease-[var(--ease-editorial)] group-hover:scale-[1.02]"
           />
         </div>

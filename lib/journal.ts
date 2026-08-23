@@ -1,8 +1,7 @@
-// Journal loader. Journal content was Sanity-only and none is published, so the
-// reads return empty and the pages render their graceful empty state. Kept out of
-// the request path entirely (no per-request Sanity fetch) so the pages stay static
-// and cheap on Workers. Wire to D1 alongside the rest of the content later.
-import type { JournalCard, ImageRef } from '@/sanity/queries'
+// Journal loader — reads published posts from D1 (managed in /admin/journal).
+// The pages that use these are force-dynamic; allJournalParams returns [] so the
+// build-time sitemap never touches D1 (posts are served on demand instead).
+import { getCloudflareContext } from '@opennextjs/cloudflare'
 
 export const JOURNAL_CATEGORIES = [
   { value: 'education', label: 'Education' },
@@ -11,26 +10,66 @@ export const JOURNAL_CATEGORIES = [
   { value: 'guides', label: 'Guides' },
 ] as const
 
-export interface JournalPostFull extends JournalCard {
-  body: unknown[] | null
-  author: string | null
-  seo?: { title?: string; description?: string } | null
+export interface JournalCardData {
+  _id: string
+  title: string
+  slug: string
+  excerpt: string | null
+  category: string | null
+  publishedAt: string | null
+  coverSrc: string | null
+  coverAlt: string
+}
+export interface JournalPostData extends JournalCardData {
+  body: string
+  author: string
+  seoTitle: string
+  seoDescription: string
 }
 
-export async function journalIndex(): Promise<JournalCard[]> {
-  return []
+function db(): D1Database {
+  return getCloudflareContext().env.DB
 }
 
-export async function journalPost(_slug: string): Promise<JournalPostFull | null> {
-  return null
+type Row = { id: string; title: string; slug: string; excerpt: string | null; category: string | null; published_at: string | null; cover_key: string | null; cover_alt: string | null }
+function card(r: Row): JournalCardData {
+  return {
+    _id: r.id, title: r.title, slug: r.slug, excerpt: r.excerpt, category: r.category, publishedAt: r.published_at,
+    coverSrc: r.cover_key ? `/img/${r.cover_key}` : null, coverAlt: r.cover_alt || r.title,
+  }
 }
 
-export async function relatedPosts(_category: string | null, _excludeSlug: string, _n = 3): Promise<JournalCard[]> {
-  return []
+export async function journalIndex(): Promise<JournalCardData[]> {
+  const { results } = await db()
+    .prepare(
+      `SELECT j.id, j.title, j.slug, j.excerpt, j.category, j.published_at, i.r2_key_640 AS cover_key, i.alt AS cover_alt
+         FROM journal_posts j LEFT JOIN images i ON j.cover_image_id = i.id
+        WHERE j.published = 1 AND j.deleted_at IS NULL
+        ORDER BY j.published_at DESC`,
+    )
+    .all<Row>()
+  return (results ?? []).map(card)
+}
+
+export async function journalPost(slug: string): Promise<JournalPostData | null> {
+  const r = await db()
+    .prepare(
+      `SELECT j.id, j.title, j.slug, j.excerpt, j.category, j.published_at, j.body, j.author, j.seo_title, j.seo_description,
+              i.r2_key AS cover_key, i.alt AS cover_alt
+         FROM journal_posts j LEFT JOIN images i ON j.cover_image_id = i.id
+        WHERE j.slug = ? AND j.published = 1 AND j.deleted_at IS NULL`,
+    )
+    .bind(slug)
+    .first<Row & { body: string; author: string; seo_title: string; seo_description: string }>()
+  if (!r) return null
+  return { ...card(r), body: r.body, author: r.author, seoTitle: r.seo_title, seoDescription: r.seo_description }
+}
+
+export async function relatedPosts(category: string | null, excludeSlug: string, n = 3): Promise<JournalCardData[]> {
+  const all = await journalIndex()
+  return all.filter((p) => p.slug !== excludeSlug && (!category || p.category === category)).slice(0, n)
 }
 
 export async function allJournalParams(): Promise<{ slug: string }[]> {
   return []
 }
-
-export type { JournalCard, ImageRef }
