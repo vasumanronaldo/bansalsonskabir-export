@@ -67,3 +67,13 @@ ADMIN PORTAL (when Phase 10 is in the diff)
 - An upload path that trusts the filename or the client-sent MIME type
 - Any price field, column or input anywhere in the portal
 - A publish path that allows an image with empty alt text
+
+DASHBOARD v2
+- An appointment submission path that does not persist to the enquiries table
+- Enquiry data in a URL, a log line, or an analytics call
+- A journal publish path that allows a missing excerpt, cover image, alt text or
+  SEO description
+- A person rendered publicly without consent_on_file = 1
+- A page_blocks edit with no reset-to-default path
+- A retention claim in the privacy policy with no job that enforces it
+- A WYSIWYG editor or autosave anywhere in the portal
