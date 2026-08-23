@@ -4,6 +4,7 @@ import { Section } from '@/components/layout/Section'
 import { Hairline } from '@/components/layout/Hairline'
 import { Display, Body, Label } from '@/components/type'
 
+// Labels are fixed; the heading + body of each row are editable page copy.
 const PROOFS = [
   { label: 'Manufacturer', heading: 'Made in our own workshops', body: 'Nothing is bought in and rebranded. Design, casting, setting, polishing and finishing all happen in our own workshops.' },
   { label: 'Certification', heading: 'Natural diamonds only', body: 'GIA and IGI certified. Every gold piece BIS hallmarked and HUID registered. Lab-grown stones are not sold here.' },
@@ -12,11 +13,12 @@ const PROOFS = [
   { label: 'Aftercare', heading: 'Serviced for life', body: 'Cleaning, polishing, resizing and repair, at no charge, for anything we have made.' },
 ] as const
 
-export function Proofs() {
+export function Proofs({ items }: { items?: ReadonlyArray<{ heading: string; body: string }> } = {}) {
+  const proofs = PROOFS.map((p, i) => ({ label: p.label, heading: items?.[i]?.heading ?? p.heading, body: items?.[i]?.body ?? p.body }))
   return (
     <Section field="pearl">
       <ul>
-        {PROOFS.map((p, i) => (
+        {proofs.map((p, i) => (
           <li key={p.label}>
             {i > 0 && <Hairline className="my-0" />}
             <div className="grid gap-x-10 gap-y-3 py-8 md:grid-cols-[10rem_18rem_1fr] md:py-10">

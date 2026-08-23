@@ -11,6 +11,6 @@ const Inner = dynamic(() => import('./StandardManifesto'), {
   loading: () => <div aria-hidden className="bg-obsidian" style={{ minHeight: '60vh' }} />,
 })
 
-export default function StandardManifestoLazy() {
-  return <Inner />
+export default function StandardManifestoLazy({ lines }: { lines?: string[] } = {}) {
+  return <Inner lines={lines} />
 }

@@ -19,7 +19,8 @@ const LINES = [
   'We never compromise on quality.',
 ] as const
 
-export default function StandardManifesto() {
+export default function StandardManifesto({ lines }: { lines?: string[] } = {}) {
+  const items = lines?.length ? lines : LINES
   const reduced = useReducedMotion()
 
   const line = reduced
@@ -41,7 +42,7 @@ export default function StandardManifesto() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ staggerChildren: 0.09 }}
         >
-          {LINES.map((text, i) => (
+          {items.map((text, i) => (
             <li key={text}>
               {i > 0 && (
                 <motion.div

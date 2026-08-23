@@ -7,7 +7,7 @@ import { Display, Lede, Label } from '@/components/type'
 import { ButtonGhost } from '@/components/ui/ButtonGhost'
 import { LinkArrow } from '@/components/ui/LinkArrow'
 
-export function Hero() {
+export function Hero({ headline, lede }: { headline?: string; lede?: string } = {}) {
   const { data: s } = getSettings()
   return (
     <section className="relative isolate overflow-hidden bg-obsidian text-pearl">
@@ -21,11 +21,11 @@ export function Hero() {
           Goldsmiths &amp; jewellers · {s.metro.station} · Since {s.foundedYear}
         </Label>
         <Display size="xl" as="h1" className="mt-6 max-w-[15ch] text-pearl">
-          Before there is jewellery, there is trust.
+          {headline ?? 'Before there is jewellery, there is trust.'}
         </Display>
         <Lede className="mt-8 text-stone-light">
-          A heritage jewellery outlet in South Delhi, in its third generation. Every piece we sell, we have made. Every
-          stone we set, we can account for.
+          {lede ??
+            'A heritage jewellery outlet in South Delhi, in its third generation. Every piece we sell, we have made. Every stone we set, we can account for.'}
         </Lede>
         <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
           <ButtonGhost onDark href="/appointment">Request a private appointment</ButtonGhost>
