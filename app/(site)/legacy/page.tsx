@@ -9,14 +9,18 @@ import { Prose } from '@/components/Prose'
 import { Placeholder } from '@/components/ui/Placeholder'
 import { LinkArrow } from '@/components/ui/LinkArrow'
 import { Timeline } from '@/components/blocks/Timeline'
+import { getTimelineEvents } from '@/lib/house-content'
 
 export const metadata: Metadata = {
   title: 'Our Legacy',
   description: 'A house built one family at a time, in South Delhi since 1993.',
 }
 
-export default function LegacyPage() {
+export const dynamic = 'force-dynamic'
+
+export default async function LegacyPage() {
   const { body: founder, _meta } = getFounder()
+  const events = await getTimelineEvents()
 
   return (
     <>
@@ -46,7 +50,7 @@ export default function LegacyPage() {
       {/* Timeline */}
       <Section field="pearl">
         <div className="grid gap-x-12 gap-y-10 lg:grid-cols-[1fr_minmax(0,20rem)]">
-          <Timeline />
+          <Timeline events={events} />
           <div className="hidden lg:block">
             <Placeholder ratio="4:5" label="The showroom at C-50" photo="/images/house/timeline.jpg" alt="A finished gold and gemstone necklace laid out on the workbench." className="sticky top-28" />
           </div>

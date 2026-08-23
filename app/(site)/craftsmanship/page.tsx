@@ -9,6 +9,7 @@ import { Section } from '@/components/layout/Section'
 import { Display, Lede, Body, Label } from '@/components/type'
 import { Prose } from '@/components/Prose'
 import { ProcessSequence } from '@/components/blocks/ProcessSequence'
+import { getProcessSteps } from '@/lib/house-content'
 import { CtaBand } from '@/components/blocks/CtaBand'
 
 export const metadata: Metadata = {
@@ -34,9 +35,12 @@ function pruneTurnaround(md: string): string {
   return [...lines.slice(0, start), ...kept, ...lines.slice(end)].join('\n')
 }
 
-export default function CraftsmanshipPage() {
+export const dynamic = 'force-dynamic'
+
+export default async function CraftsmanshipPage() {
   const pricing = getPricing()
   const aftercare = getAftercare()
+  const steps = await getProcessSteps()
 
   return (
     <>
@@ -50,7 +54,7 @@ export default function CraftsmanshipPage() {
       {/* The sequence — numbered 01–08 (correct here and only here) */}
       <Section field="pearl">
         <Label className="mb-10 block">The sequence</Label>
-        <ProcessSequence numbered withImages />
+        <ProcessSequence numbered withImages steps={steps} />
       </Section>
 
       {/* How to read a certificate */}

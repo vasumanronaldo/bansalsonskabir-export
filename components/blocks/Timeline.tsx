@@ -11,16 +11,16 @@ interface Event {
   description?: string
 }
 
-export function Timeline() {
-  const { data, _meta } = getTimeline()
-  const events = ((data.events as Event[]) ?? []).slice().sort((a, b) => a.year - b.year)
+export function Timeline({ events: provided }: { events?: Event[] } = {}) {
+  const file = provided === undefined ? getTimeline() : null
+  const events = (provided ?? (file!.data.events as Event[]) ?? []).slice().sort((a, b) => a.year - b.year)
   if (!events.length) return null
 
   return (
     <div>
       <Label className="mb-8 block">
         The years
-        <DraftFlag meta={_meta} />
+        {file && <DraftFlag meta={file._meta} />}
       </Label>
       <ol>
         {events.map((e, i) => (

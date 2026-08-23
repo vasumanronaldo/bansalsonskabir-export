@@ -18,20 +18,21 @@ interface Person {
 
 const DEV = process.env.NODE_ENV !== 'production'
 
-export function PeopleBench() {
-  const { data, _meta } = getPeople()
-  const people = (data.people as Person[]) ?? []
+export function PeopleBench({ people: provided }: { people?: Person[] } = {}) {
+  const file = provided === undefined ? getPeople() : null
+  const people = provided ?? (file!.data.people as Person[]) ?? []
 
-  // Public: only consented people. Dev also surfaces unconsented ones — but
-  // anonymously (no name) — so the gate is visible and actionable.
-  const visible = people.filter((p) => p.consentOnFile || DEV)
+  // Public: only consented people. Dev on the file path also surfaces unconsented
+  // ones — but anonymously (no name) — so the gate is visible and actionable.
+  // Data from the portal is already published-filtered upstream.
+  const visible = people.filter((p) => p.consentOnFile || (file && DEV))
   if (!visible.length) return null
 
   return (
     <div>
       <Label className="mb-8 block">
         At the bench
-        <DraftFlag meta={_meta} />
+        {file && <DraftFlag meta={file._meta} />}
       </Label>
       <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((p, i) => {

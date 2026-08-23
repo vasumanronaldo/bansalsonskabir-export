@@ -3,7 +3,8 @@
 // deciding whether to come never has to navigate away. Contact + FAQ from the
 // loader; nothing hardcoded.
 import type { Metadata } from 'next'
-import { getSettings, getFaq } from '@/lib/client-content'
+import { getSettings } from '@/lib/client-content'
+import { getFaqItems } from '@/lib/house-content'
 import { DraftFlag } from '@/components/DraftFlag'
 import { Container } from '@/components/layout/Container'
 import { Display, Label } from '@/components/type'
@@ -14,21 +15,16 @@ export const metadata: Metadata = {
   description: 'Book a private appointment at Bansal Sons Jewellers, Malviya Nagar. No obligation, no queue.',
 }
 
-interface Faq {
-  group?: string
-  question: string
-  answer: string
-}
-
 function prettyPhone(raw: string) {
   const m = raw.match(/^(\+91)(\d{5})(\d{5})$/)
   return m ? `${m[1]} ${m[2]} ${m[3]}` : raw
 }
 
-export default function AppointmentPage() {
+export const dynamic = 'force-dynamic'
+
+export default async function AppointmentPage() {
   const { data: s, _meta } = getSettings()
-  const { data: faqData, _meta: faqMeta } = getFaq()
-  const visiting = ((faqData.faqs as Faq[]) ?? []).filter((f) => f.group === 'visiting')
+  const visiting = (await getFaqItems()).filter((f) => f.group === 'visiting')
 
   return (
     <Container className="py-[clamp(3rem,7vw,6rem)]">
@@ -76,10 +72,7 @@ export default function AppointmentPage() {
           {visiting.length > 0 && (
             <>
               <div className="my-8 h-px bg-[var(--color-hairline-inv)]" />
-              <Label className="!text-stone-light">
-                Before you come
-                <DraftFlag meta={faqMeta} />
-              </Label>
+              <Label className="!text-stone-light">Before you come</Label>
               <dl className="mt-4 space-y-4">
                 {visiting.map((f) => (
                   <div key={f.question}>

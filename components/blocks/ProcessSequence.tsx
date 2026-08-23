@@ -36,14 +36,14 @@ const STEP_ALT: Record<number, string> = {
   8: 'Finished emerald and diamond earrings presented on a padded tray.',
 }
 
-export function ProcessSequence({ numbered = true, withImages = true }: { numbered?: boolean; withImages?: boolean }) {
-  const { data, _meta } = getProcess()
-  const steps = ((data.steps as Step[]) ?? []).slice().sort((a, b) => a.order - b.order)
+export function ProcessSequence({ numbered = true, withImages = true, steps: provided }: { numbered?: boolean; withImages?: boolean; steps?: Step[] }) {
+  const file = provided === undefined ? getProcess() : null
+  const steps = (provided ?? (file!.data.steps as Step[]) ?? []).slice().sort((a, b) => a.order - b.order)
   if (!steps.length) return null
 
   return (
     <div>
-      <DraftFlag meta={_meta} />
+      {file && <DraftFlag meta={file._meta} />}
       <ol className="space-y-0">
         {steps.map((s, i) => (
           <li key={s.order}>

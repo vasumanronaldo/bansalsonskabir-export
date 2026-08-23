@@ -7,6 +7,7 @@ import { Section } from '@/components/layout/Section'
 import { Display, Lede, Body, Label } from '@/components/type'
 import { Placeholder } from '@/components/ui/Placeholder'
 import { PeopleBench } from '@/components/blocks/PeopleBench'
+import { getBenchPeople } from '@/lib/house-content'
 import { CtaBand } from '@/components/blocks/CtaBand'
 
 export const metadata: Metadata = {
@@ -14,9 +15,12 @@ export const metadata: Metadata = {
   description: 'The showroom in Malviya Nagar, South Delhi — grey marble, one private cabin, and an honest visit.',
 }
 
-export default function MaisonPage() {
+export const dynamic = 'force-dynamic'
+
+export default async function MaisonPage() {
   const { data: s, _meta } = getSettings()
   const visit = getVisit()
+  const people = await getBenchPeople()
   // Maison copy now lives in content/client/12-visit.md. Split it into the visit
   // sequence ("# What a visit is like") and "## The room". The room text is a
   // placeholder pending the client's replacement (E1) — hence the DraftFlag.
@@ -67,7 +71,7 @@ export default function MaisonPage() {
 
       {/* People at the bench */}
       <Section field="pearl-deep">
-        <PeopleBench />
+        <PeopleBench people={people} />
       </Section>
 
       {/* Practical */}
