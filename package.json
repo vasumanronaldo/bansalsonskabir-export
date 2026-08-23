@@ -21,7 +21,8 @@
     "admin:migrate": "wrangler d1 execute bansal-sons-admin --remote --file=admin/schema.sql",
     "admin:user:add": "node scripts/admin-user-add.mjs",
     "admin:seed": "node scripts/admin-seed.mjs",
-    "admin:backup": "node scripts/admin-backup.mjs"
+    "admin:backup": "node scripts/admin-backup.mjs",
+    "admin:user:reset": "node scripts/admin-user-reset.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",
