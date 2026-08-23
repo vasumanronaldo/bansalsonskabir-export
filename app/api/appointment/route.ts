@@ -1,17 +1,16 @@
-// POST /api/appointment (docs/03 § Route handlers). Zod validate → honeypot +
-// timing check → rate limit 5/hr/IP → Sanity appointmentRequest doc → Resend
-// (client confirmation + internal notification). Degrades gracefully when a
-// service isn't configured yet, so the visitor never sees a failure and the
-// request is never silently lost (it's logged server-side).
+// POST /api/appointment. Validate → honeypot + timing → rate limit 5/hr/IP →
+// PERSIST a row to D1 `enquiries` (always — this is the record) → notify by email
+// via Resend and stamp notified_at on success. The visitor never sees a failure;
+// a submission is never silently lost.
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { getCloudflareContext } from '@opennextjs/cloudflare'
 import { appointmentSchema, normalizeAppointment } from '@/lib/appointment'
 import { rateLimit } from '@/lib/rate-limit'
 import { getSettings } from '@/lib/client-content'
-import { getWriteClient } from '@/sanity/lib/write'
 import { clientConfirmation, internalNotification } from '@/lib/emails/appointment'
 
-export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 function clientIp(req: Request): string {
   const fwd = req.headers.get('x-forwarded-for')
@@ -32,8 +31,7 @@ export async function POST(req: Request) {
   }
   const data = normalizeAppointment(parsed.data)
 
-  // Honeypot + timing: bots fill hidden fields and submit instantly. Return a
-  // success shape so we don't teach them what tripped the filter — but do nothing.
+  // Honeypot + timing: return a success shape so bots aren't taught the trap.
   const tooFast = typeof data.renderedAt === 'number' && Date.now() - data.renderedAt < 3000
   if (data.company || tooFast) {
     return NextResponse.json({ ok: true })
@@ -45,33 +43,40 @@ export async function POST(req: Request) {
   }
 
   const { data: settings } = getSettings()
+  const { env } = getCloudflareContext()
+  const id = crypto.randomUUID()
   const submittedAt = new Date().toISOString()
 
-  // 1) Persist to Sanity (if configured).
+  // 1) Persist to D1 — ALWAYS. The enquiry is the record; email is a notification.
+  let persisted = false
   try {
-    const sanity = getWriteClient()
-    if (sanity) {
-      await sanity.create({
-        _type: 'appointmentRequest',
-        name: data.name,
-        phone: data.phone,
-        email: data.email || undefined,
-        preferredDate: data.preferredDate,
-        preferredTime: data.preferredTime,
-        occasion: data.occasion,
-        budgetRange: data.budget || undefined,
-        interest: data.interest?.join(', ') || undefined,
-        requirement: data.requirement || undefined,
-        contactMethod: data.contactMethod,
-        status: 'new',
+    await env.DB.prepare(
+      `INSERT INTO enquiries
+         (id, name, phone, email, preferred_date, preferred_time, occasion, interest, budget, requirement, contact_method, status, submitted_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'new', ?)`,
+    )
+      .bind(
+        id,
+        data.name,
+        data.phone,
+        data.email ?? null,
+        data.preferredDate,
+        data.preferredTime,
+        data.occasion,
+        JSON.stringify(data.interest ?? []),
+        data.budget ?? null,
+        data.requirement ?? null,
+        data.contactMethod,
         submittedAt,
-      })
-    }
+      )
+      .run()
+    persisted = true
   } catch (e) {
-    console.error('appointment: sanity write failed', e)
+    // Last-resort so a request is never truly lost even if D1 is momentarily down.
+    console.error('appointment: D1 write FAILED', e, JSON.stringify({ ...data, company: undefined, renderedAt: undefined }))
   }
 
-  // 2) Email (if configured).
+  // 2) Notify by email (Resend). On success, stamp notified_at.
   const resendKey = process.env.RESEND_API_KEY
   const notifyTo = process.env.APPOINTMENT_NOTIFY_EMAIL || settings.email
   const from = process.env.APPOINTMENT_FROM || 'Bansal Sons <onboarding@resend.dev>'
@@ -84,12 +89,14 @@ export async function POST(req: Request) {
         const confirm = clientConfirmation(data, settings)
         await resend.emails.send({ from, to: data.email, subject: confirm.subject, html: confirm.html, text: confirm.text })
       }
+      if (persisted) {
+        await env.DB.prepare('UPDATE enquiries SET notified_at = ? WHERE id = ?').bind(new Date().toISOString(), id).run()
+      }
     } catch (e) {
-      console.error('appointment: email send failed', e)
+      console.error('appointment: email send failed (row still persisted)', e)
     }
   } else {
-    // Nothing configured yet — never lose the request.
-    console.info('appointment (no email configured):', JSON.stringify({ ...data, company: undefined, renderedAt: undefined }))
+    console.warn('appointment: RESEND_API_KEY not set — row persisted, no email sent. id=', id)
   }
 
   return NextResponse.json({ ok: true, contactMethod: data.contactMethod })

@@ -61,8 +61,18 @@ export function internalNotification(d: AppointmentInput) {
     ['Contact via', d.contactMethod],
     ['Requirement', d.requirement || '—'],
   ]
+  // Tap-to-act links so it's actionable from a phone, no login needed.
+  const digits = d.phone.replace(/\D/g, '')
+  const wa = digits.length === 10 ? `91${digits}` : digits
+  const btn = 'display:inline-block;padding:11px 18px;margin:0 8px 8px 0;background:#191108;color:#f4ede1;text-decoration:none;font-size:14px'
+  const actions = `<p style="margin:0 0 20px">
+      <a href="tel:${esc(d.phone)}" style="${btn}">Call ${esc(d.phone)}</a>
+      <a href="https://wa.me/${esc(wa)}" style="${btn}">WhatsApp</a>
+      ${d.email ? `<a href="mailto:${esc(d.email)}" style="${btn}">Email</a>` : ''}
+    </p>`
   const inner = `
     <p style="font-size:18px;margin:0 0 16px">New appointment request</p>
+    ${actions}
     <table style="width:100%;border-collapse:collapse">${rows
       .map(([k, v]) => `<tr><td style="padding:6px 12px 6px 0;color:#8c8a85;vertical-align:top;white-space:nowrap">${esc(k)}</td><td style="padding:6px 0">${esc(v)}</td></tr>`)
       .join('')}</table>`
