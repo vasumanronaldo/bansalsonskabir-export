@@ -3,6 +3,7 @@
 // to /appointment. Every fact from the loader.
 import type { Metadata } from 'next'
 import { getSettings } from '@/lib/client-content'
+import { businessOverride } from '@/lib/admin/settings-db'
 import { DraftFlag } from '@/components/DraftFlag'
 import { Section } from '@/components/layout/Section'
 import { Display, Body, Label } from '@/components/type'
@@ -21,8 +22,16 @@ function prettyPhone(raw: string) {
   return m ? `${m[1]} ${m[2]} ${m[3]}` : raw
 }
 
-export default function ContactPage() {
-  const { data: s, _meta } = getSettings()
+export default async function ContactPage() {
+  const { data: file, _meta } = getSettings()
+  const b = await businessOverride()
+  const s = {
+    ...file,
+    phone: b.phone ?? file.phone,
+    whatsapp: (b.whatsapp ?? file.whatsapp).replace(/\D/g, ''),
+    email: b.email ?? file.email,
+    instagram: (b.instagram ?? file.instagram).replace(/^@/, ''),
+  }
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${s.geo.latitude},${s.geo.longitude}`
 
   return (
