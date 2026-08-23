@@ -112,4 +112,6 @@ CREATE INDEX IF NOT EXISTS idx_images_entity ON images(entity_type, entity_id, s
 
 ALTER TABLE enquiries ADD COLUMN handled_by  TEXT REFERENCES users(id);
 ALTER TABLE enquiries ADD COLUMN handled_at  TEXT;
-ALTER TABLE enquiries ADD COLUMN notified_at TEXT;   -- when the email went out
+-- notified_at was already added in step 11a (the appointment persist+notify fix);
+-- re-adding it here would fail with a duplicate-column error.
+-- ALTER TABLE enquiries ADD COLUMN notified_at TEXT;   -- when the email went out
