@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bansal-sons-retention",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-06-01",
+  // Nightly at 02:30 UTC (08:00 IST). Purges enquiries past the retention window.
+  "triggers": { "crons": ["30 2 * * *"] },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "bansal-sons-admin",
+      "database_id": "ded40c57-30c2-419e-a96c-b8797be116ee"
+    }
+  ],
+  "observability": { "enabled": true }
+}
