@@ -115,3 +115,7 @@ ALTER TABLE enquiries ADD COLUMN handled_at  TEXT;
 -- notified_at was already added in step 11a (the appointment persist+notify fix);
 -- re-adding it here would fail with a duplicate-column error.
 -- ALTER TABLE enquiries ADD COLUMN notified_at TEXT;   -- when the email went out
+
+-- 2FA (TOTP) — opt-in per user; default off so no one can be locked out.
+ALTER TABLE users ADD COLUMN totp_secret TEXT;
+ALTER TABLE users ADD COLUMN totp_enabled INTEGER NOT NULL DEFAULT 0;

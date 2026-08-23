@@ -37,6 +37,7 @@ export default async function SettingsPage() {
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           <Link href="/admin/subscribers" className={link}><span>Newsletter subscribers</span><span className="text-gold-soft">→</span></Link>
           <Link href="/admin/audit" className={link}><span>Audit log</span><span className="text-gold-soft">→</span></Link>
+          <Link href="/admin/security" className={link}><span>Two-factor authentication</span><span className="text-gold-soft">→</span></Link>
         </div>
       </section>
 

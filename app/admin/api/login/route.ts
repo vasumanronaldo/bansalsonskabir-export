@@ -5,6 +5,7 @@
 // account is still on its one-time password.
 import { adminEnv } from '@/lib/admin/session'
 import { verifyPassword, dummyVerify, createSession, isRateLimited, recordAttempt } from '@/lib/admin/auth'
+import { isTwoFAEnabled, makePendingCookie } from '@/lib/admin/twofa-db'
 import { seeOther } from '@/lib/admin/http'
 
 export const dynamic = 'force-dynamic'
@@ -36,6 +37,13 @@ export async function POST(req: Request): Promise<Response> {
   await recordAttempt(env, identifier, ip, ok)
 
   if (!ok || !user) return seeOther('/admin/login?error=1')
+
+  // Password is correct. If the account has 2FA, hand off to the code step with a
+  // short-lived signed cookie — no real session exists until the code checks out.
+  if (await isTwoFAEnabled(env, user.id)) {
+    const pending = await makePendingCookie(env, user.id)
+    return seeOther('/admin/login/2fa', pending)
+  }
 
   const { cookie } = await createSession(env, user.id, req)
   await env.DB.prepare("UPDATE users SET last_login_at = datetime('now') WHERE id = ?").bind(user.id).run()

@@ -31,7 +31,9 @@ async function hashPassword(password) {
 const oneTimePassword = b64(crypto.getRandomValues(new Uint8Array(10))).replace(/[+/=]/g, '').slice(0, 14)
 const { hash, salt } = await hashPassword(oneTimePassword)
 const sq = (s) => `'${String(s).replace(/'/g, "''")}'`
-const sql = `UPDATE users SET password_hash=${sq(hash)}, password_salt=${sq(salt)}, must_change=1 WHERE email=${sq(email)} COLLATE NOCASE;
+// Also clears 2FA so a lost authenticator can't lock the account out — the owner
+// re-enrols from /admin/security after signing in with the one-time password.
+const sql = `UPDATE users SET password_hash=${sq(hash)}, password_salt=${sq(salt)}, must_change=1, totp_secret=NULL, totp_enabled=0 WHERE email=${sq(email)} COLLATE NOCASE;
 DELETE FROM sessions WHERE user_id IN (SELECT id FROM users WHERE email=${sq(email)} COLLATE NOCASE);`
 
 const tmp = `.admin-reset-${Date.now ? '' : ''}${Math.floor(Number(process.hrtime.bigint() % 1000000n))}.sql`
