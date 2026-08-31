@@ -3,7 +3,7 @@ import 'server-only'
 // (so edits in the admin drive the public pages), and falls back to the committed
 // file content (04-collections.json, 05-pieces.json) when D1 is empty or
 // unavailable. Pieces are named pieces with prose — no price, no reference code.
-import { getCloudflareContext } from '@opennextjs/cloudflare'
+import { readRows as d1 } from './site-db'
 import { getCollections as getCollectionsFile, getPieces } from './client-content'
 import type { CollectionCard } from '@/sanity/queries'
 import type { PieceCardData } from '@/components/blocks/PieceCard'
@@ -38,16 +38,7 @@ export interface PieceDetail {
   images: PieceImage[]
 }
 
-// ── D1 helpers (null = unavailable → caller falls back to the file) ──
-async function d1<T>(sql: string, ...binds: unknown[]): Promise<T[] | null> {
-  try {
-    const { results } = await getCloudflareContext().env.DB.prepare(sql).bind(...binds).all<T>()
-    return results ?? []
-  } catch {
-    return null
-  }
-}
-
+// D1 access goes through the shared reader (lib/site-db); null = fall back to file.
 interface DbCollection { slug: string; title: string; intro: string; sort_order: number; published: number }
 interface DbPieceCard { slug: string; name: string; cover_key: string | null; cover_alt: string | null }
 

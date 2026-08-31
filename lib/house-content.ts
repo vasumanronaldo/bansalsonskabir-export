@@ -4,7 +4,7 @@ import 'server-only'
 // falling back to the committed content/client JSON otherwise (empty table, or
 // D1 unavailable at build). So the site behaves exactly as before until the
 // family edits, then reflects their edits with no rebuild.
-import { getCloudflareContext } from '@opennextjs/cloudflare'
+import { readRows } from '@/lib/site-db'
 import { getTimeline, getProcess, getPeople, getFaq } from '@/lib/client-content'
 
 export interface TimelineEvent { year: number; title: string; description?: string }
@@ -12,13 +12,11 @@ export interface ProcessStep { order: number; title: string; duration?: string; 
 export interface BenchPerson { name: string; role: string; since: number | null; consentOnFile: boolean; note?: string }
 export interface FaqItem { group: string; question: string; answer: string }
 
+// Wraps the shared reader but treats an EMPTY table as "no data" (→ file
+// fallback), which is this module's existing contract.
 async function query<T>(sql: string): Promise<T[] | null> {
-  try {
-    const { results } = await getCloudflareContext().env.DB.prepare(sql).all<T>()
-    return results && results.length ? results : null
-  } catch {
-    return null
-  }
+  const rows = await readRows<T>(sql)
+  return rows && rows.length ? rows : null
 }
 
 export async function getTimelineEvents(): Promise<TimelineEvent[]> {

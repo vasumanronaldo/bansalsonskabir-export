@@ -40,12 +40,13 @@ export async function saveSettings(form: SettingsForm, userId: string): Promise<
 }
 
 // ---------- public resolvers ----------
-import { getCloudflareContext } from '@opennextjs/cloudflare'
+import { readRow } from '@/lib/site-db'
 
 async function publicJson<T extends object>(key: string): Promise<Partial<T>> {
+  const row = await readRow<{ value: string }>('SELECT value FROM settings WHERE key = ?', key)
+  if (!row) return {}
   try {
-    const row = await getCloudflareContext().env.DB.prepare('SELECT value FROM settings WHERE key = ?').bind(key).first<{ value: string }>()
-    return row ? (JSON.parse(row.value) as Partial<T>) : {}
+    return JSON.parse(row.value) as Partial<T>
   } catch {
     return {}
   }

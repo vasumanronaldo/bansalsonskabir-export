@@ -2,7 +2,7 @@ import 'server-only'
 // Featured pieces for the home page. Reads the admin's D1 catalogue when it has
 // published pieces (so the homepage grid reflects what the family features), and
 // falls back to the committed file content otherwise.
-import { getCloudflareContext } from '@opennextjs/cloudflare'
+import { readRows as d1 } from './site-db'
 import { getPieces } from './client-content'
 import type { PieceCardData } from '@/components/blocks/PieceCard'
 
@@ -15,15 +15,7 @@ interface FilePiece {
 
 interface DbRow { slug: string; name: string; col: string | null; cover_key: string | null; cover_alt: string | null }
 
-async function d1<T>(sql: string, ...binds: unknown[]): Promise<T[] | null> {
-  try {
-    const { results } = await getCloudflareContext().env.DB.prepare(sql).bind(...binds).all<T>()
-    return results ?? []
-  } catch {
-    return null
-  }
-}
-
+// D1 access goes through the shared reader (lib/site-db).
 const SELECT = `SELECT p.slug, p.name, c.slug AS col, i.r2_key_640 AS cover_key, i.alt AS cover_alt
   FROM pieces p
   LEFT JOIN collections c ON c.id = p.collection_id

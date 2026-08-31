@@ -3,7 +3,7 @@
 // concurrency, 3-rule body with a live preview, publish gated on excerpt +
 // cover(+alt) + SEO description (docs/11 § 4).
 import { useRef, useState } from 'react'
-import { JOURNAL_CATEGORIES } from '@/lib/journal'
+import { JOURNAL_CATEGORIES } from '@/lib/journal-shared'
 import { JournalBody } from '@/components/JournalBody'
 import type { JournalRecord } from '@/lib/admin/journal-db'
 

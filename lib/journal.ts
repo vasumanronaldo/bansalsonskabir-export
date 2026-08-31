@@ -1,35 +1,11 @@
 // Journal loader — reads published posts from D1 (managed in /admin/journal).
 // The pages that use these are force-dynamic; allJournalParams returns [] so the
 // build-time sitemap never touches D1 (posts are served on demand instead).
-import { getCloudflareContext } from '@opennextjs/cloudflare'
+import { readRows, readRow } from '@/lib/site-db'
+import type { JournalCardData, JournalPostData } from '@/lib/journal-shared'
 
-export const JOURNAL_CATEGORIES = [
-  { value: 'education', label: 'Education' },
-  { value: 'craft', label: 'Craft' },
-  { value: 'house', label: 'The House' },
-  { value: 'guides', label: 'Guides' },
-] as const
-
-export interface JournalCardData {
-  _id: string
-  title: string
-  slug: string
-  excerpt: string | null
-  category: string | null
-  publishedAt: string | null
-  coverSrc: string | null
-  coverAlt: string
-}
-export interface JournalPostData extends JournalCardData {
-  body: string
-  author: string
-  seoTitle: string
-  seoDescription: string
-}
-
-function db(): D1Database {
-  return getCloudflareContext().env.DB
-}
+export { JOURNAL_CATEGORIES } from '@/lib/journal-shared'
+export type { JournalCardData, JournalPostData } from '@/lib/journal-shared'
 
 type Row = { id: string; title: string; slug: string; excerpt: string | null; category: string | null; published_at: string | null; cover_key: string | null; cover_alt: string | null }
 function card(r: Row): JournalCardData {
@@ -40,27 +16,23 @@ function card(r: Row): JournalCardData {
 }
 
 export async function journalIndex(): Promise<JournalCardData[]> {
-  const { results } = await db()
-    .prepare(
-      `SELECT j.id, j.title, j.slug, j.excerpt, j.category, j.published_at, i.r2_key_640 AS cover_key, i.alt AS cover_alt
-         FROM journal_posts j LEFT JOIN images i ON j.cover_image_id = i.id
-        WHERE j.published = 1 AND j.deleted_at IS NULL
-        ORDER BY j.published_at DESC`,
-    )
-    .all<Row>()
+  const results = await readRows<Row>(
+    `SELECT j.id, j.title, j.slug, j.excerpt, j.category, j.published_at, i.r2_key_640 AS cover_key, i.alt AS cover_alt
+       FROM journal_posts j LEFT JOIN images i ON j.cover_image_id = i.id
+      WHERE j.published = 1 AND j.deleted_at IS NULL
+      ORDER BY j.published_at DESC`,
+  )
   return (results ?? []).map(card)
 }
 
 export async function journalPost(slug: string): Promise<JournalPostData | null> {
-  const r = await db()
-    .prepare(
-      `SELECT j.id, j.title, j.slug, j.excerpt, j.category, j.published_at, j.body, j.author, j.seo_title, j.seo_description,
-              i.r2_key AS cover_key, i.alt AS cover_alt
-         FROM journal_posts j LEFT JOIN images i ON j.cover_image_id = i.id
-        WHERE j.slug = ? AND j.published = 1 AND j.deleted_at IS NULL`,
-    )
-    .bind(slug)
-    .first<Row & { body: string; author: string; seo_title: string; seo_description: string }>()
+  const r = await readRow<Row & { body: string; author: string; seo_title: string; seo_description: string }>(
+    `SELECT j.id, j.title, j.slug, j.excerpt, j.category, j.published_at, j.body, j.author, j.seo_title, j.seo_description,
+            i.r2_key AS cover_key, i.alt AS cover_alt
+       FROM journal_posts j LEFT JOIN images i ON j.cover_image_id = i.id
+      WHERE j.slug = ? AND j.published = 1 AND j.deleted_at IS NULL`,
+    slug,
+  )
   if (!r) return null
   return { ...card(r), body: r.body, author: r.author, seoTitle: r.seo_title, seoDescription: r.seo_description }
 }

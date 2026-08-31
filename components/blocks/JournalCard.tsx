@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { Placeholder } from '@/components/ui/Placeholder'
 import { Display, Body, Label } from '@/components/type'
-import { JOURNAL_CATEGORIES } from '@/lib/journal'
-import type { JournalCardData } from '@/lib/journal'
+import { JOURNAL_CATEGORIES } from '@/lib/journal-shared'
+import type { JournalCardData } from '@/lib/journal-shared'
 
 const CAT_LABEL = Object.fromEntries(JOURNAL_CATEGORIES.map((c) => [c.value, c.label]))
 

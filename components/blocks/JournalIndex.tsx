@@ -5,8 +5,8 @@
 import { useMemo, useState } from 'react'
 import { JournalCard } from '@/components/blocks/JournalCard'
 import { Body } from '@/components/type'
-import { JOURNAL_CATEGORIES } from '@/lib/journal'
-import type { JournalCardData } from '@/lib/journal'
+import { JOURNAL_CATEGORIES } from '@/lib/journal-shared'
+import type { JournalCardData } from '@/lib/journal-shared'
 
 const PER_PAGE = 12
 
