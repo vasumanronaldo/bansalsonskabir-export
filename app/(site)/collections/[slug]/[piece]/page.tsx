@@ -46,9 +46,27 @@ export default async function PiecePage({ params }: { params: Promise<{ slug: st
       <LinkArrow href={`/collections/${d.collectionSlug}`}>Back to the collection</LinkArrow>
 
       <div className="mt-8 grid gap-x-14 gap-y-10 lg:grid-cols-2">
-        {/* Image — sticky on desktop */}
+        {/* Images — the uploaded photography, sticky on desktop. Placeholder only
+            when a piece has no photographs yet. */}
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <Placeholder ratio="4:5" ground="charcoal" label={d.name} />
+          {d.images.length > 0 ? (
+            <div className="space-y-4">
+              {d.images.map((img, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={i}
+                  src={img.src}
+                  alt={img.alt}
+                  width={img.width}
+                  height={img.height}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  className="w-full bg-charcoal object-cover"
+                />
+              ))}
+            </div>
+          ) : (
+            <Placeholder ratio="4:5" ground="charcoal" label={d.name} />
+          )}
         </div>
 
         {/* The piece */}

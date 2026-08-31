@@ -23,12 +23,19 @@ interface FilePiece {
   description?: string
 }
 
+export interface PieceImage {
+  src: string
+  alt: string
+  width?: number
+  height?: number
+}
 export interface PieceDetail {
   name: string
   subtitle?: string
   description?: string
   collectionSlug: string
   slug: string
+  images: PieceImage[]
 }
 
 // ── D1 helpers (null = unavailable → caller falls back to the file) ──
@@ -108,20 +115,33 @@ export async function collectionWithPieces(slug: string): Promise<{ collection: 
 export async function pieceDetail(collectionSlug: string, pieceSlug: string): Promise<PieceDetail | null> {
   const any = await d1<{ x: number }>('SELECT 1 AS x FROM pieces WHERE deleted_at IS NULL LIMIT 1')
   if (any && any.length) {
-    const rows = await d1<{ name: string; subtitle: string; description: string; col: string | null }>(
-      `SELECT p.name, p.subtitle, p.description, c.slug AS col
+    const rows = await d1<{ id: string; name: string; subtitle: string; description: string; col: string | null }>(
+      `SELECT p.id, p.name, p.subtitle, p.description, c.slug AS col
          FROM pieces p LEFT JOIN collections c ON c.id = p.collection_id
         WHERE p.slug = ? AND p.published = 1 AND p.deleted_at IS NULL`,
       pieceSlug,
     )
     const p = rows?.[0]
-    if (p && p.col === collectionSlug) return { name: p.name, subtitle: p.subtitle || undefined, description: p.description || undefined, collectionSlug, slug: pieceSlug }
-    return null
+    if (!p || p.col !== collectionSlug) return null
+    const imgs = await d1<{ r2_key: string; alt: string; width: number; height: number }>(
+      `SELECT r2_key, alt, width, height FROM images
+        WHERE entity_type = 'piece' AND entity_id = ? AND deleted_at IS NULL
+        ORDER BY is_cover DESC, sort_order ASC`,
+      p.id,
+    )
+    return {
+      name: p.name,
+      subtitle: p.subtitle || undefined,
+      description: p.description || undefined,
+      collectionSlug,
+      slug: pieceSlug,
+      images: (imgs ?? []).map((i) => ({ src: `/img/${i.r2_key}`, alt: i.alt || p.name, width: i.width, height: i.height })),
+    }
   }
 
   const p = filePieces().find((x) => x.collection === collectionSlug && x.slug === pieceSlug)
   if (!p) return null
-  return { name: p.name, subtitle: p.subtitle, description: p.description, collectionSlug: p.collection, slug: p.slug }
+  return { name: p.name, subtitle: p.subtitle, description: p.description, collectionSlug: p.collection, slug: p.slug, images: [] }
 }
 
 export async function allCollectionParams(): Promise<{ slug: string }[]> {
