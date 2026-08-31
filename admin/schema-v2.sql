@@ -122,3 +122,6 @@ ALTER TABLE users ADD COLUMN totp_enabled INTEGER NOT NULL DEFAULT 0;
 
 -- Long-form editable page prose (founder, pricing, privacy, ...).
 CREATE TABLE IF NOT EXISTS documents (key TEXT PRIMARY KEY, body TEXT NOT NULL, updated_at TEXT NOT NULL DEFAULT (datetime('now')), updated_by TEXT REFERENCES users(id));
+
+-- Q21: publish gate for process steps (default 1 so existing rows stay live).
+ALTER TABLE process_steps ADD COLUMN published INTEGER NOT NULL DEFAULT 1;

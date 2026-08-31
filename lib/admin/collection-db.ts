@@ -103,7 +103,7 @@ function seedRow(type: string, r: Record<string, unknown>, i: number): Row {
     case 'timeline':
       return { year: n(r.year), title: s(r.title), description: s(r.description) ?? '', sort_order: i, published: 1 }
     case 'process':
-      return { sort_order: Number(r.order ?? i + 1), title: s(r.title), duration: s(r.duration), description: s(r.description) ?? '' }
+      return { sort_order: Number(r.order ?? i + 1), title: s(r.title), duration: s(r.duration), description: s(r.description) ?? '', published: 1 }
     case 'people':
       return { name: s(r.name), role: s(r.role) ?? '', since: n(r.since), note: s(r.note) ?? '', consent_on_file: r.consentOnFile ? 1 : 0, sort_order: i, published: 0 }
     case 'faqs':

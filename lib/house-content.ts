@@ -31,7 +31,7 @@ export async function getTimelineEvents(): Promise<TimelineEvent[]> {
 
 export async function getProcessSteps(): Promise<ProcessStep[]> {
   const rows = await query<{ sort_order: number; title: string; duration: string | null; description: string }>(
-    'SELECT sort_order, title, duration, description FROM process_steps ORDER BY sort_order ASC',
+    'SELECT sort_order, title, duration, description FROM process_steps WHERE published = 1 ORDER BY sort_order ASC',
   )
   if (rows) return rows.map((r) => ({ order: r.sort_order, title: r.title, duration: r.duration || undefined, description: r.description || undefined }))
   return ((getProcess().data.steps as ProcessStep[]) ?? []).slice()

@@ -66,6 +66,7 @@ export const COLLECTIONS: Record<string, Collection> = {
       { name: 'title', label: 'Title', type: 'text', required: true },
       { name: 'duration', label: 'Duration', type: 'text', help: 'Leave blank to show no duration' },
       { name: 'description', label: 'Description', type: 'textarea' },
+      { name: 'published', label: 'Shown on the site', type: 'checkbox', default: true },
     ],
   },
   people: {
