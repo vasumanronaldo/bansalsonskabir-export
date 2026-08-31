@@ -5,6 +5,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { Resend } from 'resend'
+import { getCloudflareContext } from '@opennextjs/cloudflare'
 import { rateLimit } from '@/lib/rate-limit'
 import { signValue } from '@/lib/sign'
 import { getSettings } from '@/lib/client-content'
@@ -44,6 +45,22 @@ export async function POST(req: Request) {
   const token = await signValue(clean)
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
   const confirmUrl = `${base}/api/newsletter/confirm?e=${encodeURIComponent(clean)}&t=${token}`
+
+  // Record a pending subscriber in D1 so it appears in the admin, without
+  // downgrading anyone already confirmed. Confirmed on click (see ./confirm).
+  try {
+    const { env } = getCloudflareContext()
+    await env.DB.prepare(
+      `INSERT INTO subscribers (id, email, status, confirm_token)
+         VALUES (?, ?, 'pending', ?)
+       ON CONFLICT(email) DO UPDATE SET confirm_token = excluded.confirm_token
+         WHERE subscribers.status <> 'confirmed'`,
+    )
+      .bind(crypto.randomUUID(), clean, token)
+      .run()
+  } catch (e) {
+    console.error('newsletter: D1 subscriber upsert failed (continuing)', e)
+  }
 
   const resendKey = process.env.RESEND_API_KEY
   const from = process.env.APPOINTMENT_FROM || 'Bansal Sons <onboarding@resend.dev>'

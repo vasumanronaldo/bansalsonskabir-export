@@ -2,6 +2,7 @@
 // the signed link, then adds the contact to the Resend Audience. Shows a plain
 // confirmation page.
 import { Resend } from 'resend'
+import { getCloudflareContext } from '@opennextjs/cloudflare'
 import { verifyValue } from '@/lib/sign'
 
 export const runtime = 'nodejs'
@@ -19,6 +20,20 @@ export async function GET(req: Request) {
   const token = url.searchParams.get('t') || ''
   if (!email || !token || !(await verifyValue(email, token))) {
     return page('Link not valid', 'This confirmation link is invalid or has expired. Please subscribe again.')
+  }
+
+  // Mark the D1 subscriber confirmed (insert if the signup write was ever missed).
+  try {
+    const { env } = getCloudflareContext()
+    await env.DB.prepare(
+      `INSERT INTO subscribers (id, email, status, confirmed_at)
+         VALUES (?, ?, 'confirmed', datetime('now'))
+       ON CONFLICT(email) DO UPDATE SET status = 'confirmed', confirmed_at = datetime('now'), unsubscribed_at = NULL`,
+    )
+      .bind(crypto.randomUUID(), email)
+      .run()
+  } catch (e) {
+    console.error('newsletter confirm: D1 update failed (continuing)', e)
   }
 
   const resendKey = process.env.RESEND_API_KEY
