@@ -2,6 +2,7 @@
 // (draft — needs legal review against the DPDP Act, 2023).
 import type { Metadata } from 'next'
 import { getPrivacy } from '@/lib/client-content'
+import { resolveDocument } from '@/lib/documents'
 import { DraftFlag } from '@/components/DraftFlag'
 import { Section } from '@/components/layout/Section'
 import { Container } from '@/components/layout/Container'
@@ -16,8 +17,9 @@ export const metadata: Metadata = {
   ...canonical('/privacy'),
 }
 
-export default function PrivacyPage() {
-  const { body, _meta } = getPrivacy()
+export default async function PrivacyPage() {
+  const { _meta } = getPrivacy()
+  const body = await resolveDocument('privacy')
   return (
     <Section field="pearl" className="pt-[clamp(3rem,7vw,6rem)]">
       <Container className="!max-w-[68ch] !px-[var(--spacing-gutter)]">

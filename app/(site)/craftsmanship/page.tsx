@@ -10,6 +10,7 @@ import { Display, Lede, Body, Label } from '@/components/type'
 import { Prose } from '@/components/Prose'
 import { ProcessSequence } from '@/components/blocks/ProcessSequence'
 import { getProcessSteps } from '@/lib/house-content'
+import { resolveDocument } from '@/lib/documents'
 import { withSeoOverride } from '@/lib/admin/settings-db'
 import { CtaBand } from '@/components/blocks/CtaBand'
 
@@ -41,8 +42,8 @@ function pruneTurnaround(md: string): string {
 export const dynamic = 'force-dynamic'
 
 export default async function CraftsmanshipPage() {
-  const pricing = getPricing()
-  const aftercare = getAftercare()
+  const pricing = { ...getPricing(), body: await resolveDocument('pricing') }
+  const aftercare = { ...getAftercare(), body: await resolveDocument('aftercare') }
   const steps = await getProcessSteps()
 
   return (

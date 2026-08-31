@@ -108,6 +108,25 @@ export const COLLECTIONS: Record<string, Collection> = {
       { name: 'published', label: 'Shown on the site', type: 'checkbox', default: true },
     ],
   },
+  collections: {
+    type: 'collections',
+    table: 'collections',
+    label: 'Collections',
+    singular: 'collection',
+    drives: 'the Collections page — pieces are assigned to a collection in the piece editor',
+    orderBy: 'sort_order ASC, title ASC',
+    titleField: 'title',
+    subtitleField: 'slug',
+    seedFile: '04-collections.json',
+    seedKey: 'collections',
+    fields: [
+      { name: 'title', label: 'Title', type: 'text', required: true },
+      { name: 'slug', label: 'Slug (URL)', type: 'text', required: true, help: 'Lower-case, hyphenated — changing it breaks existing links' },
+      { name: 'intro', label: 'Intro', type: 'textarea' },
+      { name: 'sort_order', label: 'Order', type: 'number', default: 0 },
+      { name: 'published', label: 'Shown on the site', type: 'checkbox', default: true },
+    ],
+  },
 }
 
 export const COLLECTION_TYPES = Object.keys(COLLECTIONS)

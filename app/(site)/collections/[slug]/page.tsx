@@ -11,6 +11,10 @@ import { JsonLd } from '@/components/JsonLd'
 import { breadcrumbJsonLd } from '@/lib/seo'
 import { collectionWithPieces, allCollectionParams } from '@/lib/collections'
 
+// Dynamic so admin edits to the catalogue appear immediately; params below still
+// pre-render the known slugs, and unknown ones render on demand.
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
   return allCollectionParams()
 }

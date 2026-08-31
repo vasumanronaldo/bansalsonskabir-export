@@ -119,3 +119,6 @@ ALTER TABLE enquiries ADD COLUMN handled_at  TEXT;
 -- 2FA (TOTP) — opt-in per user; default off so no one can be locked out.
 ALTER TABLE users ADD COLUMN totp_secret TEXT;
 ALTER TABLE users ADD COLUMN totp_enabled INTEGER NOT NULL DEFAULT 0;
+
+-- Long-form editable page prose (founder, pricing, privacy, ...).
+CREATE TABLE IF NOT EXISTS documents (key TEXT PRIMARY KEY, body TEXT NOT NULL, updated_at TEXT NOT NULL DEFAULT (datetime('now')), updated_by TEXT REFERENCES users(id));

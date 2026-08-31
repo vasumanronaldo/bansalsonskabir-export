@@ -10,6 +10,7 @@ import { Placeholder } from '@/components/ui/Placeholder'
 import { LinkArrow } from '@/components/ui/LinkArrow'
 import { Timeline } from '@/components/blocks/Timeline'
 import { getTimelineEvents } from '@/lib/house-content'
+import { resolveDocument } from '@/lib/documents'
 import { withSeoOverride } from '@/lib/admin/settings-db'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,7 +23,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export const dynamic = 'force-dynamic'
 
 export default async function LegacyPage() {
-  const { body: founder, _meta } = getFounder()
+  const { _meta } = getFounder()
+  const founder = await resolveDocument('founder')
   const events = await getTimelineEvents()
 
   return (

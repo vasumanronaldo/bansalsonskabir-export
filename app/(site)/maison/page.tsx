@@ -8,6 +8,7 @@ import { Display, Lede, Body, Label } from '@/components/type'
 import { Placeholder } from '@/components/ui/Placeholder'
 import { PeopleBench } from '@/components/blocks/PeopleBench'
 import { getBenchPeople } from '@/lib/house-content'
+import { resolveDocument } from '@/lib/documents'
 import { withSeoOverride } from '@/lib/admin/settings-db'
 import { CtaBand } from '@/components/blocks/CtaBand'
 
@@ -23,11 +24,12 @@ export const dynamic = 'force-dynamic'
 export default async function MaisonPage() {
   const { data: s, _meta } = getSettings()
   const visit = getVisit()
+  const visitBody = await resolveDocument('visit')
   const people = await getBenchPeople()
   // Maison copy now lives in content/client/12-visit.md. Split it into the visit
   // sequence ("# What a visit is like") and "## The room". The room text is a
   // placeholder pending the client's replacement (E1) — hence the DraftFlag.
-  const parts = visit.body.split(/^##\s+The room\s*$/m)
+  const parts = visitBody.split(/^##\s+The room\s*$/m)
   const roomPart = parts[1] ?? ''
   const visitLines = (parts[0] ?? '')
     .split(/\n{2,}/)

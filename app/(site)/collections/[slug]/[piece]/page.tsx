@@ -12,6 +12,10 @@ import { JsonLd } from '@/components/JsonLd'
 import { breadcrumbJsonLd } from '@/lib/seo'
 import { pieceDetail, allPieceParams } from '@/lib/collections'
 
+// Dynamic so admin edits to a piece appear immediately; known slugs pre-render,
+// new ones render on demand.
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
   return allPieceParams()
 }

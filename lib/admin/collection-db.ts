@@ -108,6 +108,8 @@ function seedRow(type: string, r: Record<string, unknown>, i: number): Row {
       return { name: s(r.name), role: s(r.role) ?? '', since: n(r.since), note: s(r.note) ?? '', consent_on_file: r.consentOnFile ? 1 : 0, sort_order: i, published: 0 }
     case 'faqs':
       return { grp: s(r.group) ?? 'buying', question: s(r.question), answer: s(r.answer) ?? '', sort_order: i, published: 1 }
+    case 'collections':
+      return { title: s(r.title), slug: s(r.slug), intro: s(r.introText ?? r.shortDescription) ?? '', sort_order: Number(r.order ?? i), published: 1 }
     default:
       return {}
   }

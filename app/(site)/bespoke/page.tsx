@@ -4,6 +4,7 @@
 // differentiator — most houses never publish them.
 import type { Metadata } from 'next'
 import { getCommissionTerms } from '@/lib/client-content'
+import { resolveDocument } from '@/lib/documents'
 import { DraftFlag } from '@/components/DraftFlag'
 import { Section } from '@/components/layout/Section'
 import { Display, Lede, Body, Label } from '@/components/type'
@@ -16,8 +17,8 @@ export const metadata: Metadata = {
   description: 'A commission starts with a conversation, not a catalogue. Made to a family, not to a season.',
 }
 
-export default function BespokePage() {
-  const terms = getCommissionTerms()
+export default async function BespokePage() {
+  const terms = { ...getCommissionTerms(), body: await resolveDocument('commission-terms') }
 
   return (
     <>
