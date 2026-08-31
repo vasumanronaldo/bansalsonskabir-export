@@ -57,6 +57,41 @@ export async function businessOverride(): Promise<Partial<Business>> {
   return Object.fromEntries(Object.entries(raw).filter(([, v]) => typeof v === 'string' && v.trim() !== '')) as Partial<Business>
 }
 
+import type { Settings } from '@/lib/client-content'
+
+// THE single public settings resolver: merge the admin's business overrides over
+// the committed file settings (contact, address, hours). Every public consumer —
+// Footer, contact, appointment — reads through this so one edit shows everywhere.
+export async function resolvePublicSettings(file: Settings): Promise<Settings & { hoursNote: string }> {
+  const b = await businessOverride()
+  const address = {
+    ...file.address,
+    line1: b.addrLine1 ?? file.address.line1,
+    line2: b.addrLine2 ?? file.address.line2,
+    city: b.addrCity ?? file.address.city,
+    postalCode: b.addrPostal ?? file.address.postalCode,
+  }
+  let hours = file.hours
+  if (b.hoursJson) {
+    try {
+      const parsed = JSON.parse(b.hoursJson)
+      if (Array.isArray(parsed) && parsed.length) hours = parsed as Settings['hours']
+    } catch {
+      // Malformed override — keep the committed hours rather than break the page.
+    }
+  }
+  return {
+    ...file,
+    phone: b.phone ?? file.phone,
+    whatsapp: (b.whatsapp ?? file.whatsapp).replace(/\D/g, ''),
+    email: b.email ?? file.email,
+    instagram: (b.instagram ?? file.instagram).replace(/^@/, ''),
+    address,
+    hours,
+    hoursNote: b.hoursNote ?? '',
+  }
+}
+
 export async function seoOverride(page: string): Promise<Partial<Seo>> {
   const raw = await publicJson<Seo>(`seo.${page}`)
   return Object.fromEntries(Object.entries(raw).filter(([, v]) => typeof v === 'string' && v.trim() !== '')) as Partial<Seo>

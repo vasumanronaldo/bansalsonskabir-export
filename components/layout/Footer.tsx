@@ -2,7 +2,7 @@
 // marks. Every fact comes from the content loader; nothing is hardcoded. Carries
 // a dev-only DraftFlag because settings are still unapproved.
 import { getSettings } from '@/lib/client-content'
-import { businessOverride } from '@/lib/admin/settings-db'
+import { resolvePublicSettings } from '@/lib/admin/settings-db'
 import { DraftFlag } from '@/components/DraftFlag'
 import { Label } from '@/components/type/Label'
 import { Wordmark } from '@/components/Wordmark'
@@ -15,15 +15,8 @@ function prettyPhone(raw: string): string {
 
 export async function Footer() {
   const { data: file, _meta } = getSettings()
-  // Contact details the family edits in the admin override the committed file.
-  const b = await businessOverride()
-  const s = {
-    ...file,
-    phone: b.phone ?? file.phone,
-    whatsapp: (b.whatsapp ?? file.whatsapp).replace(/\D/g, ''),
-    email: b.email ?? file.email,
-    instagram: (b.instagram ?? file.instagram).replace(/^@/, ''),
-  }
+  // Contact, address and hours the family edits in the admin override the file.
+  const s = await resolvePublicSettings(file)
   const addr = s.address
 
   return (
@@ -93,6 +86,7 @@ export async function Footer() {
               </li>
             ))}
           </ul>
+          {s.hoursNote && <p className="mt-3 text-[length:var(--text-body-sm)] text-stone-light">{s.hoursNote}</p>}
         </div>
       </div>
 

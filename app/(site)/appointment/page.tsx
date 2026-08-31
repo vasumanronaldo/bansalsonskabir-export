@@ -5,7 +5,7 @@
 import type { Metadata } from 'next'
 import { getSettings } from '@/lib/client-content'
 import { getFaqItems } from '@/lib/house-content'
-import { withSeoOverride, businessOverride } from '@/lib/admin/settings-db'
+import { withSeoOverride, resolvePublicSettings } from '@/lib/admin/settings-db'
 import { DraftFlag } from '@/components/DraftFlag'
 import { Container } from '@/components/layout/Container'
 import { Display, Label } from '@/components/type'
@@ -26,13 +26,13 @@ function prettyPhone(raw: string) {
 export const dynamic = 'force-dynamic'
 
 export default async function AppointmentPage() {
-  const { data: s, _meta } = getSettings()
+  const { data: file, _meta } = getSettings()
+  // Contact, address and hours are the admin's overrides over the committed file.
+  const s = await resolvePublicSettings(file)
   const visiting = (await getFaqItems()).filter((f) => f.group === 'visiting')
-  // Contact fields the family can override in Settings; blank falls back to file.
-  const biz = await businessOverride()
-  const phone = biz.phone ?? s.phone
-  const whatsapp = (biz.whatsapp ?? s.whatsapp).replace(/\D/g, '')
-  const email = biz.email ?? s.email
+  const phone = s.phone
+  const whatsapp = s.whatsapp
+  const email = s.email
 
   return (
     <Container className="py-[clamp(3rem,7vw,6rem)]">

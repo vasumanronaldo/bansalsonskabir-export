@@ -41,9 +41,13 @@ export function SettingsEditor({ form: initial, seoPages, csrf }: { form: Settin
     <div className="space-y-8">
       <div className="grid gap-4 sm:grid-cols-2">
         {BUSINESS_FIELDS.map((f) => (
-          <label key={f.name} className="block">
+          <label key={f.name} className={`block ${f.multiline ? 'sm:col-span-2' : ''}`}>
             <span className={LABEL}>{f.label}</span>
-            <input value={String(form.business[f.name] ?? '')} onChange={(e) => setBiz(f.name, e.target.value)} className={INPUT} />
+            {f.multiline ? (
+              <textarea value={String(form.business[f.name] ?? '')} onChange={(e) => setBiz(f.name, e.target.value)} rows={4} className={`${INPUT} resize-y font-[family-name:var(--font-mono)] text-[0.8rem]`} />
+            ) : (
+              <input value={String(form.business[f.name] ?? '')} onChange={(e) => setBiz(f.name, e.target.value)} className={INPUT} />
+            )}
             {f.help && <span className="mt-1 block text-[0.7rem] text-stone">{f.help}</span>}
           </label>
         ))}
