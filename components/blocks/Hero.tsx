@@ -11,9 +11,9 @@ export function Hero({ headline, lede }: { headline?: string; lede?: string } = 
   const { data: s } = getSettings()
   return (
     <section className="relative isolate overflow-hidden bg-obsidian text-pearl">
-      {/* background photograph (the family's own image drops in here later) */}
+      {/* Real photograph of the showroom interior (the one confirmed image). */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/demo/photos/necklace-ruby.jpg" alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-80" />
+      <img src="/images/house/showroom-interior.jpg" alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-80" />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/80 to-obsidian/30" />
 
       <Container className="relative flex min-h-[82vh] flex-col justify-center py-24">
