@@ -17,7 +17,7 @@ import { CtaBand } from '@/components/blocks/CtaBand'
 export async function generateMetadata(): Promise<Metadata> {
   return withSeoOverride('craftsmanship', {
     title: 'Craftsmanship',
-    description: 'From a sketch on paper to a piece in a box — made under one roof, and billed in front of you.',
+    description: 'From a sketch on paper to a piece in a box — made in our own workshops, and billed in front of you.',
   })
 }
 

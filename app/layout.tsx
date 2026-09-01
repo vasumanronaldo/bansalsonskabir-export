@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: `%s — ${settings.legalName}`,
   },
   description:
-    'A family jewellery maison in South Delhi, making under one roof since 1993. Natural diamonds, polki, kundan and bespoke commissions — by private appointment.',
+    'A family jewellery maison in South Delhi, making in our own workshops since 1993. Natural diamonds, polki, kundan and bespoke commissions — by private appointment.',
   robots: { index: true, follow: true },
   alternates: { canonical: '/' },
   openGraph: {
