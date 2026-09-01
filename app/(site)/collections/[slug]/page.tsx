@@ -2,7 +2,8 @@
 // then a 4:5 grid. No prices, no per-piece enquiry. ONE CTA at the foot only,
 // with no ?ref parameter (docs/07 § E2).
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
+import { lookupRedirect } from '@/lib/redirects'
 import { Section } from '@/components/layout/Section'
 import { Display, Lede, Label } from '@/components/type'
 import { PieceCard } from '@/components/blocks/PieceCard'
@@ -32,7 +33,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function CollectionDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const data = await collectionWithPieces(slug)
-  if (!data) notFound()
+  if (!data) {
+    const to = await lookupRedirect(`/collections/${slug}`)
+    if (to) redirect(to)
+    notFound()
+  }
   const { collection, intro, pieces } = data
 
   return (

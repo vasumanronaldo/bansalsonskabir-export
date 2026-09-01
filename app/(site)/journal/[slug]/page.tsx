@@ -1,7 +1,8 @@
 // /journal/[slug] — an article (docs/04 § Journal). Reads a published post from
 // D1; body is the 3-rule markdown-lite; cover from R2. max-w-68ch, no reading time.
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
+import { lookupRedirect } from '@/lib/redirects'
 import { Section } from '@/components/layout/Section'
 import { Container } from '@/components/layout/Container'
 import { Display, Body, Label } from '@/components/type'
@@ -36,7 +37,11 @@ function fmtDate(iso: string | null): string {
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const post = await journalPost(slug)
-  if (!post) notFound()
+  if (!post) {
+    const to = await lookupRedirect(`/journal/${slug}`)
+    if (to) redirect(to)
+    notFound()
+  }
   const related = await relatedPosts(post.category, post.slug, 3)
   const { data: s } = getSettings()
 

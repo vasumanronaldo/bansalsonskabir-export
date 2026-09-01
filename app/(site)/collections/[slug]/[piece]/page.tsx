@@ -3,7 +3,8 @@
 // (D2) and the PLACEHOLDER paragraph (D4) are removed. Image left (sticky), copy
 // right. No enquiry action, no price, no "similar pieces".
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
+import { lookupRedirect } from '@/lib/redirects'
 import { Container } from '@/components/layout/Container'
 import { Display, Body, Label } from '@/components/type'
 import { Placeholder } from '@/components/ui/Placeholder'
@@ -33,7 +34,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function PiecePage({ params }: { params: Promise<{ slug: string; piece: string }> }) {
   const { slug, piece } = await params
   const d = await pieceDetail(slug, piece)
-  if (!d) notFound()
+  if (!d) {
+    const to = await lookupRedirect(`/collections/${slug}/${piece}`)
+    if (to) redirect(to)
+    notFound()
+  }
 
   const paragraphs = (d.description ?? '')
     .split(/\n{2,}/)

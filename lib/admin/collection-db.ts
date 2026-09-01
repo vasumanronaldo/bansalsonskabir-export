@@ -5,6 +5,7 @@ import 'server-only'
 // runs once per table (only while empty) from the committed content/client JSON.
 import { adminEnv } from './session'
 import { audit } from './db'
+import { recordRedirect } from './redirects-db'
 import { COLLECTIONS, type Collection, type Field } from './collections'
 import timelineJson from '@/content/client/02-timeline.json'
 import processJson from '@/content/client/03-process.json'
@@ -75,10 +76,15 @@ export async function createRow(type: string, input: Record<string, unknown>, us
 export async function updateRow(type: string, id: string, input: Record<string, unknown>, userId: string): Promise<void> {
   const c = collection(type)
   const row = rowFromInput(c, input)
+  // A collection's public URL is its slug — if it changes, leave a redirect.
+  const oldSlug = type === 'collections' ? (await adminEnv().DB.prepare('SELECT slug FROM collections WHERE id = ?').bind(id).first<{ slug: string }>())?.slug : undefined
   const names = c.fields.map((f) => f.name)
   const sql = `UPDATE ${c.table} SET ${names.map((n) => `${n} = ?`).join(', ')} WHERE id = ?`
   await adminEnv().DB.prepare(sql).bind(...names.map((n) => row[n] ?? null), id).run()
   await audit(userId, 'update', type, id)
+  if (type === 'collections' && oldSlug && row.slug && oldSlug !== row.slug) {
+    await recordRedirect(`/collections/${oldSlug}`, `/collections/${row.slug}`, userId)
+  }
 }
 
 export async function deleteRow(type: string, id: string, userId: string): Promise<void> {
