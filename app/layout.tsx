@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { getSettings } from '@/lib/client-content'
+import { resolvePublicSettings } from '@/lib/admin/settings-db'
 import { fontVariables } from '@/lib/fonts'
 import { jewelryStoreJsonLd } from '@/lib/seo'
 import { JsonLd } from '@/components/JsonLd'
@@ -30,11 +31,13 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image' },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Structured data reflects the family's admin overrides (contact, address, hours).
+  const resolved = await resolvePublicSettings(getSettings().data)
   return (
     <html lang="en-IN" className={fontVariables}>
       <body className="min-h-dvh bg-pearl text-charcoal antialiased">
-        <JsonLd data={jewelryStoreJsonLd(settings)} />
+        <JsonLd data={jewelryStoreJsonLd(resolved)} />
         {children}
         <Analytics />
         <SpeedInsights />

@@ -81,8 +81,15 @@ export async function resolvePublicSettings(file: Settings): Promise<Settings & 
       // Malformed override — keep the committed hours rather than break the page.
     }
   }
+  // Omit the fields we override from the file, then re-add them as fresh keys.
+  // (On the Workers/RSC render path, spreading the file and then re-assigning an
+  // existing key was silently dropped — new keys like hoursNote worked but
+  // existing ones like instagram kept the file value. Omitting first makes every
+  // override a fresh key, so all of them apply.)
+  const { phone: _p, whatsapp: _w, email: _e, instagram: _i, address: _a, hours: _h, ...rest } = file
+  void [_p, _w, _e, _i, _a, _h]
   return {
-    ...file,
+    ...rest,
     phone: b.phone ?? file.phone,
     whatsapp: (b.whatsapp ?? file.whatsapp).replace(/\D/g, ''),
     email: b.email ?? file.email,
@@ -90,7 +97,7 @@ export async function resolvePublicSettings(file: Settings): Promise<Settings & 
     address,
     hours,
     hoursNote: b.hoursNote ?? '',
-  }
+  } as Settings & { hoursNote: string }
 }
 
 export async function seoOverride(page: string): Promise<Partial<Seo>> {
