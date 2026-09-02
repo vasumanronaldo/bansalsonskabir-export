@@ -6,7 +6,7 @@
 import { execFileSync } from 'node:child_process'
 import { writeFileSync, unlinkSync } from 'node:fs'
 
-const DB = 'bansal-sons-admin'
+const DB = process.env.ADMIN_DB || 'bansal-sons-admin'
 const WRANGLER = process.platform === 'win32' ? 'wrangler' : './node_modules/.bin/wrangler'
 const email = process.argv.slice(2).find((a) => !a.startsWith('--'))
 if (!email) { console.error('Usage: admin:user:reset <email>'); process.exit(1) }

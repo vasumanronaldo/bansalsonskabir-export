@@ -31,14 +31,16 @@ read -r -p "    Deploy into THIS account with these names? (y/n) " ans
 
 # (b) D1 + R2, and write the D1 id into wrangler.jsonc ------------------------
 step "D1 database '$D1_NAME'"
-if $WR d1 info "$D1_NAME" >/dev/null 2>&1; then
+# d1 info exits 0 even for a missing DB, so use d1 list to test existence + get the id.
+D1_ID=$($WR d1 list --json 2>/dev/null | node scripts/d1-id.mjs "$D1_NAME")
+if [ -n "$D1_ID" ]; then
   echo "    exists"
 else
   echo "    creating…"
   $WR d1 create "$D1_NAME" >/dev/null || die "d1 create failed"
+  D1_ID=$($WR d1 list --json 2>/dev/null | node scripts/d1-id.mjs "$D1_NAME")
 fi
-D1_ID=$($WR d1 info "$D1_NAME" --json 2>/dev/null | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const j=JSON.parse(s);process.stdout.write(j.uuid||j.database_id||"")}')
-[ -n "$D1_ID" ] || die "could not read D1 id"
+[ -n "$D1_ID" ] || die "could not read D1 id for '$D1_NAME'"
 echo "    id: $D1_ID"
 
 step "R2 bucket '$BUCKET_NAME'"
@@ -53,9 +55,13 @@ step "Writing wrangler.jsonc"
 node scripts/patch-wrangler.mjs "$WORKER_NAME" "$D1_NAME" "$D1_ID" "$BUCKET_NAME" || die "patch-wrangler failed"
 
 # (c) Schema -------------------------------------------------------------------
-step "Applying schema (schema.sql, then schema-v2.sql)"
-$WR d1 execute "$D1_NAME" --remote --file admin/schema.sql --yes    || die "schema.sql failed"
-$WR d1 execute "$D1_NAME" --remote --file admin/schema-v2.sql --yes || die "schema-v2.sql failed"
+# schema-v2.sql uses ALTER TABLE ADD COLUMN (no "IF NOT EXISTS" in SQLite), so a
+# plain --file apply aborts on any re-run. apply-schema.mjs runs each statement
+# and tolerates "duplicate column"/"already exists", so it converges on a fresh,
+# a fully-applied, or a partially-applied database alike.
+step "Applying schema"
+node scripts/apply-schema.mjs "$D1_NAME" admin/schema.sql    || die "schema.sql failed"
+node scripts/apply-schema.mjs "$D1_NAME" admin/schema-v2.sql || die "schema-v2.sql failed"
 
 # (d) Import content (idempotent: clear the content tables first, FK-safe order)
 step "Importing content snapshot"
@@ -89,8 +95,14 @@ step "Owner account"
 read -r -p "    Owner email: " OWNER_EMAIL
 read -r -p "    Owner name:  " OWNER_NAME
 [ -n "$OWNER_EMAIL" ] && [ -n "$OWNER_NAME" ] || die "owner email and name are required"
-ADMIN_DB="$D1_NAME" node scripts/admin-user-add.mjs "$OWNER_EMAIL" "$OWNER_NAME" --owner --remote-only \
-  || die "owner seed failed (does the email already exist?)"
+OWNER_ESC=$(printf '%s' "$OWNER_EMAIL" | sed "s/'/''/g")
+OWNER_EXISTS=$($WR d1 execute "$D1_NAME" --remote --json --command \
+  "SELECT COUNT(*) AS n FROM users WHERE email = '$OWNER_ESC' COLLATE NOCASE" 2>/dev/null | node scripts/first-value.mjs)
+if [ "${OWNER_EXISTS:-0}" -gt 0 ] 2>/dev/null; then
+  echo "    $OWNER_EMAIL already exists — skipping (reset with: ADMIN_DB=$D1_NAME node scripts/admin-user-reset.mjs $OWNER_EMAIL)"
+else
+  ADMIN_DB="$D1_NAME" node scripts/admin-user-add.mjs "$OWNER_EMAIL" "$OWNER_NAME" --owner --remote-only || die "owner seed failed"
+fi
 
 # (h) Build, deploy, then secrets, then smoke test -----------------------------
 step "Building (OpenNext) and deploying"
@@ -112,20 +124,31 @@ fi
 # One published piece URL for the smoke test.
 PIECE_PATH=$($WR d1 execute "$D1_NAME" --remote --json --command \
   "SELECT c.slug AS c, p.slug AS p FROM pieces p JOIN collections c ON c.id=p.collection_id WHERE p.published=1 AND p.deleted_at IS NULL LIMIT 1" 2>/dev/null \
-  | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const r=JSON.parse(s)[0]?.results?.[0];process.stdout.write(r?`/collections/${r.c}/${r.p}`:"")}')
+  | node scripts/piece-path.mjs)
 
 step "Smoke test → $URL"
+# Warm up: a just-deployed worker can cold-start, so wait until the root responds
+# 200 (up to ~40s) before asserting per-route codes.
+printf '    warming up'
+for _ in $(seq 1 20); do
+  [ "$(curl -s -o /dev/null -w '%{http_code}' "$URL/")" = "200" ] && break
+  printf '.'; sleep 2
+done
+echo
 pass=0; fail=0
-check() { # <path> <expected-code> [must-contain]
-  local path="$1" want="$2" needle="${3:-}"
-  local body code
-  body=$(curl -s -w $'\n%{http_code}' "$URL$path") || { echo "    FAIL $path (curl error)"; fail=$((fail+1)); return; }
-  code=$(printf '%s' "$body" | tail -1)
-  if [ "$code" != "$want" ]; then echo "    FAIL $path → $code (want $want)"; fail=$((fail+1)); return; fi
-  if [ -n "$needle" ] && ! printf '%s' "$body" | grep -q "$needle"; then
-    echo "    FAIL $path → $code but missing '$needle'"; fail=$((fail+1)); return
-  fi
-  echo "    PASS $path → $code${needle:+ (contains '$needle')}"; pass=$((pass+1))
+check() { # <path> <expected-code> [must-contain] — retries once; individual routes
+          # can cold-start a few seconds after the root is already live.
+  local path="$1" want="$2" needle="${3:-}" attempt body code
+  for attempt in 1 2 3; do
+    body=$(curl -s -w $'\n%{http_code}' "$URL$path")
+    code=$(printf '%s' "$body" | tail -1)
+    if [ "$code" = "$want" ] && { [ -z "$needle" ] || printf '%s' "$body" | grep -q "$needle"; }; then
+      echo "    PASS $path → $code${needle:+ (contains '$needle')}"; pass=$((pass+1)); return
+    fi
+    [ "$attempt" -lt 3 ] && sleep 4
+  done
+  if [ "$code" != "$want" ]; then echo "    FAIL $path → $code (want $want)"; else echo "    FAIL $path → $code but missing '$needle'"; fi
+  fail=$((fail+1))
 }
 check "/" 200
 check "/collections" 200

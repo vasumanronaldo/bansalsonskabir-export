@@ -29,6 +29,7 @@ echo "==> Exporting D1 data (${#TABLES[@]} tables) → data/snapshot.sql"
 TABLE_FLAGS=()
 for t in "${TABLES[@]}"; do TABLE_FLAGS+=(--table "$t"); done
 $WR d1 export "$SRC_DB" --remote --no-schema "${TABLE_FLAGS[@]}" --output data/snapshot.sql
+node scripts/reorder-snapshot.mjs data/snapshot.sql
 echo "    wrote data/snapshot.sql ($(grep -c 'INSERT INTO' data/snapshot.sql) INSERT rows)"
 
 # 2) R2 media. Every object is referenced by the images table, so that is the
