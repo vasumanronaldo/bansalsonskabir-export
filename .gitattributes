@@ -1,0 +1,8 @@
+# Content snapshot media. Committed directly (not Git LFS): total ~60MB but every
+# file is small (largest ~2MB, far under GitHub's 100MB/file limit), and LFS would
+# add a required tool + bandwidth quota that works against the one-command clone
+# goal in DEPLOY.md. Marked binary so Git never tries to diff or normalise them.
+data/media/** binary
+
+# The exported snapshot is text; keep it LF so it applies cleanly on any OS.
+data/snapshot.sql text eol=lf

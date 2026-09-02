@@ -6,7 +6,7 @@
 import { execFileSync } from 'node:child_process'
 import { readFileSync, writeFileSync, unlinkSync } from 'node:fs'
 
-const DB = 'bansal-sons-admin'
+const DB = process.env.ADMIN_DB || 'bansal-sons-admin'
 const WRANGLER = process.platform === 'win32' ? 'wrangler' : './node_modules/.bin/wrangler'
 const targets = process.argv.includes('--remote-only') ? ['--remote'] : process.argv.includes('--local-only') ? ['--local'] : ['--remote', '--local']
 

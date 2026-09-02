@@ -9,7 +9,7 @@
 import { execFileSync } from 'node:child_process'
 import { writeFileSync, unlinkSync, existsSync } from 'node:fs'
 
-const DB = 'bansal-sons-admin'
+const DB = process.env.ADMIN_DB || 'bansal-sons-admin'
 const WRANGLER = process.platform === 'win32' ? 'wrangler' : './node_modules/.bin/wrangler'
 
 const args = process.argv.slice(2)
