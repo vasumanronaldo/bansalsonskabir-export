@@ -1,4 +1,16 @@
-# Bansal Sons Jewellers — Website
+# Bansal Sons Jewellers — deployable handoff
+
+The complete Bansal Sons Jewellers website — catalogue, journal, images and self-hosted admin portal (Next.js on Cloudflare Workers, D1 + R2). This repo is self-contained: a fresh Cloudflare account goes live in ~30 minutes.
+
+**Deploy (one command, full steps in [`DEPLOY.md`](DEPLOY.md)):** `pnpm install` then `./scripts/setup.sh`.
+
+**Download the packaged build:** [bansal-sons-deploy.tar.gz — Release v1.0](https://github.com/vasumanronaldo/bansalsonskabir-export/releases/download/v1.0/bansal-sons-deploy.tar.gz) (untar → `pnpm install` → `wrangler login` → `./scripts/setup.sh`).
+
+> ⚠️ **PRIVATE — contains personal data.** `data/snapshot.sql` includes real customer names and phone numbers. Keep this repository private, never fork or make it public, and **delete `data/snapshot.sql` once deployment is complete.**
+
+---
+
+## Development (existing project docs)
 
 Next.js 15 · TypeScript · Tailwind v4 · Sanity · Vercel
 
